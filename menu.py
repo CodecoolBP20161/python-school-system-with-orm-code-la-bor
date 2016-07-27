@@ -1,6 +1,16 @@
 class Menu:
 
-
+    @staticmethod
+    def choose_main_menu():
+        option = input("Please enter the key of the option, that you want to choose: ")
+        if option == "1":
+            print("Admin")
+            Menu.admin_menu()
+            Menu.choose_admin_menu()
+        elif option == "2":
+            print("Applicant")
+            Menu.applicant_menu()
+            Menu.choose_applicant_menu()
         elif option == "3":
             print("Mentor")
             Menu.mentor_menu()
@@ -34,10 +44,13 @@ class Menu:
         option = input("Please enter the key of the option, that you want to choose: ")
         if option == "1":
             print("application details")
+            print('\n')
         elif option == "2":
             print("interview details")
+            print('\n')
         elif option == "3":
             print("question?")
+            print('\n')
         elif option == "q":
             exit()
         else:
@@ -53,10 +66,13 @@ class Menu:
         option = input("Please enter the key of the option, that you want to choose: ")
         if option == "1":
             print("application details")
+            print('\n')
         elif option == "2":
             print("interview details")
+            print('\n')
         elif option == "3":
             print("question?")
+            print('\n')
         elif option == "q":
             exit()
         else:
