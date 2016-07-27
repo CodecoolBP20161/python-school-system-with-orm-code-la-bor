@@ -1,5 +1,4 @@
 from peewee import *
-from example_data import *
 
 # Configure your database connection here
 # database name = should be your username on your laptop
@@ -11,7 +10,7 @@ class ConnectDatabase():
 
     def connect_database():
         with open('connect_str.txt', "r") as f:
-            return f.readline()
+            return f.readline().strip()
 
     connect_str = connect_database()
     db = PostgresqlDatabase(connect_str)
@@ -23,50 +22,58 @@ class BaseModel(Model):
         database = ConnectDatabase.db
 
 
-class School(BaseModel, GenerateData):
+class School(BaseModel):
     location = CharField()
     school_name = CharField()
     # mentors
 
 
-class Applicant(BaseModel, GenerateData):
-    app_code = CharField()
+class Applicant(BaseModel):
+    app_code = CharField(null=True, unique=True)
     first_name = CharField()
     last_name = CharField()
     city = CharField()
-    school = ForeignKeyField(School)
+    school = ForeignKeyField(School, default=None)
     status = CharField()
     email = CharField()
     # interview = ForeignKeyField(Interview)
 
-    def detect_new_applicants(self):
-        return Applicant.select().where(Applicant.app_code == NULL).get()
+    @staticmethod
+    def detect_new_applicants():
+        return Applicant.select().where(Applicant.app_code >> None)
         # return Applicant.get(Applicant.app_code == NULL)
 
-    def generate_app_code():
-        applicants = Applicant.select().where(Applicant.app_code != NULL).get()
-        while True:
+    def generate_app_code(self):
+        self.applicants = Applicant.select().where(Applicant.app_code != NULL).get()
+        exists = True
+        while exists is True:
             app_code = random.randrange(10000, 100000)
             exists = False
-            for code in applicants.app_code:
+            for code in self.applicants.app_code:
                 if app_code == code:
                     exists = True
-                    return
             if exists is False:
-                return app_code
+                Applicant.update(Applicant.app_code == app_code).where(Applicant.id == self.id)
 
+
+    @staticmethod
     def assign_app_code_to_new_applicants():
-        new_applicants = detect_new_applicants()
+        new_applicants = Applicant.detect_new_applicants()
         for applicant in new_applicants:
-            applicant.app_code = generate_app_code()
+            applicant.app_code = Applicant.generate_app_code()
 
 
-class School(BaseModel, GenerateData):
+class School(BaseModel):
     location = CharField()
     school_name = CharField()
     # mentors
 
 
-class City(BaseModel, GenerateData):
+class City(BaseModel):
     name = CharField()
     school_name = CharField()
+
+
+
+print(Applicant.detect_new_applicants())
+print(Applicant.assign_app_code_to_new_applicants())

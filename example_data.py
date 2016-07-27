@@ -1,7 +1,5 @@
 # This script can generate example data for "City" and "InterviewSlot" models.
-
 from models import *
-from peewee import *
 
 schools = [
     {'name': 'CodecoolBudapest', 'location': 'Budapest'},
@@ -11,23 +9,23 @@ schools = [
 
 # status: new/in progress/accepted/rejected
 applicants = [
-    {'app_code': '', 'first_name': 'Dominique', 'last_name': 'Williams', 'city': 'Budapest', 'school': '',
+    {'app_code': None, 'first_name': 'Dominique', 'last_name': 'Williams', 'city': 'Budapest', 'school': None,
         'status': 'new', 'email': 'dolor@laoreet.co.uk', 'interview': ''},
-    {'app_code': '', 'first_name': 'Jemima', 'last_name': 'Foreman', 'city': 'Székesfehérvár', 'school': '',
+    {'app_code': None, 'first_name': 'Jemima', 'last_name': 'Foreman', 'city': 'Székesfehérvár', 'school': None,
         'status': 'new', 'email': 'magna@etultrices.net', 'interview': ''},
-    {'app_code': '', 'first_name': 'Zeph', 'last_name': 'Massey', 'city': 'Esztergom', 'school': '',
+    {'app_code': None, 'first_name': 'Zeph', 'last_name': 'Massey', 'city': 'Esztergom', 'school': None,
         'status': 'new', 'email': 'a.feiat.lus@monculus.co.uk', 'interview': ''},
-    {'app_code': '', 'first_name': 'Joseph', 'last_name': 'Crawford', 'city': 'Szentendre', 'school': '',
+    {'app_code': None, 'first_name': 'Joseph', 'last_name': 'Crawford', 'city': 'Szentendre', 'school': None,
         'status': 'new', 'email': 'lacinia.mattis@arcu.com', 'interview': ''},
-    {'app_code': '', 'first_name': 'Ifeoma', 'last_name': 'Bird', 'city': 'Miskolc', 'school': '',
+    {'app_code': None, 'first_name': 'Ifeoma', 'last_name': 'Bird', 'city': 'Miskolc', 'school': None,
         'status': 'new', 'email': 'diam.duis.mi@orciti.com', 'interview': ''},
-    {'app_code': '', 'first_name': 'Arsenio', 'last_name': 'Matthews', 'city': 'Debrecen', 'school': '',
+    {'app_code': None, 'first_name': 'Arsenio', 'last_name': 'Matthews', 'city': 'Debrecen', 'school': None,
         'status': 'new', 'email': 'semper.pret@mauriseu.net', 'interview': ''},
-    {'app_code': '', 'first_name': 'Jemima', 'last_name': 'Cantu', 'city': 'Eger', 'school': '',
+    {'app_code': None, 'first_name': 'Jemima', 'last_name': 'Cantu', 'city': 'Eger', 'school': None,
         'status': 'new', 'email': 'et.risus@mollis.com', 'interview': ''},
-    {'app_code': '', 'first_name': 'Carol', 'last_name': 'Arnold', 'city': 'Krakkó', 'school': '',
+    {'app_code': None, 'first_name': 'Carol', 'last_name': 'Arnold', 'city': 'Krakkó', 'school': None,
         'status': 'new', 'email': 'dapibus.rum@litor.com', 'interview': ''},
-    {'app_code': '', 'first_name': 'Jane', 'last_name': 'Forbes', 'city': 'Varsó', 'school': '',
+    {'app_code': None, 'first_name': 'Jane', 'last_name': 'Forbes', 'city': 'Varsó', 'school': None,
         'status': 'new', 'email': 'janiebaby@nimmi.edu', 'interview': ''},
 
 ]
@@ -86,44 +84,61 @@ interviews = [
 
 class GenerateData:
 
-        def add_schools():
-            for school in schools:
-                School.create(school_name=school['name'], location=school['location'])
+    @staticmethod
+    def add_schools(schools):
+        # from models import School
+        for school in schools:
+            School.create(school_name=school['name'], location=school['location'])
 
-        def add_applicants():
-            for applicant in applicants:
-                Applicant.create(
-                                app_code=applicants['app_code'],
-                                first_name=applicants['first_name'],
-                                last_name=applicants['last_name'],
-                                city=applicants['city'],
-                                school=applicants['school'],
-                                status=applicants['status'],
-                                email=applicants['email']
-                                # interview=interviews
-                                )
-
-        def get_closest_school():
-            for city in cities:
-                City.create(
-                            name=city['name'],
-                            school_city=School.select().where(School.location == city['school_city'])
+    @staticmethod
+    def add_applicants(applicants):
+        # from models import Applicant
+        for applicant in applicants:
+            Applicant.create(
+                            app_code=applicant['app_code'],
+                            first_name=applicant['first_name'],
+                            last_name=applicant['last_name'],
+                            city=applicant['city'],
+                            school=applicant['school'],
+                            status=applicant['status'],
+                            email=applicant['email']
+                            # interview=interviews
                             )
 
-        def add_mentors():
-            for mentor in mentors:
-                Mentor.create(
-                            first_name=mentor['first_name'],
-                            last_name=mentor['last_name'],
-                            school_name=mentor['school_name']
+    @staticmethod
+    def get_closest_school():
+        for city in cities:
+            City.create(
+                        name=city['name'],
+                        school_city=School.select().where(School.location == city['school_city'])
+                        )
+
+    @staticmethod
+    def add_mentors(mentors):
+        # from models import Mentor
+        for mentor in mentors:
+            Mentor.create(
+                        first_name=mentor['first_name'],
+                        last_name=mentor['last_name'],
+                        school_name=mentor['school_name']
+                        )
+
+    @staticmethod
+    def get_interview():
+        for interview in interviews:
+            Interview.create(
+                            start_date=interview['start'],
+                            end_date=interview['end'],
+                            mentor=interview['mentor'],
+                            school_name=interview['school_name'],
+                            available=interview['available']
                             )
 
-        def get_interview():
-            for interview in interviews:
-                Interview.create(
-                                start_date=interviews['start'],
-                                end_date=interviews['end'],
-                                mentor=interviews['mentor'],
-                                school_name=interviews['school_name'],
-                                available=interviews['available']
-                                )
+
+Applicant.delete().execute()
+School.delete().execute()
+GenerateData.add_schools(schools)
+# GenerateData.add_mentors(mentors)
+GenerateData.add_applicants(applicants)
+
+
