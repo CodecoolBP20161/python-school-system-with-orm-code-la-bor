@@ -1,4 +1,9 @@
 class Menu:
+
+    @staticmethod
+    def main_menu():
+        print("\tMain menu:\n", "\t\t1: Admin\n", "\t\t2: Applicant\n", "\t\t3: Mentor\n", "\t\tPress Q to EXIT", "\n")
+
     @staticmethod
     def choose_main_menu():
         option = input("Please enter the key of the option, that you want to choose: ")
@@ -20,23 +25,9 @@ class Menu:
             raise KeyError("There is no such option.")
 
     @staticmethod
-    def main_menu():
-        print("\tMain menu:\n", "\t\t1: Admin\n", "\t\t2: Applicant\n", "\t\t3: Mentor\n", "\t\tPress Q to EXIT", "\n")
-
-    @staticmethod
-    def main():
-        while True:
-            Menu.main_menu()
-            try:
-                Menu.choose_main_menu()
-            except KeyError as err:
-                print("Please choose from these options:")
-
-    @staticmethod
     def applicant_menu():
         print("\tApplicant menu:\n", "\t\t1: Application details\n", "\t\t2: Interview details\n", "\t\t3: Questions\n"
               "\t\tPress Q to main menu:\n")
-
 
     @staticmethod
     def choose_applicant_menu():
@@ -100,6 +91,15 @@ class Menu:
             else:
                 raise KeyError("There is no such option.")
             Menu.mentor_menu()
+
+    @staticmethod
+    def main():
+        while True:
+            Menu.main_menu()
+            try:
+                Menu.choose_main_menu()
+            except KeyError as err:
+                print("Please choose from these options:")
 
 if __name__ == '__main__':
     Menu.main()
