@@ -2,6 +2,6 @@
 
 from models import *
 
-db.connect()
+ConnectDatabase.db.connect()
 # List the tables here what you want to create...
-db.create_tables([Applicant, School, City], safe=True)
+ConnectDatabase.db.create_tables([Applicant, School, City], safe=True)
