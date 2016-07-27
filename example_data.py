@@ -37,7 +37,7 @@ cities = [
     {'name': 'Székesfehérvár', 'school_city': 'Budapest'},
     {'name': 'Esztergom', 'school_city': 'Budapest'},
     {'name': 'Szentendre', 'school_city': 'Budapest'},
-    {'name': 'Miskolc', 'school_city': 'Miskolc'}
+    {'name': 'Miskolc', 'school_city': 'Miskolc'},
     {'name': 'Debrecen', 'school_city': 'Miskolc'},
     {'name': 'Eger', 'school_city': 'Miskolc'},
     {'name': 'Krakkó', 'school_city': 'Krakkó'},
@@ -66,19 +66,19 @@ interviews = [
     {'start_date': '2016-09-01 11:00:00', 'end_date': '2016-09-01 11:30:00',
         'mentor': 'Mateusz Ostafil', 'school_name': 'CodecoolKrakkó', 'available': 'True'},
     {'start_date': '2016-09-01 11:30:00', 'end_date': '2016-09-01 12:00:00',
-        'mentor': 'Attila Molnár', 'school_name': 'CodecoolMiskolc', 'available': 'True'}
+        'mentor': 'Attila Molnár', 'school_name': 'CodecoolMiskolc', 'available': 'True'},
     {'start_date': '2016-09-01 12:30:00', 'end_date': '2016-09-01 13:00:00',
         'mentor': 'Pál Monoczki', 'school_name': 'CodecoolMiskolc', 'available': 'True'},
     {'start_date': '2016-09-01 13:00:00', 'end_date': '2016-09-01 13:30:00',
-        'mentor': 'Sándor Szodoray', 'school_name': 'CodecoolMiskolc', 'available': 'True'}
+        'mentor': 'Sándor Szodoray', 'school_name': 'CodecoolMiskolc', 'available': 'True'},
     {'start_date': '2016-09-02 11:00:00', 'end_date': '2016-09-02 11:30:00',
         'mentor': 'Mateusz Ostafil', 'school_name': 'CodecoolKrakkó', 'available': 'True'},
     {'start_date': '2016-09-02 11:30:00', 'end_date': '2016-09-02 12:00:00',
-        'mentor': 'Miklós Beöthy', 'school_name': 'CodecoolBudapest', 'available': 'True'}
+        'mentor': 'Miklós Beöthy', 'school_name': 'CodecoolBudapest', 'available': 'True'},
     {'start_date': '2016-09-02 12:00:00', 'end_date': '2016-09-02 12:30:00',
         'mentor': 'Tamás Tompa', 'school_name': 'CodecoolBudapest', 'available': 'True'},
     {'start_date': '2016-09-02 12:30:00', 'end_date': '2016-09-02 13:00:00',
-        'mentor': 'Dániel Salamon', 'school_name': 'CodecoolBudapest', 'available': 'True'}
+        'mentor': 'Dániel Salamon', 'school_name': 'CodecoolBudapest', 'available': 'True'},
     {'start_date': '2016-09-02 13:00:00', 'end_date': '2016-09-02 13:30:00',
         'mentor': 'Tamás Tompa', 'school_name': 'CodecoolBudapest', 'available': 'True'},
 ]
@@ -100,7 +100,7 @@ class GenerateData:
                                 school=applicants['school'],
                                 status=applicants['status'],
                                 email=applicants['email']
-                                interview=interviews
+                                # interview=interviews
                                 )
 
         def get_closest_school():
