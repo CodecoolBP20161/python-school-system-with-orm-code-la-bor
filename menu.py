@@ -1,5 +1,4 @@
 class Menu:
-
     @staticmethod
     def choose_main_menu():
         option = input("Please enter the key of the option, that you want to choose: ")
