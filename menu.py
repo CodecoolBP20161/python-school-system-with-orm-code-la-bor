@@ -43,10 +43,13 @@ class Menu:
         option = input("Please enter the key of the option, that you want to choose: ")
         if option == "1":
             print("application details")
+            print('\n')
         elif option == "2":
             print("interview details")
+            print('\n')
         elif option == "3":
             print("question?")
+            print('\n')
         elif option == "q":
             exit()
         else:
@@ -62,10 +65,13 @@ class Menu:
         option = input("Please enter the key of the option, that you want to choose: ")
         if option == "1":
             print("application details")
+            print('\n')
         elif option == "2":
             print("interview details")
+            print('\n')
         elif option == "3":
             print("question?")
+            print('\n')
         elif option == "q":
             exit()
         else:
