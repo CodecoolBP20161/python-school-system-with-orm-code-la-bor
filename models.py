@@ -55,12 +55,17 @@ class Applicant(BaseModel, GenerateData):
             if exists is False:
                 return app_code
 
+    def assign_app_code_to_new_applicants():
+        new_applicants = detect_new_applicants()
+        for applicant in new_applicants:
+            applicant.app_code = generate_app_code()
+
 
 class School(BaseModel, GenerateData):
     location = CharField()
     school_name = CharField()
     # mentors
-    
+
 
 class City(BaseModel, GenerateData):
     name = CharField()
