@@ -10,3 +10,25 @@ class BaseModel(Model):
     """A base model that will use our Postgresql database"""
     class Meta:
         database = db
+
+
+class Applicant(BaseModel, GenerateData):
+    app_code = CharField()
+    first_name = CharField()
+    last_name = CharField()
+    city = CharField()
+    school = ForeignKeyField(School)
+    status = CharField()
+    email = CharField()
+    interview = ForeignKeyField(Interview)
+
+
+class School(BaseModel, GenerateData):
+    location = CharField()
+    school_name = CharField()
+    # mentors
+
+
+class City(BaseModel, GenerateData):
+    name = CharField()
+    school_name = CharField()
