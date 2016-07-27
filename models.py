@@ -3,13 +3,22 @@ from peewee import *
 # Configure your database connection here
 # database name = should be your username on your laptop
 # database user = should be your username on your laptop
-db = PostgresqlDatabase('dbname', user='dbuser')
+# db = PostgresqlDatabase('dbname', user='dbuser')
 
+class ConnectDatabase():
+
+    @staticmethod
+    def connect_database():
+        with open('connect_str.txt', "r") as f:
+            return f.readline()
+
+    connect_str = connect_database()
+    db = PostgresqlDatabase(connect_str)
 
 class BaseModel(Model):
     """A base model that will use our Postgresql database"""
     class Meta:
-        database = db
+        database = ConnectDatabase.db
 
 
 class Applicant(BaseModel, GenerateData):
@@ -23,8 +32,8 @@ class Applicant(BaseModel, GenerateData):
     interview = ForeignKeyField(Interview)
 
     def detect_new_applicants(self):
-        return Applicant.select().where(Applicant.application_code == NULL).get()
-        # return Applicant.get(Applicant.application_code == NULL)
+        return Applicant.select().where(Applicant.app_code == NULL).get()
+        # return Applicant.get(Applicant.app_code == NULL)
 
 class School(BaseModel, GenerateData):
     location = CharField()
