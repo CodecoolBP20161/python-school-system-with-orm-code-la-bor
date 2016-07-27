@@ -43,6 +43,29 @@ class Applicant(BaseModel, GenerateData):
         return Applicant.select().where(Applicant.app_code == NULL).get()
         # return Applicant.get(Applicant.app_code == NULL)
 
+    def generate_app_code():
+        applicants = Applicant.select().where(Applicant.app_code != NULL).get()
+        while True:
+            app_code = random.randrange(10000, 100000)
+            exists = False
+            for code in applicants.app_code:
+                if app_code == code:
+                    exists = True
+                    return
+            if exists is False:
+                return app_code
+
+    def assign_app_code_to_new_applicants():
+        new_applicants = detect_new_applicants()
+        for applicant in new_applicants:
+            applicant.app_code = generate_app_code()
+
+
+class School(BaseModel, GenerateData):
+    location = CharField()
+    school_name = CharField()
+    # mentors
+
 
 class City(BaseModel, GenerateData):
     name = CharField()
