@@ -22,6 +22,9 @@ class Applicant(BaseModel, GenerateData):
     email = CharField()
     interview = ForeignKeyField(Interview)
 
+    def detect_new_applicants(self):
+        return Applicant.select().where(Applicant.application_code == NULL).get()
+        # return Applicant.get(Applicant.application_code == NULL)
 
 class School(BaseModel, GenerateData):
     location = CharField()
