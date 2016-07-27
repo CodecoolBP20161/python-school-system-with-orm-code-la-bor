@@ -24,7 +24,7 @@ class Menu:
 
     @staticmethod
     def main_menu():
-        print("\tMain menu:\n", "\t\t1: Admin\n", "\t\t2: Applicant\n", "\t\t3: Mentor\n", "\t\"\tPress Q to EXIT")
+        print("\tMain menu:\n", "\t\t1: Admin\n", "\t\t2: Applicant\n", "\t\t3: Mentor\n", "\t\tPress Q to EXIT")
 
     @staticmethod
     def main():
