@@ -27,7 +27,6 @@ applicants = [
         'status': 'new', 'email': 'dapibus.rum@litor.com', 'interview': ''},
     {'app_code': None, 'first_name': 'Jane', 'last_name': 'Forbes', 'hometown': 'Varsó', 'school': None,
         'status': 'new', 'email': 'janiebaby@nimmi.edu', 'interview': ''},
-
 ]
 
 cities = [
@@ -41,7 +40,6 @@ cities = [
     {'name': 'Krakkó', 'school_name': 'CodecoolKrakkó'},
     {'name': 'Varsó', 'school_name': 'CodecoolKrakkó'},
 ]
-
 
 mentors = [
     {'first_name': 'Attila', 'last_name': 'Molnár', 'school_name': 'CodecoolMiskolc',
@@ -102,7 +100,7 @@ class GenerateData:
                             school=applicant['school'],
                             status=applicant['status'],
                             email=applicant['email']
-                            # interview=interviews
+                            # interview=interviews['interview']
                             )
 
     @staticmethod

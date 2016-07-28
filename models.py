@@ -1,4 +1,5 @@
 from peewee import *
+import random
 
 # Configure your database connection here
 # database name = should be your username on your laptop
@@ -23,6 +24,7 @@ class BaseModel(Model):
 
 
 class School(BaseModel):
+    # id = PrimaryKeyField(default=None)
     location = CharField()
     school_name = CharField()
     # mentors
@@ -33,33 +35,36 @@ class Applicant(BaseModel):
     first_name = CharField()
     last_name = CharField()
     city = CharField()
-    school = ForeignKeyField(School, default=None)
+    school = ForeignKeyField(School, null=True, default=None)
     status = CharField()
     email = CharField()
-    # interview = ForeignKeyField(Interview)
+    # interview = ForeignKeyField(Interview, default=None)
 
     @staticmethod
     def detect_new_applicants():
         return Applicant.select().where(Applicant.app_code >> None)
         # return Applicant.get(Applicant.app_code == NULL)
 
-    def generate_app_code(self):
-        self.applicants = Applicant.select().where(Applicant.app_code != NULL).get()
+    def generate_app_code():
+        applicants = Applicant.select().where(Applicant.app_code != None)
         exists = True
         while exists is True:
-            app_code = random.randrange(10000, 100000)
+            new_app_code = random.randrange(10000, 100000)
             exists = False
-            for code in self.applicants.app_code:
-                if app_code == code:
+            for applicant in applicants:
+                if applicant.app_code == new_app_code:
                     exists = True
             if exists is False:
-                Applicant.update(Applicant.app_code == app_code).where(Applicant.id == self.id)
+                return new_app_code
 
     @staticmethod
     def assign_app_code_to_new_applicants():
         new_applicants = Applicant.detect_new_applicants()
         for applicant in new_applicants:
-            applicant.app_code = Applicant.generate_app_code()
+            # applicant.app_code = Applicant.generate_app_code()
+            new_app_code = Applicant.generate_app_code()
+            print(new_app_code)
+            Applicant.update(Applicant.app_code == new_app_code).where(Applicant.id == applicant.id).execute()
 
     def get_closest_school(self):
         return City.select(City.school_name).where(City.name == self.hometown)
@@ -70,11 +75,6 @@ class Applicant(BaseModel):
             element.closest_school = element.get_closest_school_name()
             element.save()
 
-
-class School(BaseModel):
-    location = CharField()
-    school_name = CharField()
-    # mentors
 
 
 class City(BaseModel):
