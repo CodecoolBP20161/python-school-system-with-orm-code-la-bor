@@ -63,6 +63,7 @@ class Applicant(BaseModel):
         for applicant in new_applicants:
             # new_app_code = Applicant.generate_app_code()
             applicant.app_code = Applicant.generate_app_code()
+            applicant.status = 'in progress'
             applicant.save()
             # Applicant.update(Applicant.app_code == new_app_code).where(Applicant.id == applicant.id).execute()
 
