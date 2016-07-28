@@ -92,3 +92,10 @@ class Applicant(BaseModel):
 class City(BaseModel):
     name = CharField()
     school = ForeignKeyField(School)
+
+class Interview(BaseModel):
+    start_date = DateTimeField()
+    end_date = DateTimeField()
+    mentor = CharField()
+    school = ForeignKeyField(School, null=True, default=None)
+    available = BooleanField(default=True)
