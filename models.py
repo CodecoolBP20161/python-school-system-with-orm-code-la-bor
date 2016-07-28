@@ -62,10 +62,10 @@ class Applicant(BaseModel):
     def assign_app_code_to_new_applicants():
         new_applicants = Applicant.detect_new_applicants()
         for applicant in new_applicants:
-            # applicant.app_code = Applicant.generate_app_code()
-            new_app_code = Applicant.generate_app_code()
-            print(new_app_code)
-            Applicant.update(Applicant.app_code == new_app_code).where(Applicant.id == applicant.id).execute()
+            # new_app_code = Applicant.generate_app_code()
+            applicant.app_code = Applicant.generate_app_code()
+            applicant.save()
+            # Applicant.update(Applicant.app_code == new_app_code).where(Applicant.id == applicant.id).execute()
 
 
 
