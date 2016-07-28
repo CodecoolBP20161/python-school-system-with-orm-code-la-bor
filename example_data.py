@@ -56,7 +56,7 @@ class GenerateData:
 schools = [
     {'name': 'CodecoolBudapest', 'location': 'Budapest'},
     {'name': 'CodecoolMiskolc', 'location': 'Miskolc'},
-    {'name': 'CodecoolKrakkó', 'location': 'Krakkó'},
+    {'name': 'CodecoolKrakow', 'location': 'Krakow'},
 ]
 
 GenerateData.add_schools(schools)
@@ -93,8 +93,8 @@ cities = [
     {'name': 'Miskolc', 'school': School.get(School.name =='CodecoolMiskolc')},
     {'name': 'Debrecen', 'school': School.get(School.name =='CodecoolMiskolc')},
     {'name': 'Eger', 'school': School.get(School.name =='CodecoolMiskolc')},
-    {'name': 'Krakkó', 'school': School.get(School.name =='CodecoolKrakkó')},
-    {'name': 'Varsó', 'school': School.get(School.name == 'CodecoolKrakkó')},
+    {'name': 'Krakow', 'school': School.get(School.name =='CodecoolKrakow')},
+    {'name': 'Warsaw', 'school': School.get(School.name == 'CodecoolKrakow')},
 ]
 
 mentors = [
@@ -110,29 +110,29 @@ mentors = [
         'email': 'miklos.beothy@codecool.com'},
     {'first_name': 'Tamás', 'last_name': 'Tompa', 'school': School.get(School.name == 'CodecoolBudapest'),
         'email': 'tamas.tompa@codecool.com'},
-    {'first_name': 'Mateusz', 'last_name': 'Ostafil', 'school_name': School.get(School.name == 'CodecoolKrakkó'),
+    {'first_name': 'Mateusz', 'last_name': 'Ostafil', 'school_name': School.get(School.name == 'CodecoolKrakow'),
         'email': 'mateusz.ostafil@codecool.com'},
 ]
 
 interviews = [
     {'start_date': '2016-09-01 11:00:00', 'end_date': '2016-09-01 11:30:00',
-        'mentor': 'Mateusz Ostafil', 'school': School.get(School.name == 'CodecoolKrakkó'), 'available': 'True'},
+        'mentor': Mentor.get(Mentor.first_name == 'Mateusz', Mentor.last_name == 'Ostafil' ), 'school': School.get(School.name == 'CodecoolKrakow'), 'available': True},
     {'start_date': '2016-09-01 11:30:00', 'end_date': '2016-09-01 12:00:00',
-        'mentor': 'Attila Molnár', 'school': School.get(School.name == 'CodecoolMiskolc'), 'available': 'True'},
+        'mentor': Mentor.get(Mentor.first_name == 'Attila', Mentor.last_name == 'Molnár', 'school': School.get(School.name == 'CodecoolMiskolc'), 'available': True},
     {'start_date': '2016-09-01 12:30:00', 'end_date': '2016-09-01 13:00:00',
-        'mentor': 'Pál Monoczki', 'school': School.get(School.name == 'CodecoolMiskolc'), 'available': 'True'},
+        'mentor': Mentor.get(Mentor.first_name == 'Pál',  Mentor.last_name == 'Monoczki', 'school': School.get(School.name == 'CodecoolMiskolc'), 'available': True},
     {'start_date': '2016-09-01 13:00:00', 'end_date': '2016-09-01 13:30:00',
-        'mentor': 'Sándor Szodoray', 'school': School.get(School.name == 'CodecoolMiskolc'), 'available': 'True'},
+        'mentor': Mentor.get(Mentor.first_name == 'Sándor',  Mentor.last_name == 'Szodoray', 'school': School.get(School.name == 'CodecoolMiskolc'), 'available': True},
     {'start_date': '2016-09-02 11:00:00', 'end_date': '2016-09-02 11:30:00',
-        'mentor': 'Mateusz Ostafil', 'school': School.get(School.name == 'CodecoolKrakkó'), 'available': 'True'},
+        'mentor': Mentor.get(Mentor.first_name == 'Mateusz',  Mentor.last_name == 'Ostafil', 'school': School.get(School.name == 'CodecoolKrakow'), 'available': True},
     {'start_date': '2016-09-02 11:30:00', 'end_date': '2016-09-02 12:00:00',
-        'mentor': 'Miklós Beöthy', 'school': School.get(School.name == 'CodecoolBudapest'), 'available': 'True'},
+        'mentor': Mentor.get(Mentor.first_name == 'Miklós', Mentor.last_name == 'Beöthy', 'school': School.get(School.name == 'CodecoolBudapest'), 'available': True},
     {'start_date': '2016-09-02 12:00:00', 'end_date': '2016-09-02 12:30:00',
-        'mentor': 'Tamás Tompa', 'school': School.get(School.name == 'CodecoolBudapest'), 'available': 'True'},
+        'mentor': Mentor.get(Mentor.first_name == 'Tamás', Mentor.last_name == 'Tompa', 'school': School.get(School.name == 'CodecoolBudapest'), 'available': True},
     {'start_date': '2016-09-02 12:30:00', 'end_date': '2016-09-02 13:00:00',
-        'mentor': 'Dániel Salamon', 'school': School.get(School.name == 'CodecoolBudapest'), 'available': 'True'},
+        'mentor': Mentor.get(Mentor.first_name == 'Dániel', Mentor.last_name == 'Salamon', 'school': School.get(School.name == 'CodecoolBudapest'), 'available': True},
     {'start_date': '2016-09-02 13:00:00', 'end_date': '2016-09-02 13:30:00',
-        'mentor': 'Tamás Tompa', 'school': School.get(School.name == 'CodecoolBudapest'), 'available': 'True'},
+        'mentor': Mentor.get(Mentor.first_name == 'Tamás', Mentor.last_name == 'Tompa', 'school': School.get(School.name == 'CodecoolBudapest'), 'available': True},
 ]
 
 
