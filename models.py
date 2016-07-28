@@ -78,6 +78,16 @@ class Applicant(BaseModel):
             # element.closest_school = element.get_closest_school_name()
             applicant.save()
 
+    @staticmethod
+    def get_status():
+        application_code = input("Please enter your application code: " + "\n")
+        try:
+            applicant = Applicant.get(Applicant.app_code == application_code)
+            print("\n", applicant.status)
+        except:
+            print("Invalid application code, please try again")
+            Applicant.get_status()
+
 
 class City(BaseModel):
     name = CharField()
