@@ -10,23 +10,23 @@ schools = [
 # status: new/in progress/accepted/rejected
 applicants = [
     {'app_code': None, 'first_name': 'Dominique', 'last_name': 'Williams', 'city': 'Budapest', 'school': None,
-        'status': 'new', 'email': 'dolor@laoreet.co.uk', 'interview': None},
+        'status': 'new', 'email': 'dolor@laoreet.co.uk'},
     {'app_code': None, 'first_name': 'Jemima', 'last_name': 'Foreman', 'city': 'Székesfehérvár', 'school': None,
-        'status': 'new', 'email': 'magna@etultrices.net', 'interview': None},
+        'status': 'new', 'email': 'magna@etultrices.net'},
     {'app_code': None, 'first_name': 'Zeph', 'last_name': 'Massey', 'city': 'Esztergom', 'school': None,
-        'status': 'new', 'email': 'a.feiat.lus@monculus.co.uk', 'interview': None},
+        'status': 'new', 'email': 'a.feiat.lus@monculus.co.uk'},
     {'app_code': None, 'first_name': 'Joseph', 'last_name': 'Crawford', 'city': 'Szentendre', 'school': None,
-        'status': 'new', 'email': 'lacinia.mattis@arcu.com', 'interview': None},
+        'status': 'new', 'email': 'lacinia.mattis@arcu.com'},
     {'app_code': None, 'first_name': 'Ifeoma', 'last_name': 'Bird', 'city': 'Miskolc', 'school': None,
-        'status': 'new', 'email': 'diam.duis.mi@orciti.com', 'interview': None},
+        'status': 'new', 'email': 'diam.duis.mi@orciti.com'},
     {'app_code': None, 'first_name': 'Arsenio', 'last_name': 'Matthews', 'city': 'Debrecen', 'school': None,
-        'status': 'new', 'email': 'semper.pret@mauriseu.net', 'interview': None},
+        'status': 'new', 'email': 'semper.pret@mauriseu.net'},
     {'app_code': None, 'first_name': 'Jemima', 'last_name': 'Cantu', 'city': 'Eger', 'school': None,
-        'status': 'new', 'email': 'et.risus@mollis.com', 'interview': None},
+        'status': 'new', 'email': 'et.risus@mollis.com'},
     {'app_code': None, 'first_name': 'Carol', 'last_name': 'Arnold', 'city': 'Krakkó', 'school': None,
-        'status': 'new', 'email': 'dapibus.rum@litor.com', 'interview': None},
+        'status': 'new', 'email': 'dapibus.rum@litor.com'},
     {'app_code': None, 'first_name': 'Jane', 'last_name': 'Forbes', 'city': 'Varsó', 'school': None,
-        'status': 'new', 'email': 'janiebaby@nimmi.edu', 'interview': None},
+        'status': 'new', 'email': 'janiebaby@nimmi.edu'},
 
 ]
 
@@ -102,7 +102,7 @@ class GenerateData:
                             school=applicant['school'],
                             status=applicant['status'],
                             email=applicant['email']
-                            interview=interviews['interview']
+                            #interview=interviews['interview']
                             )
 
     @staticmethod

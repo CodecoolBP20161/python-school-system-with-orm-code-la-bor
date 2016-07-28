@@ -23,6 +23,7 @@ class BaseModel(Model):
 
 
 class School(BaseModel):
+    # id = PrimaryKeyField(default=None)
     location = CharField()
     school_name = CharField()
     # mentors
@@ -33,10 +34,10 @@ class Applicant(BaseModel):
     first_name = CharField()
     last_name = CharField()
     city = CharField()
-    school = ForeignKeyField(School, default=None)
+    school = ForeignKeyField(School, null=True, default=None)
     status = CharField()
     email = CharField()
-    interview = ForeignKeyField(Interview, default=None)
+    # interview = ForeignKeyField(Interview, default=None)
 
     @staticmethod
     def detect_new_applicants():
@@ -69,5 +70,5 @@ class City(BaseModel):
 
 
 
-print(Applicant.detect_new_applicants())
-print(Applicant.assign_app_code_to_new_applicants())
+# print(Applicant.detect_new_applicants())
+# print(Applicant.assign_app_code_to_new_applicants())
