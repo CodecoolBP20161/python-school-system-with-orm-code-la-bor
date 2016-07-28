@@ -36,7 +36,7 @@ class Applicant(BaseModel):
     school = ForeignKeyField(School, default=None)
     status = CharField()
     email = CharField()
-    # interview = ForeignKeyField(Interview)
+    interview = ForeignKeyField(Interview, default=None)
 
     @staticmethod
     def detect_new_applicants():
@@ -61,12 +61,6 @@ class Applicant(BaseModel):
         new_applicants = Applicant.detect_new_applicants()
         for applicant in new_applicants:
             applicant.app_code = Applicant.generate_app_code()
-
-
-class School(BaseModel):
-    location = CharField()
-    school_name = CharField()
-    # mentors
 
 
 class City(BaseModel):
