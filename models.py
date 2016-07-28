@@ -29,6 +29,18 @@ class School(BaseModel):
     name = CharField()
     # mentors
 
+class Interview(BaseModel):
+    start_date = DateTimeField()
+    end_date = DateTimeField()
+    mentor = CharField()
+    school = ForeignKeyField(School, null=True, default=None)
+    available = BooleanField(default=True)
+
+class Mentor(BaseModel):
+    first_name = CharField()
+    last_name = CharField()
+    school = ForeignKeyField(School, null=True, default=None)
+    email = CharField()
 
 class Applicant(BaseModel):
     app_code = CharField(null=True, unique=True)
@@ -38,7 +50,7 @@ class Applicant(BaseModel):
     school = ForeignKeyField(School, null=True, default=None)
     status = CharField()
     email = CharField()
-    # interview = ForeignKeyField(Interview, default=None)
+    interview = ForeignKeyField(Interview, null=True)
 
     @staticmethod
     def detect_new_applicants():
@@ -78,14 +90,16 @@ class Applicant(BaseModel):
             # element.closest_school = element.get_closest_school_name()
             applicant.save()
 
+    def interview_date_to_applicant():
+        available = Interview.available
+        if available is True:
+            applicants = Applicant.select().where(Applicant.interview >> None)
+            for applicant in applicants:
+                applicant.interview = Interview.select().where(Interview.school == applicant.school).get()
+                Interview.available = False
+                applicant.save()
+
 
 class City(BaseModel):
     name = CharField()
-    school = ForeignKeyField(School)
-
-class Interview(BaseModel):
-    start_date = DateTimeField()
-    end_date = DateTimeField()
-    mentor = CharField()
     school = ForeignKeyField(School, null=True, default=None)
-    available = BooleanField(default=True)

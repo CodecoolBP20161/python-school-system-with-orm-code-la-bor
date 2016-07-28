@@ -39,17 +39,17 @@ class GenerateData:
             Mentor.create(
                         first_name=mentor['first_name'],
                         last_name=mentor['last_name'],
-                        school_name=mentor['school']
+                        school=mentor['school']
                         )
 
     @staticmethod
-    def get_interview():
+    def add_interview_slot(interviews):
         for interview in interviews:
             Interview.create(
-                            start_date=interview['start'],
-                            end_date=interview['end'],
+                            start_date=interview['start_date'],
+                            end_date=interview['end_date'],
                             mentor=interview['mentor'],
-                            school_name=interview['school'],
+                            school=interview['school'],
                             available=interview['available']
                             )
 
@@ -136,7 +136,7 @@ interviews = [
 ]
 
 
-
+GenerateData.add_interview_slot(interviews)
 
 
 # GenerateData.add_mentors(mentors)
