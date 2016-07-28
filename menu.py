@@ -1,3 +1,6 @@
+from models import *
+
+
 class Menu:
 
     @staticmethod
@@ -35,6 +38,7 @@ class Menu:
             option = input("Please enter the key of the option, that you want to choose: ")
             if option == "1":
                 print("application details")
+                Applicant.get_status()
                 print('\n')
             elif option == "2":
                 print("interview details")
