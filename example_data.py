@@ -116,23 +116,23 @@ mentors = [
 
 interviews = [
     {'start_date': '2016-09-01 11:00:00', 'end_date': '2016-09-01 11:30:00',
-        'mentor': 'Mateusz Ostafil', 'school_name': 'CodecoolKrakkó', 'available': 'True'},
+        'mentor': 'Mateusz Ostafil', 'school': School.get(School.name == 'CodecoolKrakkó'), 'available': 'True'},
     {'start_date': '2016-09-01 11:30:00', 'end_date': '2016-09-01 12:00:00',
-        'mentor': 'Attila Molnár', 'school_name': 'CodecoolMiskolc', 'available': 'True'},
+        'mentor': 'Attila Molnár', 'school': School.get(School.name == 'CodecoolMiskolc'), 'available': 'True'},
     {'start_date': '2016-09-01 12:30:00', 'end_date': '2016-09-01 13:00:00',
-        'mentor': 'Pál Monoczki', 'school_name': 'CodecoolMiskolc', 'available': 'True'},
+        'mentor': 'Pál Monoczki', 'school': School.get(School.name == 'CodecoolMiskolc'), 'available': 'True'},
     {'start_date': '2016-09-01 13:00:00', 'end_date': '2016-09-01 13:30:00',
-        'mentor': 'Sándor Szodoray', 'school_name': 'CodecoolMiskolc', 'available': 'True'},
+        'mentor': 'Sándor Szodoray', 'school': School.get(School.name == 'CodecoolMiskolc'), 'available': 'True'},
     {'start_date': '2016-09-02 11:00:00', 'end_date': '2016-09-02 11:30:00',
-        'mentor': 'Mateusz Ostafil', 'school_name': 'CodecoolKrakkó', 'available': 'True'},
+        'mentor': 'Mateusz Ostafil', 'school': School.get(School.name == 'CodecoolKrakkó'), 'available': 'True'},
     {'start_date': '2016-09-02 11:30:00', 'end_date': '2016-09-02 12:00:00',
-        'mentor': 'Miklós Beöthy', 'school_name': 'CodecoolBudapest', 'available': 'True'},
+        'mentor': 'Miklós Beöthy', 'school': School.get(School.name == 'CodecoolBudapest'), 'available': 'True'},
     {'start_date': '2016-09-02 12:00:00', 'end_date': '2016-09-02 12:30:00',
-        'mentor': 'Tamás Tompa', 'school_name': 'CodecoolBudapest', 'available': 'True'},
+        'mentor': 'Tamás Tompa', 'school': School.get(School.name == 'CodecoolBudapest'), 'available': 'True'},
     {'start_date': '2016-09-02 12:30:00', 'end_date': '2016-09-02 13:00:00',
-        'mentor': 'Dániel Salamon', 'school_name': 'CodecoolBudapest', 'available': 'True'},
+        'mentor': 'Dániel Salamon', 'school': School.get(School.name == 'CodecoolBudapest'), 'available': 'True'},
     {'start_date': '2016-09-02 13:00:00', 'end_date': '2016-09-02 13:30:00',
-        'mentor': 'Tamás Tompa', 'school_name': 'CodecoolBudapest', 'available': 'True'},
+        'mentor': 'Tamás Tompa', 'school': School.get(School.name == 'CodecoolBudapest'), 'available': 'True'},
 ]
 
 
