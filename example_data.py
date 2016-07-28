@@ -1,4 +1,4 @@
-# This script can generate example data for "City" and "InterviewSlot" models.
+# This script can generate example data for "city" and "InterviewSlot" models.
 from models import *
 
 schools = [
@@ -9,37 +9,37 @@ schools = [
 
 # status: new/in progress/accepted/rejected
 applicants = [
-    {'app_code': None, 'first_name': 'Dominique', 'last_name': 'Williams', 'city': 'Budapest', 'school': None,
+    {'app_code': None, 'first_name': 'Dominique', 'last_name': 'Williams', 'hometown': 'Budapest', 'school': None,
         'status': 'new', 'email': 'dolor@laoreet.co.uk', 'interview': ''},
-    {'app_code': None, 'first_name': 'Jemima', 'last_name': 'Foreman', 'city': 'Székesfehérvár', 'school': None,
+    {'app_code': None, 'first_name': 'Jemima', 'last_name': 'Foreman', 'hometown': 'Székesfehérvár', 'school': None,
         'status': 'new', 'email': 'magna@etultrices.net', 'interview': ''},
-    {'app_code': None, 'first_name': 'Zeph', 'last_name': 'Massey', 'city': 'Esztergom', 'school': None,
+    {'app_code': None, 'first_name': 'Zeph', 'last_name': 'Massey', 'hometown': 'Esztergom', 'school': None,
         'status': 'new', 'email': 'a.feiat.lus@monculus.co.uk', 'interview': ''},
-    {'app_code': None, 'first_name': 'Joseph', 'last_name': 'Crawford', 'city': 'Szentendre', 'school': None,
+    {'app_code': None, 'first_name': 'Joseph', 'last_name': 'Crawford', 'hometown': 'Szentendre', 'school': None,
         'status': 'new', 'email': 'lacinia.mattis@arcu.com', 'interview': ''},
-    {'app_code': None, 'first_name': 'Ifeoma', 'last_name': 'Bird', 'city': 'Miskolc', 'school': None,
+    {'app_code': None, 'first_name': 'Ifeoma', 'last_name': 'Bird', 'hometown': 'Miskolc', 'school': None,
         'status': 'new', 'email': 'diam.duis.mi@orciti.com', 'interview': ''},
-    {'app_code': None, 'first_name': 'Arsenio', 'last_name': 'Matthews', 'city': 'Debrecen', 'school': None,
+    {'app_code': None, 'first_name': 'Arsenio', 'last_name': 'Matthews', 'hometown': 'Debrecen', 'school': None,
         'status': 'new', 'email': 'semper.pret@mauriseu.net', 'interview': ''},
-    {'app_code': None, 'first_name': 'Jemima', 'last_name': 'Cantu', 'city': 'Eger', 'school': None,
+    {'app_code': None, 'first_name': 'Jemima', 'last_name': 'Cantu', 'hometown': 'Eger', 'school': None,
         'status': 'new', 'email': 'et.risus@mollis.com', 'interview': ''},
-    {'app_code': None, 'first_name': 'Carol', 'last_name': 'Arnold', 'city': 'Krakkó', 'school': None,
+    {'app_code': None, 'first_name': 'Carol', 'last_name': 'Arnold', 'hometown': 'Krakkó', 'school': None,
         'status': 'new', 'email': 'dapibus.rum@litor.com', 'interview': ''},
-    {'app_code': None, 'first_name': 'Jane', 'last_name': 'Forbes', 'city': 'Varsó', 'school': None,
+    {'app_code': None, 'first_name': 'Jane', 'last_name': 'Forbes', 'hometown': 'Varsó', 'school': None,
         'status': 'new', 'email': 'janiebaby@nimmi.edu', 'interview': ''},
 
 ]
 
 cities = [
-    {'name': 'Budapest', 'school_city': 'Budapest'},
-    {'name': 'Székesfehérvár', 'school_city': 'Budapest'},
-    {'name': 'Esztergom', 'school_city': 'Budapest'},
-    {'name': 'Szentendre', 'school_city': 'Budapest'},
-    {'name': 'Miskolc', 'school_city': 'Miskolc'},
-    {'name': 'Debrecen', 'school_city': 'Miskolc'},
-    {'name': 'Eger', 'school_city': 'Miskolc'},
-    {'name': 'Krakkó', 'school_city': 'Krakkó'},
-    {'name': 'Varsó', 'school_city': 'Krakkó'},
+    {'name': 'Budapest', 'school_name': 'CodecoolBudapest'},
+    {'name': 'Székesfehérvár', 'school_name': 'CodecoolBudapest'},
+    {'name': 'Esztergom', 'school_name': 'CodecoolBudapest'},
+    {'name': 'Szentendre', 'school_name': 'CodecoolBudapest'},
+    {'name': 'Miskolc', 'school_name': 'CodecoolMiskolc'},
+    {'name': 'Debrecen', 'school_name': 'CodecoolMiskolc'},
+    {'name': 'Eger', 'school_name': 'CodecoolMiskolc'},
+    {'name': 'Krakkó', 'school_name': 'CodecoolKrakkó'},
+    {'name': 'Varsó', 'school_name': 'CodecoolKrakkó'},
 ]
 
 
@@ -98,7 +98,7 @@ class GenerateData:
                             app_code=applicant['app_code'],
                             first_name=applicant['first_name'],
                             last_name=applicant['last_name'],
-                            city=applicant['city'],
+                            hometown=applicant['hometown'],
                             school=applicant['school'],
                             status=applicant['status'],
                             email=applicant['email']
@@ -106,11 +106,11 @@ class GenerateData:
                             )
 
     @staticmethod
-    def get_closest_school():
+    def add_closest_school():
         for city in cities:
             City.create(
                         name=city['name'],
-                        school_city=School.select().where(School.location == city['school_city'])
+                        school_city=School.select().where(School.location == city['school_name'])
                         )
 
     @staticmethod
@@ -140,5 +140,3 @@ School.delete().execute()
 GenerateData.add_schools(schools)
 # GenerateData.add_mentors(mentors)
 GenerateData.add_applicants(applicants)
-
-
