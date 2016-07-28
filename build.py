@@ -4,4 +4,6 @@ from models import *
 
 ConnectDatabase.db.connect()
 # List the tables here what you want to create...
+ConnectDatabase.db.drop_tables([Applicant, School, City], safe=True)
+
 ConnectDatabase.db.create_tables([Applicant, School, City], safe=True)

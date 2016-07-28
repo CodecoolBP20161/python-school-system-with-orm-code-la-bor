@@ -26,7 +26,7 @@ class BaseModel(Model):
 class School(BaseModel):
     # id = PrimaryKeyField(default=None)
     location = CharField()
-    school_name = CharField()
+    name = CharField()
     # mentors
 
 
@@ -66,19 +66,18 @@ class Applicant(BaseModel):
             applicant.save()
             # Applicant.update(Applicant.app_code == new_app_code).where(Applicant.id == applicant.id).execute()
 
-    def get_closest_school(self):
-        return City.select(City.school_name).where(City.name == self.hometown)
+        # return City.select(City.school_name).where(City.name == Applicant.hometown)
 
-    @classmethod
-    def school_to_applicant(cls):
-        for element in cls.select().where(cls.closest_school >> None):
-            element.closest_school = element.get_closest_school_name()
-            element.save()
+    @staticmethod
+    def school_to_applicant():
+        applicants = Applicant.select().where(Applicant.school >> None)
+        for applicant in applicants:
+            applicant.school = City.select().where(City.name == applicant.hometown).get().school
+
+            # element.closest_school = element.get_closest_school_name()
+            applicant.save()
 
 
 class City(BaseModel):
     name = CharField()
-    school_name = CharField()
-
-print(Applicant.detect_new_applicants())
-print(Applicant.assign_app_code_to_new_applicants())
+    school = ForeignKeyField(School)
