@@ -34,7 +34,7 @@ class Applicant(BaseModel):
     app_code = CharField(null=True, unique=True)
     first_name = CharField()
     last_name = CharField()
-    city = CharField()
+    hometown = CharField()
     school = ForeignKeyField(School, null=True, default=None)
     status = CharField()
     email = CharField()
@@ -74,7 +74,6 @@ class Applicant(BaseModel):
         for element in cls.select().where(cls.closest_school >> None):
             element.closest_school = element.get_closest_school_name()
             element.save()
-
 
 
 class City(BaseModel):
