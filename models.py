@@ -112,7 +112,9 @@ class Applicant(BaseModel):
         application_code = input("Please enter your application code: ")
         try:
             applicant = Applicant.get(Applicant.app_code == application_code)
-            print("\n", applicant.status)
+            print("\n Application Details",
+                  "\n Name: ", applicant.name,
+                  "\n Status: ", applicant.status)
         except:
             print("Invalid application code, please try again")
             Applicant.get_status()
@@ -122,10 +124,12 @@ class Applicant(BaseModel):
         application_code = input("Please enter your application code: ")
         try:
             applicant = Applicant.get(Applicant.app_code == application_code)
-            print("\n", applicant.interview.start_date,
-                  "\n", applicant.interview.end_date,
-                  "\n", applicant.interview.mentor.first_name, applicant.interview.mentor.last_name,
-                  "\n", applicant.interview.school.name)
+            print("\n Interview Details",
+                  "\n Name: ", applicant.interview.first_name, applicant.last_name,
+                  "\n Start: ", applicant.interview.start_date,
+                  "\n End: ", applicant.interview.end_date,
+                  "\n Assigned mentor: ", applicant.interview.mentor.first_name, applicant.interview.mentor.last_name,
+                  "\n Location: ", applicant.interview.school.name)
         except:
             print("Invalid application code, please try again")
             Applicant.get_interview_details()
