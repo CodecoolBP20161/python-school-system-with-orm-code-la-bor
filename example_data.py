@@ -21,8 +21,8 @@ class GenerateData:
                             hometown=applicant['hometown'],
                             school=applicant['school'],
                             status=applicant['status'],
-                            email=applicant['email']
-                            # interview=interviews['interview']
+                            email=applicant['email'],
+                            interview=applicant['interview']
                             )
 
     @staticmethod
@@ -54,7 +54,9 @@ class GenerateData:
                             available=interview['available']
                             )
 
+
 def generate_data():
+
     schools = [
         {'name': 'CodecoolBudapest', 'location': 'Budapest'},
         {'name': 'CodecoolMiskolc', 'location': 'Miskolc'},
@@ -66,23 +68,23 @@ def generate_data():
     # status: new/in progress/accepted/rejected
     applicants = [
         {'app_code': None, 'first_name': 'Dominique', 'last_name': 'Williams', 'hometown': 'Budapest', 'school': None,
-            'status': 'new', 'email': 'dolor@laoreet.co.uk'},
+            'status': 'new', 'email': 'dolor@laoreet.co.uk', 'interview': None},
         {'app_code': None, 'first_name': 'Jemima', 'last_name': 'Foreman', 'hometown': 'Székesfehérvár', 'school': None,
-            'status': 'new', 'email': 'magna@etultrices.net'},
+            'status': 'new', 'email': 'magna@etultrices.net', 'interview': None},
         {'app_code': None, 'first_name': 'Zeph', 'last_name': 'Massey', 'hometown': 'Esztergom', 'school': None,
-            'status': 'new', 'email': 'a.feiat.lus@monculus.co.uk'},
+            'status': 'new', 'email': 'a.feiat.lus@monculus.co.uk', 'interview': None},
         {'app_code': None, 'first_name': 'Joseph', 'last_name': 'Crawford', 'hometown': 'Szentendre', 'school': None,
-            'status': 'new', 'email': 'lacinia.mattis@arcu.com'},
+            'status': 'new', 'email': 'lacinia.mattis@arcu.com', 'interview': None},
         {'app_code': None, 'first_name': 'Ifeoma', 'last_name': 'Bird', 'hometown': 'Miskolc', 'school': None,
-            'status': 'new', 'email': 'diam.duis.mi@orciti.com'},
+            'status': 'new', 'email': 'diam.duis.mi@orciti.com', 'interview': None},
         {'app_code': None, 'first_name': 'Arsenio', 'last_name': 'Matthews', 'hometown': 'Debrecen', 'school': None,
-            'status': 'new', 'email': 'semper.pret@mauriseu.net'},
+            'status': 'new', 'email': 'semper.pret@mauriseu.net', 'interview': None},
         {'app_code': None, 'first_name': 'Jemima', 'last_name': 'Cantu', 'hometown': 'Eger', 'school': None,
-            'status': 'new', 'email': 'et.risus@mollis.com'},
+            'status': 'new', 'email': 'et.risus@mollis.com', 'interview': None},
         {'app_code': None, 'first_name': 'Carol', 'last_name': 'Arnold', 'hometown': 'Krakow', 'school': None,
-            'status': 'new', 'email': 'dapibus.rum@litor.com'},
+            'status': 'new', 'email': 'dapibus.rum@litor.com', 'interview': None},
         {'app_code': None, 'first_name': 'Jane', 'last_name': 'Forbes', 'hometown': 'Warsaw', 'school': None,
-            'status': 'new', 'email': 'janiebaby@nimmi.edu'},
+            'status': 'new', 'email': 'janiebaby@nimmi.edu', 'interview': None},
     ]
 
     GenerateData.add_applicants(applicants)
@@ -137,7 +139,7 @@ def generate_data():
          'mentor': Mentor.get(Mentor.id == 4), 'school': School.get(School.name == 'CodecoolBudapest'), 'available': True},
         {'start_date': '2016-09-02 13:00:00', 'end_date': '2016-09-02 13:30:00',
          'mentor': Mentor.get(Mentor.id == 6), 'school': School.get(School.name == 'CodecoolBudapest'), 'available': True},
-        ]
+
 
     GenerateData.add_interview_slot(interviews)
     GenerateData.add_hometown_and_closest_school(cities)
