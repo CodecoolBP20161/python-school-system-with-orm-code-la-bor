@@ -105,6 +105,7 @@ class Applicant(BaseModel):
         self.interview = Interview.select().where(Interview.available == True, Interview.school == self.school).get()
         self.interview.available = False
         self.interview.save()
+        self.status = "waiting for interview"
         self.save()
 
     @staticmethod
