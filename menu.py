@@ -9,17 +9,14 @@ class Menu:
 
     @staticmethod
     def choose_main_menu():
-        option = input("Please enter the key of the option, that you want to choose: ")
+        option = input("Choose an option: ")
         if option == "1":
-            print("Admin")
             Menu.admin_menu()
             Menu.choose_admin_menu()
         elif option == "2":
-            print("Applicant")
             Menu.applicant_menu()
             Menu.choose_applicant_menu()
         elif option == "3":
-            print("Mentor")
             Menu.mentor_menu()
             Menu.choose_mentor_menu()
         elif option == "q":
@@ -35,14 +32,11 @@ class Menu:
     @staticmethod
     def choose_applicant_menu():
         while True:
-            option = input("Please enter the key of the option, that you want to choose: ")
+            option = input("Choose an option: ")
             if option == "1":
-                print("application details")
                 Applicant.get_status()
-                print('\n')
             elif option == "2":
-                print("interview details")
-                print('\n')
+                Applicant.get_interview_details()
             elif option == "3":
                 print("question?")
                 print('\n')
@@ -60,12 +54,12 @@ class Menu:
     @staticmethod
     def choose_admin_menu():
         while True:
-            option = input("Please enter the key of the option, that you want to choose: ")
+            option = input("Choose an option: ")
             if option == "1":
-                print("application details")
+                print("Application details")
                 print('\n')
             elif option == "2":
-                print("interview details")
+                print("Interview details")
                 print('\n')
             elif option == "3":
                 print("question?")
@@ -83,7 +77,7 @@ class Menu:
     @staticmethod
     def choose_mentor_menu():
         while True:
-            option = input("Please enter the key of the option, that you want to choose: ")
+            option = input("Choose an option: ")
             if option == "1":
                 print("interview")
                 print('\n')
