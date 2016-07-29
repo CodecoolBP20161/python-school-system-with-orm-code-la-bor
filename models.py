@@ -113,10 +113,12 @@ class Applicant(BaseModel):
         try:
             applicant = Applicant.get(Applicant.app_code == application_code)
             print("\n Application Details",
-                  "\n Name: ", applicant.name,
+                  "\n School: ", applicant.school,
                   "\n Status: ", applicant.status)
-        except:
+
+        except Exception as inst:
             print("Invalid application code, please try again")
+            print(inst)
             Applicant.get_status()
 
     @staticmethod
