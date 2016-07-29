@@ -29,19 +29,22 @@ class School(BaseModel):
     name = CharField()
     # mentors
 
-class Interview(BaseModel):
-    start_date = DateTimeField()
-    end_date = DateTimeField()
-    mentor = CharField()
-    school = ForeignKeyField(School, null=True, default=None)
-    available = BooleanField(default=True)
-
-
 class Mentor(BaseModel):
     first_name = CharField()
     last_name = CharField()
     school = ForeignKeyField(School, null=True, default=None)
     email = CharField()
+
+
+class Interview(BaseModel):
+    start_date = DateTimeField()
+    end_date = DateTimeField()
+    mentor = ForeignKeyField(Mentor)
+    school = ForeignKeyField(School, null=True, default=None)
+    available = BooleanField(default=True)
+
+    def get_applicant(self):
+        return Applicant.get(Applicant.interview == self)
 
 
 class Applicant(BaseModel):
@@ -52,7 +55,7 @@ class Applicant(BaseModel):
     school = ForeignKeyField(School, null=True, default=None)
     status = CharField()
     email = CharField()
-    interview = ForeignKeyField(Interview, null=True)
+    interview = ForeignKeyField(Interview, null=True, default=None, related_name='applicants')
 
     @staticmethod
     def detect_new_applicants():
@@ -106,7 +109,7 @@ class Applicant(BaseModel):
 
     @staticmethod
     def get_status():
-        application_code = input("Please enter your application code: " + "\n")
+        application_code = input("Please enter your application code: ")
         try:
             applicant = Applicant.get(Applicant.app_code == application_code)
             print("\n", applicant.status)
@@ -114,6 +117,18 @@ class Applicant(BaseModel):
             print("Invalid application code, please try again")
             Applicant.get_status()
 
+    @staticmethod
+    def get_interview_details():
+        application_code = input("Please enter your application code: ")
+        try:
+            applicant = Applicant.get(Applicant.app_code == application_code)
+            print("\n", applicant.interview.start_date,
+                  "\n", applicant.interview.end_date,
+                  "\n", applicant.interview.mentor.first_name, applicant.interview.mentor.last_name,
+                  "\n", applicant.interview.school.name)
+        except:
+            print("Invalid application code, please try again")
+            Applicant.get_interview_details()
 
 class City(BaseModel):
     name = CharField()
