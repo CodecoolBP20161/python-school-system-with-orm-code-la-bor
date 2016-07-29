@@ -36,11 +36,13 @@ class Interview(BaseModel):
     school = ForeignKeyField(School, null=True, default=None)
     available = BooleanField(default=True)
 
+
 class Mentor(BaseModel):
     first_name = CharField()
     last_name = CharField()
     school = ForeignKeyField(School, null=True, default=None)
     email = CharField()
+
 
 class Applicant(BaseModel):
     app_code = CharField(null=True, unique=True)
@@ -90,14 +92,17 @@ class Applicant(BaseModel):
             # element.closest_school = element.get_closest_school_name()
             applicant.save()
 
-    def interview_date_to_applicant():
-        available = Interview.available
-        if available is True:
-            applicants = Applicant.select().where(Applicant.interview >> None)
-            for applicant in applicants:
-                applicant.interview = Interview.select().where(Interview.school == applicant.school).get()
-                Interview.available = False
-                applicant.save()
+    @classmethod
+    def check_interview_date(cls):
+        applicants = cls.select().where(cls.interview >> None)
+        for applicant in applicants:
+            applicant.interview_date_to_applicant()
+
+    def interview_date_to_applicant(self):
+        self.interview = Interview.select().where(Interview.available == True, Interview.school == self.school).get()
+        self.interview.available = False
+        self.interview.save()
+        self.save()
 
     @staticmethod
     def get_status():
@@ -108,6 +113,7 @@ class Applicant(BaseModel):
         except:
             print("Invalid application code, please try again")
             Applicant.get_status()
+
 
 class City(BaseModel):
     name = CharField()
