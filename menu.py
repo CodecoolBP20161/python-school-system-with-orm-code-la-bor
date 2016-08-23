@@ -9,7 +9,7 @@ class Menu:
 
     @staticmethod
     def choose_main_menu():
-        option = input("Choose an option: ")
+        option = input("Choose an option: ").upper()
         if option == "1":
             Menu.admin_menu()
             Menu.choose_admin_menu()
@@ -19,7 +19,7 @@ class Menu:
         elif option == "3":
             Menu.mentor_menu()
             Menu.choose_mentor_menu()
-        elif option == "q":
+        elif option == "Q":
             exit()
         else:
             raise KeyError("There is no such option.")
@@ -32,7 +32,7 @@ class Menu:
     @staticmethod
     def choose_applicant_menu():
         while True:
-            option = input("Choose an option: ")
+            option = input("Choose an option: ").upper()
             if option == "1":
                 Applicant.get_status()
             elif option == "2":
@@ -40,7 +40,7 @@ class Menu:
             elif option == "3":
                 print("question?")
                 print('\n')
-            elif option == "q":
+            elif option == "Q":
                 break
             else:
                 raise KeyError("There is no such option.")
@@ -54,7 +54,7 @@ class Menu:
     @staticmethod
     def choose_admin_menu():
         while True:
-            option = input("Choose an option: ")
+            option = input("Choose an option: ").upper()
             if option == "1":
                 print("Application details")
                 print('\n')
@@ -64,7 +64,7 @@ class Menu:
             elif option == "3":
                 print("question?")
                 print('\n')
-            elif option == "q":
+            elif option == "Q":
                 break
             else:
                 raise KeyError("There is no such option.")
@@ -77,14 +77,14 @@ class Menu:
     @staticmethod
     def choose_mentor_menu():
         while True:
-            option = input("Choose an option: ")
+            option = input("Choose an option: ").upper()
             if option == "1":
                 print("interview")
                 print('\n')
             elif option == "2":
                 print("question?")
                 print('\n')
-            elif option == "q":
+            elif option == "Q":
                 break
             else:
                 raise KeyError("There is no such option.")
