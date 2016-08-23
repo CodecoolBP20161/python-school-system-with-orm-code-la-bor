@@ -144,18 +144,12 @@ class Applicant(BaseModel):
     @staticmethod
     def get_filter_hometown():
         hometown = input("Please choose a city:")
-        if hometown:
-            return [applicant for applicant in Applicant.select().where(Applicant.hometown == hometown)]
-        else:
-            print("Not found city, please try again")
+        return [applicant for applicant in Applicant.select().where(Applicant.hometown == hometown)]
 
     @staticmethod
     def get_filter_email():
         email = input("Please write an e-mail address:")
-        if email:
-            return [applicant for applicant in Applicant.select().where(Applicant.email == email.contains())]
-        else:
-            print("Not found email, please try again")
+        return [applicant for applicant in Applicant.select().where(Applicant.email == email)]
 
     @staticmethod
     def get_filter_status():
@@ -165,10 +159,7 @@ class Applicant(BaseModel):
     @staticmethod
     def get_filter_school():
         school = input("Please choose a school: 1. Budapest, 2. Miskolc, 3.Krakow: ")
-        if school == 1 or school == 2 or school == 3:
-            return [applicant for applicant in Applicant.select().where(Applicant.school == school)]
-        else:
-            print("Not found school, please try again")
+        return [applicant for applicant in Applicant.select().where(Applicant.school == school)]
 
 
 class City(BaseModel):

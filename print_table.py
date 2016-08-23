@@ -13,5 +13,7 @@ class PrintTable:
                 applicant.school.name, applicant.status, applicant.email]])
             headers = ["App_code", "First name", "Last name", "Hometown", "School", "Status", "E-mail"]
             print(tabulate(table, headers, tablefmt="fancy_grid"))
+        else:
+            print("This filter option does not exist!")
 
 # PrintTable.print_all()
