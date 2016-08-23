@@ -155,13 +155,7 @@ class Applicant(BaseModel):
     @staticmethod
     def get_filter_status():
         status = str(input("Choose a status (new, in-progress, waiting for interview): "))
-        try:
-            for applicant in Applicant.select().where(Applicant.status == status):
-                print(applicant.first_name, applicant.last_name, applicant.status)
-        except Exception as err:
-            print("Invalid status, please try again")
-            print(err)
-            Applicant.get_filter_status()
+        return [applicant for applicant in Applicant.select().where(Applicant.status == status)]
 
     @staticmethod
     def get_filter_school():
