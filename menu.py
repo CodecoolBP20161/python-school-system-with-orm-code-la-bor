@@ -81,10 +81,9 @@ class Menu:
                 # function for peewee query
                 print("function for peewee query")
             elif option == "3":
-                Applicant.get_filter_hometown()
+                PrintTable.print_all(Applicant.get_filter_hometown())
             elif option == "4":
-                # function for peewee query
-                print("function for peewee query")
+                PrintTable.print_all(Applicant.get_filter_email())
             elif option == "5":
                 PrintTable.print_all(Applicant.get_filter_school())
             elif option == "6":

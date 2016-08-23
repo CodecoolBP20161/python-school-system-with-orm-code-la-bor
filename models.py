@@ -144,13 +144,18 @@ class Applicant(BaseModel):
     @staticmethod
     def get_filter_hometown():
         hometown = input("Please choose a city:")
-        try:
-            for applicant in Applicant.select().where(Applicant.hometown == hometown):
-                print(applicant.first_name, applicant.last_name)
-        except Exception as err:
+        if hometown:
+            return [applicant for applicant in Applicant.select().where(Applicant.hometown == hometown)]
+        else:
             print("Not found city, please try again")
-            print(err)
-            Applicant.get_filter_hometown()
+
+    @staticmethod
+    def get_filter_email():
+        email = input("Please write an e-mail address:")
+        if email:
+            return [applicant for applicant in Applicant.select().where(Applicant.email == email.contains())]
+        else:
+            print("Not found email, please try again")
 
     @staticmethod
     def get_filter_status():
