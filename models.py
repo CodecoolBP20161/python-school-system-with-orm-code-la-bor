@@ -142,6 +142,17 @@ class Applicant(BaseModel):
             Applicant.get_interview_details()
 
     @staticmethod
+    def get_filter_status():
+        status = str(input("Choose a status (new, in-progress, waiting for interview): "))
+        try:
+            for applicant in Applicant.select().where(Applicant.status == status):
+                print(applicant.first_name, applicant.last_name, applicant.status)
+        except Exception as err:
+            print("Invalid status, please try again")
+            print(err)
+            Applicant.get_filter_status()
+
+    @staticmethod
     def get_filter_school():
         school = input("Please choose a school: 1. Budapest, 2. Miskolc, 3.Krakow: ")
         try:
