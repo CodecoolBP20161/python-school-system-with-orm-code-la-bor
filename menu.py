@@ -56,8 +56,8 @@ class Menu:
         while True:
             option = input("Choose an option: ")
             if option == "1":
-                print("Application details")
-                print('\n')
+                Menu.applicants_admin_menu()
+                Menu.choose_applicants_admin_menu()
             elif option == "2":
                 print("Interview details")
                 print('\n')
@@ -69,6 +69,39 @@ class Menu:
             else:
                 raise KeyError("There is no such option.")
             Menu.admin_menu()
+
+    @staticmethod
+    def choose_applicants_admin_menu():
+        while True:
+            option = input("Choose a filter: ")
+            if option == "1":
+                # function for peewee query
+                print("function for peewee query")
+            elif option == "2":
+                # function for peewee query
+                print("function for peewee query")
+            elif option == "3":
+                # function for peewee query
+                print("function for peewee query")
+            elif option == "4":
+                # function for peewee query
+                print("function for peewee query")
+            elif option == "5":
+                # function for peewee query
+                print("function for peewee query")
+            elif option == "6":
+                # function for peewee query
+                print("function for peewee query")
+            elif option == "q":
+                break
+            else:
+                raise KeyError("There is no such option.")
+            Menu.choose_applicants_admin_menu()
+
+    @staticmethod
+    def applicants_admin_menu():
+        print("\tApplicants (Admin menu):\n", "\t\t1: status\n", "\t\t2: time \n", "\t\t3: location \n",
+              "\t\t4: personal data \n", "\t\t5: school \n", "\t\t6: mentor name \n"  "\t\tPress Q to admin menu:\n")
 
     @staticmethod
     def mentor_menu():
