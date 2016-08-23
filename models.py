@@ -142,7 +142,6 @@ class Applicant(BaseModel):
             Applicant.get_interview_details()
 
     @staticmethod
-<<<<<<< HEAD
     def get_filter_hometown():
         hometown = input("Please choose a city:")
         try:
@@ -152,7 +151,8 @@ class Applicant(BaseModel):
             print("Not found city, please try again")
             print(err)
             Applicant.get_filter_hometown()
-=======
+
+    @staticmethod
     def get_filter_status():
         status = str(input("Choose a status (new, in-progress, waiting for interview): "))
         try:
@@ -162,7 +162,6 @@ class Applicant(BaseModel):
             print("Invalid status, please try again")
             print(err)
             Applicant.get_filter_status()
->>>>>>> 012738de85a9fce4b5cd9dff20ddf1aa03c485a7
 
     @staticmethod
     def get_filter_school():
