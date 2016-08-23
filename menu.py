@@ -1,4 +1,5 @@
 from models import *
+from print_table import *
 
 
 class Menu:
@@ -85,7 +86,7 @@ class Menu:
                 # function for peewee query
                 print("function for peewee query")
             elif option == "5":
-                Applicant.get_filter_school()
+                PrintTable.print_all(Applicant.get_filter_school())
             elif option == "6":
                 # function for peewee query
                 print("function for peewee query")

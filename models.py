@@ -166,13 +166,14 @@ class Applicant(BaseModel):
     @staticmethod
     def get_filter_school():
         school = input("Please choose a school: 1. Budapest, 2. Miskolc, 3.Krakow: ")
-        try:
-            for applicant in Applicant.select().where(Applicant.school == school):
-                print(applicant.first_name, applicant.last_name, applicant.school.name)
-        except Exception as err:
-            print("Invalid School, please try again")
-            print(err)
-            Applicant.get_filter_school()
+        return [applicant for applicant in Applicant.select().where(Applicant.school == school)]
+        # try:
+        #     for applicant in Applicant.select().where(Applicant.school == school):
+        #         print(applicant.first_name, applicant.last_name, applicant.school.name)
+        # except Exception as err:
+        #     print("Invalid School, please try again")
+        #     print(err)
+        #     Applicant.get_filter_school()
 
 
 class City(BaseModel):
