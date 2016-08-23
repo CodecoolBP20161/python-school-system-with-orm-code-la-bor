@@ -1,5 +1,6 @@
 from peewee import *
 import random
+import time
 
 # Configure your database connection here
 # database name = should be your username on your laptop
@@ -56,6 +57,7 @@ class Applicant(BaseModel):
     status = CharField()
     email = CharField()
     interview = ForeignKeyField(Interview, null=True, default=None, related_name='applicants')
+    reg_date = DateTimeField(null=True)
 
     @staticmethod
     def detect_new_applicants():
@@ -73,6 +75,22 @@ class Applicant(BaseModel):
                     exists = True
             if exists is False:
                 return new_app_code
+
+    def strTimeProp(start, end, format, prop):
+        start_time = time.mktime(time.strptime(start, format))
+        end_time = time.mktime(time.strptime(end, format))
+        prop_time = start_time + prop * (end_time - start_time)
+        return time.strftime(format, time.localtime(prop_time))
+
+    def randomDate(start, end, prop):
+        return Applicant.strTimeProp(start, end, '%Y-%m-%d %H:%M:%S', prop)
+
+    @staticmethod
+    def assign_reg_date_to_new_applicants():
+        new_applicants = Applicant.select().where(Applicant.reg_date >> None)
+        for applicant in new_applicants:
+            applicant.reg_date = Applicant.randomDate("2016-04-01 12:01:00", "2016-08-22 11:59:59", random.random())
+            applicant.save()
 
     @staticmethod
     def assign_app_code_to_new_applicants():
@@ -140,6 +158,7 @@ class Applicant(BaseModel):
             print("Invalid application code, please try again")
             print(err)
             Applicant.get_interview_details()
+
 
 class City(BaseModel):
     name = CharField()
