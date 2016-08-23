@@ -143,18 +143,18 @@ class Applicant(BaseModel):
 
     @staticmethod
     def get_filter_hometown():
-        hometown = input("Please choose a city:")
-        return [applicant for applicant in Applicant.select().where(Applicant.hometown == hometown)]
+        hometown = str(input("Please choose a city:"))
+        return [applicant for applicant in Applicant.select().where(Applicant.hometown.contains(hometown))]
 
     @staticmethod
     def get_filter_email():
-        email = input("Please write an e-mail address:")
-        return [applicant for applicant in Applicant.select().where(Applicant.email == email)]
+        email = str(input("Please write an e-mail address:"))
+        return [applicant for applicant in Applicant.select().where(Applicant.email.contains(email))]
 
     @staticmethod
     def get_filter_status():
         status = str(input("Choose a status (new, in-progress, waiting for interview): "))
-        return [applicant for applicant in Applicant.select().where(Applicant.status == status)]
+        return [applicant for applicant in Applicant.select().where(Applicant.status.contains(status))]
 
     @staticmethod
     def get_filter_school():
