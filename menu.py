@@ -75,8 +75,7 @@ class Menu:
         while True:
             option = input("Choose a filter: ")
             if option == "1":
-                #  Applicant.get_filter_school()
-                """print("function for peewee query")"""
+                Applicant.get_filter_status()
             elif option == "2":
                 # function for peewee query
                 print("function for peewee query")
