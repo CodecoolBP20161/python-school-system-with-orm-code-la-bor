@@ -150,7 +150,7 @@ class Applicant(BaseModel):
         except Exception as err:
             print("Invalid School, please try again")
             print(err)
-            Applicant.get_filter_data()
+            Applicant.get_filter_school()
 
 
 class City(BaseModel):
