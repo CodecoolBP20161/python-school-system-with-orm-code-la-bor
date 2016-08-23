@@ -142,6 +142,17 @@ class Applicant(BaseModel):
             Applicant.get_interview_details()
 
     @staticmethod
+    def get_filter_hometown():
+        hometown = input("Please choose a city:")
+        try:
+            for applicant in Applicant.select().where(Applicant.hometown == hometown):
+                print(applicant.first_name, applicant.last_name)
+        except Exception as err:
+            print("Not found city, please try again")
+            print(err)
+            Applicant.get_filter_hometown()
+
+    @staticmethod
     def get_filter_school():
         school = input("Please choose a school: 1. Budapest, 2. Miskolc, 3.Krakow: ")
         try:

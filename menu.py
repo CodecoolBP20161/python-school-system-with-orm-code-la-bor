@@ -81,8 +81,7 @@ class Menu:
                 # function for peewee query
                 print("function for peewee query")
             elif option == "3":
-                # function for peewee query
-                print("function for peewee query")
+                Applicant.get_filter_hometown()
             elif option == "4":
                 # function for peewee query
                 print("function for peewee query")
@@ -99,7 +98,7 @@ class Menu:
 
     @staticmethod
     def applicants_admin_menu():
-        print("\tApplicants (Admin menu):\n", "\t\t1: status\n", "\t\t2: time \n", "\t\t3: location \n",
+        print("\tApplicants (Admin menu):\n", "\t\t1: status\n", "\t\t2: time \n", "\t\t3: hometown \n",
               "\t\t4: personal data \n", "\t\t5: school \n", "\t\t6: mentor name \n"  "\t\tPress Q to admin menu:\n")
 
     @staticmethod
