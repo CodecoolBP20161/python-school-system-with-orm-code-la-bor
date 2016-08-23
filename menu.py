@@ -1,6 +1,7 @@
 from models import *
 from print_table import *
 
+
 class Menu:
 
     @classmethod
