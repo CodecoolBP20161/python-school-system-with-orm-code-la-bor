@@ -68,23 +68,23 @@ def generate_data():
     # status: new/in progress/accepted/rejected
     applicants = [
         {'app_code': None, 'first_name': 'Dominique', 'last_name': 'Williams', 'hometown': 'Budapest', 'school': None,
-            'status': 'new', 'email': 'dolor@laoreet.co.uk', 'interview': None},
+            'status': 'new', 'email': 'codelabor1@gmail.com', 'interview': None},
         {'app_code': None, 'first_name': 'Jemima', 'last_name': 'Foreman', 'hometown': 'Székesfehérvár', 'school': None,
-            'status': 'new', 'email': 'magna@etultrices.net', 'interview': None},
+            'status': 'new', 'email': 'codelabor1@gmail.com', 'interview': None},
         {'app_code': None, 'first_name': 'Zeph', 'last_name': 'Massey', 'hometown': 'Esztergom', 'school': None,
-            'status': 'new', 'email': 'a.feiat.lus@monculus.co.uk', 'interview': None},
+            'status': 'new', 'email': 'codelabor1@gmail.com', 'interview': None},
         {'app_code': None, 'first_name': 'Joseph', 'last_name': 'Crawford', 'hometown': 'Szentendre', 'school': None,
-            'status': 'new', 'email': 'lacinia.mattis@arcu.com', 'interview': None},
+            'status': 'new', 'email': 'codelabor1@gmail.com', 'interview': None},
         {'app_code': None, 'first_name': 'Ifeoma', 'last_name': 'Bird', 'hometown': 'Miskolc', 'school': None,
-            'status': 'new', 'email': 'diam.duis.mi@orciti.com', 'interview': None},
+            'status': 'new', 'email': 'codelabor1@gmail.com', 'interview': None},
         {'app_code': None, 'first_name': 'Arsenio', 'last_name': 'Matthews', 'hometown': 'Debrecen', 'school': None,
-            'status': 'new', 'email': 'semper.pret@mauriseu.net', 'interview': None},
+            'status': 'new', 'email': 'codelabor1@gmail.com', 'interview': None},
         {'app_code': None, 'first_name': 'Jemima', 'last_name': 'Cantu', 'hometown': 'Eger', 'school': None,
-            'status': 'new', 'email': 'et.risus@mollis.com', 'interview': None},
+            'status': 'new', 'email': 'codelabor1@gmail.com', 'interview': None},
         {'app_code': None, 'first_name': 'Carol', 'last_name': 'Arnold', 'hometown': 'Krakow', 'school': None,
-            'status': 'new', 'email': 'dapibus.rum@litor.com', 'interview': None},
+            'status': 'new', 'email': 'codelabor1@gmail.com', 'interview': None},
         {'app_code': None, 'first_name': 'Jane', 'last_name': 'Forbes', 'hometown': 'Warsaw', 'school': None,
-            'status': 'new', 'email': 'janiebaby@nimmi.edu', 'interview': None},
+            'status': 'new', 'email': 'codelabor1@gmail.com', 'interview': None},
     ]
 
     GenerateData.add_applicants(applicants)
@@ -103,19 +103,19 @@ def generate_data():
 
     mentors = [
         {'first_name': 'Attila', 'last_name': 'Molnár', 'school': School.get(School.name == 'CodecoolMiskolc'),
-            'email': 'attila.molnar@codecool.com'},
+            'email': 'codelabor1@gmail.com'},
         {'first_name': 'Pál', 'last_name': 'Monoczki', 'school': School.get(School.name == 'CodecoolMiskolc'),
-            'email': 'pal.monoczki@codecool.com'},
+            'email': 'codelabor1@gmail.com'},
         {'first_name': 'Sándor', 'last_name': 'Szodoray', 'school': School.get(School.name == 'CodecoolMiskolc'),
-            'email': 'sandor.szodoray@codecool.com'},
+            'email': 'codelabor1@gmail.com'},
         {'first_name': 'Dániel', 'last_name': 'Salamon', 'school': School.get(School.name == 'CodecoolBudapest'),
-            'email': 'daniel.salamon@codecool.com'},
+            'email': 'codelabor1@gmail.com'},
         {'first_name': 'Miklós', 'last_name': 'Beöthy', 'school': School.get(School.name == 'CodecoolBudapest'),
-            'email': 'miklos.beothy@codecool.com'},
+            'email': 'codelabor1@gmail.com'},
         {'first_name': 'Tamás', 'last_name': 'Tompa', 'school': School.get(School.name == 'CodecoolBudapest'),
-            'email': 'tamas.tompa@codecool.com'},
+            'email': 'codelabor1@gmail.com'},
         {'first_name': 'Mateusz', 'last_name': 'Ostafil', 'school': School.get(School.name == 'CodecoolKrakow'),
-            'email': 'mateusz.ostafil@codecool.com'},
+            'email': 'codelabor1@gmail.com'},
     ]
 
     GenerateData.add_mentors(mentors)
