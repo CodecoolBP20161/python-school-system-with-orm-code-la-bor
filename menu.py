@@ -81,7 +81,7 @@ class Menu:
             elif option == "5":
                 PrintTable.print_applicant(Applicant.get_filter_school())
             elif option == "6":
-                PrintTable.print_all(Applicant.get_filter_mentor())
+                PrintTable.print_applicant(Applicant.get_filter_mentor())
             elif option == "q":
                 break
             else:

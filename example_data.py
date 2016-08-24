@@ -91,26 +91,6 @@ def generate_data():
     GenerateData.add_applicants(applicants)
 
     cities = [
-<<<<<<< HEAD
-        {'name': 'Budapest', 'school':
-            School.get(School.name == 'CodecoolBudapest')},
-        {'name': 'Székesfehérvár', 'school':
-            School.get(School.name == 'CodecoolBudapest')},
-        {'name': 'Esztergom', 'school':
-            School.get(School.name == 'CodecoolBudapest')},
-        {'name': 'Szentendre', 'school':
-            School.get(School.name == 'CodecoolBudapest')},
-        {'name': 'Miskolc', 'school':
-            School.get(School.name == 'CodecoolMiskolc')},
-        {'name': 'Debrecen', 'school':
-            School.get(School.name == 'CodecoolMiskolc')},
-        {'name': 'Eger', 'school':
-            School.get(School.name == 'CodecoolMiskolc')},
-        {'name': 'Krakow', 'school':
-            School.get(School.name == 'CodecoolKrakow')},
-        {'name': 'Warsaw', 'school':
-            School.get(School.name == 'CodecoolKrakow')},
-=======
         {'name': 'Budapest', 'school': School.get(School.name == 'CodecoolBudapest')},
         {'name': 'Székesfehérvár', 'school': School.get(School.name == 'CodecoolBudapest')},
         {'name': 'Esztergom', 'school': School.get(School.name == 'CodecoolBudapest')},
@@ -120,7 +100,6 @@ def generate_data():
         {'name': 'Eger', 'school': School.get(School.name == 'CodecoolMiskolc')},
         {'name': 'Krakow', 'school': School.get(School.name == 'CodecoolKrakow')},
         {'name': 'Warsaw', 'school': School.get(School.name == 'CodecoolKrakow')},
->>>>>>> 6814036bba36d5721af0c52d0b0c0e26546c19ed
     ]
 
     mentors = [
