@@ -4,25 +4,36 @@ from email.mime.text import MIMEText
 from models import *
 
 
-fromaddr = "codelabor1@gmail.com"
-toaddr = "lorszil@gmail.com"
-msg = MIMEMultipart()
-msg['From'] = fromaddr
-msg['To'] = toaddr
-msg['Subject'] = "Welcome"
+class EmailSender:
 
-body = "\r\n".join([
-  "Why, oh why",
-  "Why, oh why",
-  "Why, oh why"
-  ])
+    fromaddr = "codelabor1@gmail.com"
+    toaddr = 
+    body = "\r\n".join([
+      "Why, oh why",
+      "Why, oh why",
+      "Why, oh why"
+      ])
 
-msg.attach(MIMEText(body, 'plain'))
 
-server = smtplib.SMTP('smtp.gmail.com', 587)
-server.ehlo()
-server.starttls()
-server.login(fromaddr, "Codelabor1234")
-text = msg.as_string()
-server.sendmail(fromaddr, toaddr, text)
-server.quit()
+    def email_send():
+        try:
+            fromaddr = EmailSender.fromaddr
+            toaddr = EmailSender.toaddr
+            msg = MIMEMultipart()
+            msg['From'] = "codelabor1@gmail.com"
+            msg['To'] = "lorszil@gmail.com"
+            msg['Subject'] = "Welcome"
+            body = EmailSender.body
+            msg.attach(MIMEText(body, 'plain'))
+            server = smtplib.SMTP('smtp.gmail.com', 587)
+            server.ehlo()
+            server.starttls()
+            server.login(fromaddr, "Codelabor1234")
+            text = msg.as_string()
+            server.sendmail(fromaddr, toaddr, text)
+            print("Send")
+            server.quit()
+        except:
+            raise ("Sending failed!")
+
+EmailSender.email_send()
