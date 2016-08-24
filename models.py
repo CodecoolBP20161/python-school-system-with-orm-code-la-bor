@@ -47,6 +47,11 @@ class Interview(BaseModel):
     def get_applicant(self):
         return Applicant.get(Applicant.interview == self)
 
+    @classmethod
+    def get_school_filter(cls):
+        school = input("Please choose a school: 1. Budapest, 2. Miskolc, 3. Krakow: ")
+        return [interview for interview in Interview.select().where(cls.school == school)]
+
 
 class Applicant(BaseModel):
     app_code = CharField(null=True, unique=True)

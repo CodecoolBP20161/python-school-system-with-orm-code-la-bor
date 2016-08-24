@@ -51,8 +51,7 @@ class Menu:
             if option == "1":
                 cls.choose_applicants_admin_menu()
             elif option == "2":
-                print("Interview details")
-                print('\n')
+                cls.choose_interview_admin_menu()
             elif option == "3":
                 print("question?")
                 print('\n')
@@ -70,18 +69,42 @@ class Menu:
 
             option = input("Choose a filter: ")
             if option == "1":
-                PrintTable.print_all(Applicant.get_filter_status())
+                PrintTable.print_applicant(Applicant.get_filter_status())
             elif option == "2":
-                PrintTable.print_all(Applicant.get_filter_time())
+                PrintTable.print_applicant(Applicant.get_filter_time())
             elif option == "3":
-                PrintTable.print_all(Applicant.get_filter_hometown())
+                PrintTable.print_applicant(Applicant.get_filter_hometown())
             elif option == "4":
-                PrintTable.print_all(Applicant.get_filter_email())
+                PrintTable.print_applicant(Applicant.get_filter_email())
             elif option == "5":
-                PrintTable.print_all(Applicant.get_filter_school())
+                PrintTable.print_applicant(Applicant.get_filter_school())
             elif option == "6":
                 # function for peewee query
                 print("function for peewee query")
+            elif option == "q":
+                break
+            else:
+                print("There is no such option.")
+
+    @staticmethod
+    def choose_interview_admin_menu():
+
+        while True:
+            print("\tInterview (Admin menu):\n", "\t\t1: school\n", "\t\t2: application code \n", "\t\t3: mentor \n",
+                  "\t\t4: date \n", "\t\tPress Q to admin menu:\n")
+
+            option = input("Choose a filter: ")
+            if option == "1":
+                PrintTable.print_interview(Interview.get_school_filter())
+            elif option == "2":
+                pass
+                PrintTable.print_applicant()
+            elif option == "3":
+                pass
+                PrintTable.print_applicant()
+            elif option == "4":
+                pass
+                PrintTable.print_applicant()
             elif option == "q":
                 break
             else:
