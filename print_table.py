@@ -4,17 +4,27 @@ from tabulate import tabulate
 class PrintTable:
 
     @staticmethod
-    def print_all(query):
+    def print_applicant(query):
         if query:
-            all_applicants = [applicant for applicant in query]
             table = []
-            for applicant in all_applicants:
+            for applicant in query:
                 table.extend([[applicant.app_code, applicant.first_name, applicant.last_name, applicant.hometown,
-                applicant.school.name, applicant.status, applicant.email, applicant.reg_date]])
+                               applicant.school.name, applicant.status, applicant.email, applicant.reg_date]])
             headers = ["App_code", "First name", "Last name", "Hometown", "School", "Status", "E-mail",
                        "Registration time"]
             print(tabulate(table, headers, tablefmt="fancy_grid"))
         else:
             print("This filter option does not exist!")
 
-# PrintTable.print_all()
+
+    def print_interview(query):
+        if query:
+            table = []
+            for interview in query:
+                table.extend([[interview.school.name, interview.get_applicant().app_code,
+                               interview.mentor.first_name + ' ' + interview.mentor.last_name, interview.start_date,
+                               interview.end_date]])
+            headers = ["School", "App_code", "Mentor name", "Start date", "End date"]
+            print(tabulate(table, headers, tablefmt="fancy_grid"))
+        else:
+            print("This filter option does not exist!")
