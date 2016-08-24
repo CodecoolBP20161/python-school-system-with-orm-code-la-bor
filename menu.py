@@ -81,8 +81,7 @@ class Menu:
             elif option == "5":
                 PrintTable.print_all(Applicant.get_filter_school())
             elif option == "6":
-                # function for peewee query
-                print("function for peewee query")
+                PrintTable.print_all(Applicant.get_filter_mentor())
             elif option == "q":
                 break
             else:
@@ -104,7 +103,6 @@ class Menu:
                 break
             else:
                 print("There is no such option.")
-
 
     @classmethod
     def main(cls):
