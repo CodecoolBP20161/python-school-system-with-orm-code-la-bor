@@ -72,8 +72,7 @@ class Menu:
             if option == "1":
                 PrintTable.print_all(Applicant.get_filter_status())
             elif option == "2":
-                # function for peewee query
-                print("function for peewee query")
+                PrintTable.print_all(Applicant.get_filter_time())
             elif option == "3":
                 PrintTable.print_all(Applicant.get_filter_hometown())
             elif option == "4":

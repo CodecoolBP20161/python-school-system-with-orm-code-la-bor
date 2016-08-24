@@ -159,25 +159,31 @@ class Applicant(BaseModel):
             print(err)
             Applicant.get_interview_details()
 
-    @staticmethod
-    def get_filter_hometown():
-        hometown = str(input("Please choose a city:"))
-        return [applicant for applicant in Applicant.select().where(Applicant.hometown.contains(hometown))]
+    @classmethod
+    def get_filter_hometown(cls):
+        hometown = str(input("Please choose a city: "))
+        return [applicant for applicant in cls.select().where(cls.hometown.contains(hometown))]
 
-    @staticmethod
-    def get_filter_email():
-        email = str(input("Please write an e-mail address:"))
-        return [applicant for applicant in Applicant.select().where(Applicant.email.contains(email))]
+    @classmethod
+    def get_filter_email(cls):
+        email = str(input("Please write an e-mail address: "))
+        return [applicant for applicant in cls.select().where(cls.email.contains(email))]
 
-    @staticmethod
-    def get_filter_status():
+    @classmethod
+    def get_filter_status(cls):
         status = str(input("Choose a status (new, in-progress, waiting for interview): "))
-        return [applicant for applicant in Applicant.select().where(Applicant.status.contains(status))]
+        return [applicant for applicant in cls.select().where(cls.status.contains(status))]
 
-    @staticmethod
-    def get_filter_school():
-        school = input("Please choose a school: 1. Budapest, 2. Miskolc, 3.Krakow: ")
-        return [applicant for applicant in Applicant.select().where(Applicant.school == school)]
+    @classmethod
+    def get_filter_school(cls):
+        school = input("Please choose a school: 1. Budapest, 2. Miskolc, 3. Krakow: ")
+        return [applicant for applicant in cls.select().where(cls.school == school)]
+
+    @classmethod
+    def get_filter_time(cls):
+        reg_date = input("Enter a date in the following format - 2016-04-01 12:01:00: ")
+        return [applicant for applicant in cls.select().where(cls.reg_date >= reg_date)]
+
 
 class City(BaseModel):
     name = CharField()
