@@ -7,16 +7,17 @@ class Menu:
     @classmethod
     def choose_main_menu(cls):
         while True:
-            print("\tMain menu:\n", "\t\t1: Admin\n", "\t\t2: Applicant\n", "\t\t3: Mentor\n", "\t\tPress Q to EXIT", "\n")
-
-            option = input("Choose an option: ")
+            print(
+                "\tMain menu:\n", "\t\t1: Admin\n", "\t\t2: Applicant\n", "\t\t3: Mentor\n",
+                "\t\tPress Q to EXIT", "\n")
+            option = input("Choose an option: ").upper()
             if option == "1":
                 cls.choose_admin_menu()
             elif option == "2":
                 cls.choose_applicant_menu()
             elif option == "3":
                 cls.choose_mentor_menu()
-            elif option == "q":
+            elif option == "Q":
                 exit()
             else:
                 print("There is no such option.")
@@ -27,7 +28,7 @@ class Menu:
             print("\tApplicant menu:\n", "\t\t1: Application details\n", "\t\t2: Interview details\n",
                   "\t\t3: Questions\n", "\t\tPress Q to main menu:\n")
 
-            option = input("Choose an option: ")
+            option = input("Choose an option: ").upper()
             if option == "1":
                 Applicant.get_status()
             elif option == "2":
@@ -35,7 +36,7 @@ class Menu:
             elif option == "3":
                 print("question?")
                 print('\n')
-            elif option == "q":
+            elif option == "Q":
                 break
             else:
                 print("There is no such option.")
@@ -47,16 +48,15 @@ class Menu:
             print("\tAdmin menu:\n", "\t\t1: Applicants\n", "\t\t2: Interviews \n", "\t\t3: Questions \n",
                   "\t\tPress Q to main menu:\n")
 
-            option = input("Choose an option: ")
+            option = input("Choose an option: ").upper()
             if option == "1":
                 cls.choose_applicants_admin_menu()
             elif option == "2":
-                print("Interview details")
-                print('\n')
+                cls.choose_interview_admin_menu()
             elif option == "3":
                 print("question?")
                 print('\n')
-            elif option == "q":
+            elif option == "Q":
                 break
             else:
                 print("There is no such option.")
@@ -65,21 +65,21 @@ class Menu:
     def choose_applicants_admin_menu():
 
         while True:
-            print("\tApplicants (Admin menu):\n", "\t\t1: status\n", "\t\t2: time \n", "\t\t3: hometown \n",
-                  "\t\t4: personal data \n", "\t\t5: school \n", "\t\t6: mentor name \n", "\t\tPress Q to admin menu:\n")
+            print(
+                "\tApplicants (Admin menu):\n", "\t\t1: status\n", "\t\t2: time \n", "\t\t3: hometown \n",
+                "\t\t4: personal data \n", "\t\t5: school \n", "\t\t6: mentor name \n", "\t\tPress Q to admin menu:\n")
 
             option = input("Choose a filter: ")
             if option == "1":
-                PrintTable.print_all(Applicant.get_filter_status())
+                PrintTable.print_applicant(Applicant.get_filter_status())
             elif option == "2":
-                # function for peewee query
-                print("function for peewee query")
+                PrintTable.print_applicant(Applicant.get_filter_time())
             elif option == "3":
-                PrintTable.print_all(Applicant.get_filter_hometown())
+                PrintTable.print_applicant(Applicant.get_filter_hometown())
             elif option == "4":
-                PrintTable.print_all(Applicant.get_filter_email())
+                PrintTable.print_applicant(Applicant.get_filter_email())
             elif option == "5":
-                PrintTable.print_all(Applicant.get_filter_school())
+                PrintTable.print_applicant(Applicant.get_filter_school())
             elif option == "6":
                 PrintTable.print_all(Applicant.get_filter_mentor())
             elif option == "q":
@@ -88,18 +88,42 @@ class Menu:
                 print("There is no such option.")
 
     @staticmethod
+    def choose_interview_admin_menu():
+
+        while True:
+            print("\tInterview (Admin menu):\n", "\t\t1: school\n", "\t\t2: application code \n", "\t\t3: mentor \n",
+                  "\t\t4: date \n", "\t\tPress Q to admin menu:\n")
+
+            option = input("Choose a filter: ")
+            if option == "1":
+                PrintTable.print_interview(Interview.get_school_filter())
+            elif option == "2":
+                pass
+                PrintTable.print_applicant()
+            elif option == "3":
+                pass
+                PrintTable.print_applicant()
+            elif option == "4":
+                pass
+                PrintTable.print_applicant()
+            elif option == "q":
+                break
+            else:
+                print("There is no such option.")
+
+    @staticmethod
     def choose_mentor_menu():
         while True:
-            print("\tMentor menu:\n", "\t\t1: Interview\n", "\t\t2: Questions \n", "\t\tq: Back to main menu:\n")
+            print("\tMentor menu:\n", "\t\t1: Interview\n", "\t\t2: Questions \n", "\t\tQ: Back to main menu:\n")
 
-            option = input("Choose an option: ")
+            option = input("Choose an option: ").upper()
             if option == "1":
                 print("interview")
                 print('\n')
             elif option == "2":
                 print("question?")
                 print('\n')
-            elif option == "q":
+            elif option == "Q":
                 break
             else:
                 print("There is no such option.")
