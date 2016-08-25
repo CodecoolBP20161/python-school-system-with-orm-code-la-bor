@@ -16,6 +16,7 @@ while True:
         Applicant.handle_new_applicants()
         input("Assigning interviews to applicants.")
         Applicant.check_interview_date()
+        Interview.send_email()
         Applicant.assign_reg_date_to_new_applicants()
         input("Press enter to the main menu.")
         print("\n")

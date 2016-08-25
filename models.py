@@ -60,6 +60,12 @@ class Interview(BaseModel):
             "4. Dániel Salamon 5. Miklós Beöthy 6. Tamás Tompa 7. Mateusz Ostafil: ")
         return [interview for interview in cls.select().where(cls.mentor == mentor)]
 
+    @staticmethod
+    def send_email():
+        applicants = Applicant.select().join(Interview)
+        for applicant in applicants:
+            ProjectEmail.send_interview_details(applicant)
+
 
 class Applicant(BaseModel):
     app_code = CharField(null=True, unique=True)
@@ -120,7 +126,7 @@ class Applicant(BaseModel):
             applicant.school = City.select().where(
                 City.name == applicant.hometown).get().school
             applicant.save()
-            # ProjectEmail.send_applicant_info(applicant)
+            ProjectEmail.send_applicant_info(applicant)
 
     @classmethod
     def check_interview_date(cls):
@@ -135,9 +141,7 @@ class Applicant(BaseModel):
         self.interview.save()
         self.status = "waiting for interview"
         self.save()
-        applicants = Applicant.select().join(Interview)
-        for applicant in applicants:
-            ProjectEmail.send_interview_details(applicant)
+
 
     @staticmethod
     def get_status():
