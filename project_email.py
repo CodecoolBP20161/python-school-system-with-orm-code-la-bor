@@ -22,3 +22,15 @@ class ProjectEmail:
         subject = "Your interview details"
         to_address = applicant.email
         EmailSender.email_send(to_address, body, subject)
+
+    @staticmethod
+    def send_details_to_mentor(applicant):
+        body = "Dear {0}, \n Your screening details: \n Applicant name: {1} \n Start date: {2} \n End date: {3} \n".format(
+            applicant.interview.mentor.first_name + ' ' + applicant.interview.mentor.last_name,
+            applicant.first_name + ' ' + applicant.last_name,
+            applicant.interview.start_date,
+            applicant.interview.end_date,
+        )
+        subject = "Your screening details"
+        to_address = applicant.interview.mentor.email
+        EmailSender.email_send(to_address, body, subject)
