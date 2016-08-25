@@ -1,6 +1,7 @@
 from peewee import *
 import random
 import time
+from project_email import ProjectEmail
 
 
 class ConnectDatabase:
@@ -111,21 +112,15 @@ class Applicant(BaseModel):
             applicant.save()
 
     @staticmethod
-    def assign_app_code_to_new_applicants():
+    def handle_new_applicants():
         new_applicants = Applicant.detect_new_applicants()
         for applicant in new_applicants:
             applicant.app_code = Applicant.generate_app_code()
             applicant.status = 'in progress'
-            applicant.save()
-
-    @staticmethod
-    def school_to_applicant():
-        applicants = Applicant.select().where(Applicant.school >> None)
-        for applicant in applicants:
-            applicant.school = City.select().where(City.name == applicant.hometown).get().school
             applicant.school = City.select().where(
                 City.name == applicant.hometown).get().school
             applicant.save()
+            ProjectEmail.send_applicant_info(applicant)
 
     @classmethod
     def check_interview_date(cls):

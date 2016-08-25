@@ -11,10 +11,9 @@ while True:
         create_table()
         input("Database imaging is in progress... ⌛ ")
         generate_data()
-        input("Hunting new applicants and generating application codes for them... ☢")
-        Applicant.assign_app_code_to_new_applicants()
-        input("Based on their hometown, applicants get assigned to the nearest Codecool school.")
-        Applicant.school_to_applicant()
+        input("Hunting new applicants and generating application codes for them... ☢.\
+              Based on their hometown, applicants get assigned to the nearest Codecool school.")
+        Applicant.handle_new_applicants()
         input("Assigning interviews to applicants.")
         Applicant.check_interview_date()
         Applicant.assign_reg_date_to_new_applicants()
