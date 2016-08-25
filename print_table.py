@@ -16,6 +16,7 @@ class PrintTable:
         else:
             print("This filter option does not exist!")
 
+    @staticmethod
     def print_interview(query):
         if query:
             table = []
@@ -27,3 +28,4 @@ class PrintTable:
             print(tabulate(table, headers, tablefmt="fancy_grid"))
         else:
             print("This filter option does not exist!")
+

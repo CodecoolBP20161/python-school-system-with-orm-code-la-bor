@@ -5,6 +5,7 @@ import time
 
 class ConnectDatabase:
 
+
     @staticmethod
     def connect_database():
         with open('connect_str.txt', "r") as f:
@@ -15,16 +16,15 @@ class ConnectDatabase:
 
 
 class BaseModel(Model):
+
     """A base model that will use our Postgresql database"""
     class Meta:
         database = ConnectDatabase.db
 
 
 class School(BaseModel):
-    # id = PrimaryKeyField(default=None)
     location = CharField()
     name = CharField()
-    # mentors
 
 
 class Mentor(BaseModel):
@@ -58,7 +58,11 @@ class Applicant(BaseModel):
     school = ForeignKeyField(School, null=True, default=None)
     status = CharField()
     email = CharField()
-    interview = ForeignKeyField(Interview, null=True, default=None, related_name='applicants')
+    interview = ForeignKeyField(
+        Interview,
+        null=True,
+        default=None,
+        related_name='applicants')
     reg_date = DateTimeField(null=True)
 
     @staticmethod
@@ -67,7 +71,7 @@ class Applicant(BaseModel):
 
     @staticmethod
     def generate_app_code():
-        applicants = Applicant.select().where(Applicant.app_code != None)
+        applicants = Applicant.select().where(Applicant.app_code is not None)
         exists = True
         while exists is True:
             new_app_code = random.randrange(10000, 100000)
@@ -109,6 +113,8 @@ class Applicant(BaseModel):
         applicants = Applicant.select().where(Applicant.school >> None)
         for applicant in applicants:
             applicant.school = City.select().where(City.name == applicant.hometown).get().school
+            applicant.school = City.select().where(
+                City.name == applicant.hometown).get().school
             applicant.save()
 
     @classmethod
@@ -118,7 +124,8 @@ class Applicant(BaseModel):
             applicant.interview_date_to_applicant()
 
     def interview_date_to_applicant(self):
-        self.interview = Interview.select().where(Interview.available == True, Interview.school == self.school).get()
+        self.interview = Interview.select().where(
+            Interview.available, Interview.school == self.school).get()
         self.interview.available = False
         self.interview.save()
         self.status = "waiting for interview"
@@ -167,6 +174,18 @@ class Applicant(BaseModel):
         email = str(input("Please write an e-mail address: "))
         return [applicant for applicant in cls.select().where(cls.email.contains(email))]
 
+    @staticmethod
+    def get_filter_status():
+        status = str(
+            input("Choose a status (new, in-progress, waiting for interview): "))
+        return [applicant for applicant in Applicant.select().where(Applicant.status.contains(status))]
+
+    @staticmethod
+    def get_filter_school():
+        school = input(
+            "Please choose a school: 1. Budapest, 2. Miskolc, 3.Krakow: ")
+        return [applicant for applicant in Applicant.select().where(Applicant.school == school)]
+
     @classmethod
     def get_filter_status(cls):
         status = str(input("Choose a status (new, in-progress, waiting for interview): "))
@@ -181,6 +200,15 @@ class Applicant(BaseModel):
     def get_filter_time(cls):
         reg_date = input("Enter a date in the following format - 2016-04-01 12:01:00: ")
         return [applicant for applicant in cls.select().where(cls.reg_date >= reg_date)]
+
+    @staticmethod
+    def get_filter_mentor():
+        mentor = input(
+            "Select a Mentor for sorting users by: 1. Attila Molnár 2. Pál Monoczki 3. Sándor Szodoray " +
+            "4. Dániel Salamon 5. Miklós Beöthy 6. Tamás Tompa 7. Mateusz Ostafil: ")
+        return [applicant for applicant in Applicant.select()
+                .join(Interview, on=(Applicant.interview == Interview.id))
+                .join(Mentor, on=(Interview.mentor == Mentor.id)).where(Mentor.id == mentor)]
 
 
 class City(BaseModel):

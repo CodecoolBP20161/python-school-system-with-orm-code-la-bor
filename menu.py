@@ -7,8 +7,9 @@ class Menu:
     @classmethod
     def choose_main_menu(cls):
         while True:
-            print("\tMain menu:\n", "\t\t1: Admin\n", "\t\t2: Applicant\n", "\t\t3: Mentor\n", "\t\tPress Q to EXIT", "\n")
-
+            print(
+                "\tMain menu:\n", "\t\t1: Admin\n", "\t\t2: Applicant\n", "\t\t3: Mentor\n",
+                "\t\tPress Q to EXIT", "\n")
             option = input("Choose an option: ").upper()
             if option == "1":
                 cls.choose_admin_menu()
@@ -64,8 +65,9 @@ class Menu:
     def choose_applicants_admin_menu():
 
         while True:
-            print("\tApplicants (Admin menu):\n", "\t\t1: status\n", "\t\t2: time \n", "\t\t3: hometown \n",
-                  "\t\t4: personal data \n", "\t\t5: school \n", "\t\t6: mentor name \n", "\t\tPress Q to admin menu:\n")
+            print(
+                "\tApplicants (Admin menu):\n", "\t\t1: status\n", "\t\t2: time \n", "\t\t3: hometown \n",
+                "\t\t4: personal data \n", "\t\t5: school \n", "\t\t6: mentor name \n", "\t\tPress Q to admin menu:\n")
 
             option = input("Choose a filter: ")
             if option == "1":
@@ -79,8 +81,7 @@ class Menu:
             elif option == "5":
                 PrintTable.print_applicant(Applicant.get_filter_school())
             elif option == "6":
-                # function for peewee query
-                print("function for peewee query")
+                PrintTable.print_applicant(Applicant.get_filter_mentor())
             elif option == "q":
                 break
             else:
@@ -126,7 +127,6 @@ class Menu:
                 break
             else:
                 print("There is no such option.")
-
 
     @classmethod
     def main(cls):
