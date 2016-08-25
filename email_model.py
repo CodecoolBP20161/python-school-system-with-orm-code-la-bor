@@ -33,4 +33,3 @@ class EmailSender:
         except:
             print("Sending failed!")
 
-#  EmailSender.email_send()
