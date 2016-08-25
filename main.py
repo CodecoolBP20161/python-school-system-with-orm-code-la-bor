@@ -40,8 +40,3 @@ while True:
         Menu.main()
     else:
         print("There is no such option, please choose yes or no.")
-
-
-
-
->>>>>>> 88b91df542cff3a3829612acf5e814183940deb5
