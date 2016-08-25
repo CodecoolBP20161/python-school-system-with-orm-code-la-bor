@@ -90,3 +90,6 @@ ENV/
 
 # Connection string
 connect_str.txt
+
+# Login data
+login.json
