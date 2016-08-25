@@ -32,6 +32,12 @@ class Mentor(BaseModel):
     school = ForeignKeyField(School, null=True, default=None)
     email = CharField()
 
+    @staticmethod
+    def send_email():
+        applicants = Applicant.select().join(Interview)
+        for applicant in applicants:
+            ProjectEmail.send_details_to_mentor(applicant)
+
 
 class Interview(BaseModel):
     start_date = DateTimeField()
