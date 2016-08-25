@@ -31,21 +31,6 @@ class Mentor(BaseModel):
     school = ForeignKeyField(School, null=True, default=None)
     email = CharField()
 
-    @staticmethod
-    def get_mentor_interviews():
-        query = Mentor.select(
-            Mentor.first_name.alias('mentor_first'), Mentor.last_name.alias('mentor_last'), Interview.start_date, Applicant.first_name, Applicant.last_name
-        ).join(
-            Interview, on=(Mentor.id == Interview.mentor)
-        ).join(
-            Applicant, on=(Interview.id == Applicant.interview)
-        ).naive()
-        dict = {}
-        for i in query:
-            interview_details = []
-            interview_details.append([i.start_date, i.first_name, i.last_name])
-            dict[i.mentor_first, i.mentor_last] = interview_details
-        print(dict)
 
 class Interview(BaseModel):
     start_date = DateTimeField()
