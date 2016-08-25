@@ -47,6 +47,13 @@ class Interview(BaseModel):
         school = input("Please choose a school: 1. Budapest, 2. Miskolc, 3. Krakow: ")
         return [interview for interview in cls.select().where(cls.school == school)]
 
+    @classmethod
+    def get_filter_mentor(cls):
+        mentor = input(
+            "Select a Mentor for sorting users by: 1. Attila Molnár 2. Pál Monoczki 3. Sándor Szodoray " +
+            "4. Dániel Salamon 5. Miklós Beöthy 6. Tamás Tompa 7. Mateusz Ostafil: ")
+        return [interview for interview in cls.select().where(cls.mentor == mentor)]
+
 
 class Applicant(BaseModel):
     app_code = CharField(null=True, unique=True)

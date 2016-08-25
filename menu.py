@@ -98,10 +98,10 @@ class Menu:
             if option == "1":
                 PrintTable.print_interview(Interview.get_school_filter())
             elif option == "2":
-                PrintTable.print_interview_app_code(Interview.get_applicant_filter())
+                PrintTable.print_interview_app_code(Applicant.get_applicant_filter())
             elif option == "3":
                 pass
-                PrintTable.print_interview()
+                PrintTable.print_interview(Interview.get_filter_mentor())
             elif option == "4":
                 pass
                 PrintTable.print_interview()
