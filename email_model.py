@@ -7,6 +7,7 @@ import json
 
 class EmailSender:
 
+
     with open("login.json") as login:
         login_data = json.load(login)
 
@@ -40,4 +41,4 @@ class EmailSender:
         except:
             print("Sending failed!")
 
-# EmailSender.email_send()
+EmailSender.email_send()
