@@ -5,35 +5,36 @@ from models import *
 
 
 class EmailSender:
-
-    fromaddr = "codelabor1@gmail.com"
-    toaddr = 
+    user = 'codelabor1@gmail.com'
+    password = 'Codelabor1234'
+    to_address = 'codelabor1@gmail.com'
     body = "\r\n".join([
       "Why, oh why",
       "Why, oh why",
       "Why, oh why"
       ])
 
-
-    def email_send():
+    @classmethod
+    def email_send(cls):
+        user = cls.user
+        to_address = cls.to_address
+        password = cls.password
+        body = cls.body
+        message = MIMEMultipart()
+        message['From'] = user
+        message['To'] = to_address
+        message['Subject'] = "Welcome"
+        body = cls.body
+        message.attach(MIMEText(body, 'plain'))
         try:
-            fromaddr = EmailSender.fromaddr
-            toaddr = EmailSender.toaddr
-            msg = MIMEMultipart()
-            msg['From'] = "codelabor1@gmail.com"
-            msg['To'] = "lorszil@gmail.com"
-            msg['Subject'] = "Welcome"
-            body = EmailSender.body
-            msg.attach(MIMEText(body, 'plain'))
             server = smtplib.SMTP('smtp.gmail.com', 587)
             server.ehlo()
             server.starttls()
-            server.login(fromaddr, "Codelabor1234")
-            text = msg.as_string()
-            server.sendmail(fromaddr, toaddr, text)
+            server.login(user, password)
+            server.sendmail(user, to_address, message.as_string())
             print("Send")
             server.quit()
         except:
-            raise ("Sending failed!")
+            print("Sending failed!")
 
 EmailSender.email_send()
