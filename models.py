@@ -3,7 +3,7 @@ import random
 import time
 
 
-class ConnectDatabase():
+class ConnectDatabase:
 
     def connect_database():
         with open('connect_str.txt', "r") as f:
@@ -45,7 +45,19 @@ class Interview(BaseModel):
     @classmethod
     def get_school_filter(cls):
         school = input("Please choose a school: 1. Budapest, 2. Miskolc, 3. Krakow: ")
-        return [interview for interview in Interview.select().where(cls.school == school)]
+        return [interview for interview in cls.select().where(cls.school == school)]
+
+    @classmethod
+    def get_filter_time(cls):
+        reg_date = input("Enter a date in the following format - 2016-04-01 12:01:00: ")
+        return [i for i in cls.select().where(cls.start_date >= reg_date)]
+
+    @classmethod
+    def get_filter_mentor(cls):
+        mentor = input(
+            "Select a Mentor for sorting users by: 1. Attila Molnár 2. Pál Monoczki 3. Sándor Szodoray " +
+            "4. Dániel Salamon 5. Miklós Beöthy 6. Tamás Tompa 7. Mateusz Ostafil: ")
+        return [interview for interview in cls.select().where(cls.mentor == mentor)]
 
 
 class Applicant(BaseModel):
@@ -67,6 +79,7 @@ class Applicant(BaseModel):
     def detect_new_applicants():
         return Applicant.select().where(Applicant.app_code >> None)
 
+    @staticmethod
     def generate_app_code():
         applicants = Applicant.select().where(Applicant.app_code is not None)
         exists = True
@@ -79,20 +92,22 @@ class Applicant(BaseModel):
             if exists is False:
                 return new_app_code
 
-    def strTimeProp(start, end, format, prop):
+    @staticmethod
+    def str_time_prop(start, end, format, prop):
         start_time = time.mktime(time.strptime(start, format))
         end_time = time.mktime(time.strptime(end, format))
         prop_time = start_time + prop * (end_time - start_time)
         return time.strftime(format, time.localtime(prop_time))
 
-    def randomDate(start, end, prop):
-        return Applicant.strTimeProp(start, end, '%Y-%m-%d %H:%M:%S', prop)
+    @staticmethod
+    def random_date(start, end, prop):
+        return Applicant.str_time_prop(start, end, '%Y-%m-%d %H:%M:%S', prop)
 
     @staticmethod
     def assign_reg_date_to_new_applicants():
         new_applicants = Applicant.select().where(Applicant.reg_date >> None)
         for applicant in new_applicants:
-            applicant.reg_date = Applicant.randomDate("2016-04-01 12:01:00", "2016-08-22 11:59:59", random.random())
+            applicant.reg_date = Applicant.random_date("2016-04-01 12:01:00", "2016-08-22 11:59:59", random.random())
             applicant.save()
 
     @staticmethod
@@ -107,6 +122,7 @@ class Applicant(BaseModel):
     def school_to_applicant():
         applicants = Applicant.select().where(Applicant.school >> None)
         for applicant in applicants:
+            applicant.school = City.select().where(City.name == applicant.hometown).get().school
             applicant.school = City.select().where(
                 City.name == applicant.hometown).get().school
             applicant.save()
@@ -168,17 +184,17 @@ class Applicant(BaseModel):
         email = str(input("Please write an e-mail address: "))
         return [applicant for applicant in cls.select().where(cls.email.contains(email))]
 
-    @staticmethod
-    def get_filter_status():
+    @classmethod
+    def get_filter_status(cls):
         status = str(
             input("Choose a status (new, in-progress, waiting for interview): "))
-        return [applicant for applicant in Applicant.select().where(Applicant.status.contains(status))]
+        return [applicant for applicant in cls.select().where(cls.status.contains(status))]
 
-    @staticmethod
-    def get_filter_school():
+    @classmethod
+    def get_filter_school(cls):
         school = input(
             "Please choose a school: 1. Budapest, 2. Miskolc, 3.Krakow: ")
-        return [applicant for applicant in Applicant.select().where(Applicant.school == school)]
+        return [applicant for applicant in cls.select().where(cls.school == school)]
 
     @classmethod
     def get_filter_status(cls):
@@ -195,14 +211,19 @@ class Applicant(BaseModel):
         reg_date = input("Enter a date in the following format - 2016-04-01 12:01:00: ")
         return [applicant for applicant in cls.select().where(cls.reg_date >= reg_date)]
 
-    @staticmethod
-    def get_filter_mentor():
+    @classmethod
+    def get_filter_mentor(cls):
         mentor = input(
             "Select a Mentor for sorting users by: 1. Attila Molnár 2. Pál Monoczki 3. Sándor Szodoray " +
             "4. Dániel Salamon 5. Miklós Beöthy 6. Tamás Tompa 7. Mateusz Ostafil: ")
-        return [applicant for applicant in Applicant.select()
-                .join(Interview, on=(Applicant.interview == Interview.id))
+        return [applicant for applicant in cls.select()
+                .join(Interview, on=(cls.interview == Interview.id))
                 .join(Mentor, on=(Interview.mentor == Mentor.id)).where(Mentor.id == mentor)]
+
+    @classmethod
+    def get_applicant_filter(cls):
+        app_code = input("Please enter an application code: ")
+        return cls.select().where(cls.app_code == app_code)
 
 
 class City(BaseModel):
