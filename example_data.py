@@ -15,16 +15,16 @@ class GenerateData:
         # from models import Applicant
         for applicant in applicants:
             Applicant.create(
-                app_code=applicant['app_code'],
-                first_name=applicant['first_name'],
-                last_name=applicant['last_name'],
-                hometown=applicant['hometown'],
-                school=applicant['school'],
-                status=applicant['status'],
-                email=applicant['email'],
-                interview=applicant['interview'],
-                reg_date=applicant['reg_date']
-            )
+                            app_code=applicant['app_code'],
+                            first_name=applicant['first_name'],
+                            last_name=applicant['last_name'],
+                            hometown=applicant['hometown'],
+                            school=applicant['school'],
+                            status=applicant['status'],
+                            email=applicant['email'],
+                            interview=applicant['interview'],
+                            reg_date=applicant['reg_date']
+                            )
 
     @staticmethod
     def add_hometown_and_closest_school(cities):
