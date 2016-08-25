@@ -47,6 +47,11 @@ class Interview(BaseModel):
         school = input("Please choose a school: 1. Budapest, 2. Miskolc, 3. Krakow: ")
         return [interview for interview in cls.select().where(cls.school == school)]
 
+    @classmethod
+    def get_filter_time(cls):
+        reg_date = input("Enter a date in the following format - 2016-04-01 12:01:00: ")
+        return [i for i in cls.select().where(cls.start_date >= reg_date)]
+
 
 class Applicant(BaseModel):
     app_code = CharField(null=True, unique=True)
