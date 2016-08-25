@@ -129,12 +129,14 @@ class Applicant(BaseModel):
             applicant.interview_date_to_applicant()
 
     def interview_date_to_applicant(self):
+        applicant = Applicant.select()
         self.interview = Interview.select().where(
             Interview.available, Interview.school == self.school).get()
         self.interview.available = False
         self.interview.save()
         self.status = "waiting for interview"
         self.save()
+        ProjectEmail.send_interview_details(applicant)
 
     @staticmethod
     def get_status():
