@@ -98,14 +98,13 @@ class Menu:
             if option == "1":
                 PrintTable.print_interview(Interview.get_school_filter())
             elif option == "2":
-                pass
-                PrintTable.print_applicant()
+                PrintTable.print_interview_app_code(Interview.get_applicant_filter())
             elif option == "3":
                 pass
-                PrintTable.print_applicant()
+                PrintTable.print_interview()
             elif option == "4":
                 pass
-                PrintTable.print_applicant()
+                PrintTable.print_interview()
             elif option == "q":
                 break
             else:

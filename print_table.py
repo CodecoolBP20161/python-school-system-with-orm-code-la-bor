@@ -29,3 +29,16 @@ class PrintTable:
         else:
             print("This filter option does not exist!")
 
+    @staticmethod
+    def print_interview_app_code(query):
+        if query:
+            table = []
+            for i in query:
+                table.extend([[i.school.name, i.app_code,
+                               i.interview.mentor.first_name + ' ' + i.interview.mentor.last_name, i.interview.start_date,
+                               i.interview.end_date]])
+            headers = ["School", "App_code", "Mentor name", "Start date", "End date"]
+            print(tabulate(table, headers, tablefmt="fancy_grid"))
+        else:
+            print("This filter option does not exist!")
+

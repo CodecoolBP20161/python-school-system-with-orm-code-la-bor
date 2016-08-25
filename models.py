@@ -45,9 +45,21 @@ class Interview(BaseModel):
     @classmethod
     def get_school_filter(cls):
         school = input("Please choose a school: 1. Budapest, 2. Miskolc, 3. Krakow: ")
-        return [interview for interview in Interview.select().where(cls.school == school)]
+        return [interview for interview in cls.select().where(cls.school == school)]
 
-    
+    @staticmethod
+    def applicant_cities():
+        applicant_cities = Mentor.select(
+            fn.CONCAT(Mentor.first_name, ' ', Mentor.last_name).alias('name'),
+            Applicant.hometown
+        ).join(
+            Interview, on=(Mentor.id == Interview.mentor)
+        ).join(
+            Applicant, on=(Interview.id == Applicant.interview)
+        ).order_by(Mentor.last_name, Mentor.first_name).naive()
+        return applicant_cities
+
+
 class Applicant(BaseModel):
     app_code = CharField(null=True, unique=True)
     first_name = CharField()
@@ -172,17 +184,17 @@ class Applicant(BaseModel):
         email = str(input("Please write an e-mail address: "))
         return [applicant for applicant in cls.select().where(cls.email.contains(email))]
 
-    @staticmethod
-    def get_filter_status():
+    @classmethod
+    def get_filter_status(cls):
         status = str(
             input("Choose a status (new, in-progress, waiting for interview): "))
-        return [applicant for applicant in Applicant.select().where(Applicant.status.contains(status))]
+        return [applicant for applicant in cls.select().where(cls.status.contains(status))]
 
-    @staticmethod
-    def get_filter_school():
+    @classmethod
+    def get_filter_school(cls):
         school = input(
             "Please choose a school: 1. Budapest, 2. Miskolc, 3.Krakow: ")
-        return [applicant for applicant in Applicant.select().where(Applicant.school == school)]
+        return [applicant for applicant in cls.select().where(cls.school == school)]
 
     @classmethod
     def get_filter_status(cls):
@@ -199,14 +211,19 @@ class Applicant(BaseModel):
         reg_date = input("Enter a date in the following format - 2016-04-01 12:01:00: ")
         return [applicant for applicant in cls.select().where(cls.reg_date >= reg_date)]
 
-    @staticmethod
-    def get_filter_mentor():
+    @classmethod
+    def get_filter_mentor(cls):
         mentor = input(
             "Select a Mentor for sorting users by: 1. Attila Molnár 2. Pál Monoczki 3. Sándor Szodoray " +
             "4. Dániel Salamon 5. Miklós Beöthy 6. Tamás Tompa 7. Mateusz Ostafil: ")
-        return [applicant for applicant in Applicant.select()
-                .join(Interview, on=(Applicant.interview == Interview.id))
+        return [applicant for applicant in cls.select()
+                .join(Interview, on=(cls.interview == Interview.id))
                 .join(Mentor, on=(Interview.mentor == Mentor.id)).where(Mentor.id == mentor)]
+
+    @classmethod
+    def get_applicant_filter(cls):
+        app_code = input("Please enter an application code: ")
+        return cls.select().where(cls.app_code == app_code)
 
 
 class City(BaseModel):
