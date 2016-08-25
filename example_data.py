@@ -22,8 +22,8 @@ class GenerateData:
                 school=applicant['school'],
                 status=applicant['status'],
                 email=applicant['email'],
-                interview=applicant['interview']
-
+                interview=applicant['interview'],
+                reg_date=applicant['reg_date']
             )
 
     @staticmethod
