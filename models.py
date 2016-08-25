@@ -52,6 +52,13 @@ class Interview(BaseModel):
         reg_date = input("Enter a date in the following format - 2016-04-01 12:01:00: ")
         return [i for i in cls.select().where(cls.start_date >= reg_date)]
 
+    @classmethod
+    def get_filter_mentor(cls):
+        mentor = input(
+            "Select a Mentor for sorting users by: 1. Attila Molnár 2. Pál Monoczki 3. Sándor Szodoray " +
+            "4. Dániel Salamon 5. Miklós Beöthy 6. Tamás Tompa 7. Mateusz Ostafil: ")
+        return [interview for interview in cls.select().where(cls.mentor == mentor)]
+
 
 class Applicant(BaseModel):
     app_code = CharField(null=True, unique=True)

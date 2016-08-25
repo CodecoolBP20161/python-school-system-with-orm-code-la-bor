@@ -101,7 +101,7 @@ class Menu:
                 PrintTable.print_interview_app_code(Applicant.get_applicant_filter())
             elif option == "3":
                 pass
-                PrintTable.print_interview()
+                PrintTable.print_interview(Interview.get_filter_mentor())
             elif option == "4":
                 PrintTable.print_interview(Interview.get_filter_time())
             elif option == "q":
