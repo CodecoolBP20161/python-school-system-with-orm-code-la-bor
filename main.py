@@ -3,6 +3,8 @@ from menu import *
 from build import *
 from example_data import *
 
+Mentor.get_mentor_interviews()
+exit()
 
 while True:
     answer = input("Do you want to create a new database? (yes or no): ").lower()
