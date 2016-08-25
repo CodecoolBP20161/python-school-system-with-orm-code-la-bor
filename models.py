@@ -2,14 +2,10 @@ from peewee import *
 import random
 import time
 
-# Configure your database connection here
-# database name = should be your username on your laptop
-# database user = should be your username on your laptop
-# db = PostgresqlDatabase('dbname', user='dbuser')
 
+class ConnectDatabase:
 
-class ConnectDatabase():
-
+    @staticmethod
     def connect_database():
         with open('connect_str.txt', "r") as f:
             return f.readline().strip()
@@ -29,6 +25,7 @@ class School(BaseModel):
     location = CharField()
     name = CharField()
     # mentors
+
 
 class Mentor(BaseModel):
     first_name = CharField()
@@ -52,7 +49,7 @@ class Interview(BaseModel):
         school = input("Please choose a school: 1. Budapest, 2. Miskolc, 3. Krakow: ")
         return [interview for interview in Interview.select().where(cls.school == school)]
 
-
+    
 class Applicant(BaseModel):
     app_code = CharField(null=True, unique=True)
     first_name = CharField()
@@ -67,8 +64,8 @@ class Applicant(BaseModel):
     @staticmethod
     def detect_new_applicants():
         return Applicant.select().where(Applicant.app_code >> None)
-        # return Applicant.get(Applicant.app_code == NULL)
 
+    @staticmethod
     def generate_app_code():
         applicants = Applicant.select().where(Applicant.app_code != None)
         exists = True
@@ -81,41 +78,37 @@ class Applicant(BaseModel):
             if exists is False:
                 return new_app_code
 
-    def strTimeProp(start, end, format, prop):
+    @staticmethod
+    def str_time_prop(start, end, format, prop):
         start_time = time.mktime(time.strptime(start, format))
         end_time = time.mktime(time.strptime(end, format))
         prop_time = start_time + prop * (end_time - start_time)
         return time.strftime(format, time.localtime(prop_time))
 
-    def randomDate(start, end, prop):
-        return Applicant.strTimeProp(start, end, '%Y-%m-%d %H:%M:%S', prop)
+    @staticmethod
+    def random_date(start, end, prop):
+        return Applicant.str_time_prop(start, end, '%Y-%m-%d %H:%M:%S', prop)
 
     @staticmethod
     def assign_reg_date_to_new_applicants():
         new_applicants = Applicant.select().where(Applicant.reg_date >> None)
         for applicant in new_applicants:
-            applicant.reg_date = Applicant.randomDate("2016-04-01 12:01:00", "2016-08-22 11:59:59", random.random())
+            applicant.reg_date = Applicant.("2016-04-01 12:01:00", "2016-08-22 11:59:59", random.random())
             applicant.save()
 
     @staticmethod
     def assign_app_code_to_new_applicants():
         new_applicants = Applicant.detect_new_applicants()
         for applicant in new_applicants:
-            # new_app_code = Applicant.generate_app_code()
             applicant.app_code = Applicant.generate_app_code()
             applicant.status = 'in progress'
             applicant.save()
-            # Applicant.update(Applicant.app_code == new_app_code).where(Applicant.id == applicant.id).execute()
-
-        # return City.select(City.school_name).where(City.name == Applicant.hometown)
 
     @staticmethod
     def school_to_applicant():
         applicants = Applicant.select().where(Applicant.school >> None)
         for applicant in applicants:
             applicant.school = City.select().where(City.name == applicant.hometown).get().school
-
-            # element.closest_school = element.get_closest_school_name()
             applicant.save()
 
     @classmethod

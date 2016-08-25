@@ -16,7 +16,6 @@ class PrintTable:
         else:
             print("This filter option does not exist!")
 
-
     def print_interview(query):
         if query:
             table = []
