@@ -5,8 +5,6 @@ import time
 
 class ConnectDatabase:
 
-
-    @staticmethod
     def connect_database():
         with open('connect_str.txt', "r") as f:
             return f.readline().strip()
@@ -97,7 +95,7 @@ class Applicant(BaseModel):
     def assign_reg_date_to_new_applicants():
         new_applicants = Applicant.select().where(Applicant.reg_date >> None)
         for applicant in new_applicants:
-            applicant.reg_date = Applicant.("2016-04-01 12:01:00", "2016-08-22 11:59:59", random.random())
+            applicant.reg_date = Applicant.random_date("2016-04-01 12:01:00", "2016-08-22 11:59:59", random.random())
             applicant.save()
 
     @staticmethod
