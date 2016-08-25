@@ -7,19 +7,11 @@ import json
 
 class EmailSender:
 
-
     with open("login.json") as login:
         login_data = json.load(login)
 
     user = login_data["user"]
     password = login_data["password"]
-    # to_address = 'codelabor1@gmail.com'
-    #
-    # body = "\r\n".join([
-    #   "Why, oh why",
-    #   "Why, oh why",
-    #   "Why, oh why"
-    #   ])
 
     @classmethod
     def email_send(cls, to_address, body, subject):
@@ -40,5 +32,3 @@ class EmailSender:
 
         except:
             print("Sending failed!")
-
-EmailSender.email_send()
