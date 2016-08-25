@@ -47,18 +47,6 @@ class Interview(BaseModel):
         school = input("Please choose a school: 1. Budapest, 2. Miskolc, 3. Krakow: ")
         return [interview for interview in cls.select().where(cls.school == school)]
 
-    @staticmethod
-    def applicant_cities():
-        applicant_cities = Mentor.select(
-            fn.CONCAT(Mentor.first_name, ' ', Mentor.last_name).alias('name'),
-            Applicant.hometown
-        ).join(
-            Interview, on=(Mentor.id == Interview.mentor)
-        ).join(
-            Applicant, on=(Interview.id == Applicant.interview)
-        ).order_by(Mentor.last_name, Mentor.first_name).naive()
-        return applicant_cities
-
 
 class Applicant(BaseModel):
     app_code = CharField(null=True, unique=True)
