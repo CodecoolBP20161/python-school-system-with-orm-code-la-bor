@@ -12,16 +12,11 @@ class ProjectEmail:
 
     @staticmethod
     def send_interview_details(applicant):
-        body = "Dear {0}, \n ",
-        "Your interview details: \n",
-        "Your will start: {1} \n",
-        "Your will end: {2} \n",
-        "Your mentor will be: {3} \n",
-        "The location of the school: {4}".format(
+        body = "Dear {0}, \n Your interview details: \n Your will start: {1} \n Your will end: {2} \n Your mentor will be: {3} \n The location of the school: {4}".format(
             applicant.first_name + ' ' + applicant.last_name,
             applicant.interview.start_date,
             applicant.interview.end_date,
-            applicant.interview.mentor,
+            applicant.interview.mentor.first_name + ' ' + applicant.interview.mentor.last_name,
             applicant.school.location
             )
         subject = "Your interview details"
