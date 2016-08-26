@@ -1,13 +1,10 @@
 from peewee import *
 import random
-
-# Configure your database connection here
-# database name = should be your username on your laptop
-# database user = should be your username on your laptop
-# db = PostgresqlDatabase('dbname', user='dbuser')
+import time
+from project_email import ProjectEmail
 
 
-class ConnectDatabase():
+class ConnectDatabase:
 
     def connect_database():
         with open('connect_str.txt', "r") as f:
@@ -18,22 +15,28 @@ class ConnectDatabase():
 
 
 class BaseModel(Model):
+
     """A base model that will use our Postgresql database"""
     class Meta:
         database = ConnectDatabase.db
 
 
 class School(BaseModel):
-    # id = PrimaryKeyField(default=None)
     location = CharField()
     name = CharField()
-    # mentors
+
 
 class Mentor(BaseModel):
     first_name = CharField()
     last_name = CharField()
     school = ForeignKeyField(School, null=True, default=None)
     email = CharField()
+
+    @staticmethod
+    def send_email():
+        applicants = Applicant.select().join(Interview)
+        for applicant in applicants:
+            ProjectEmail.send_details_to_mentor(applicant)
 
 
 class Interview(BaseModel):
@@ -46,6 +49,29 @@ class Interview(BaseModel):
     def get_applicant(self):
         return Applicant.get(Applicant.interview == self)
 
+    @classmethod
+    def get_school_filter(cls):
+        school = input("Please choose a school: 1. Budapest, 2. Miskolc, 3. Krakow: ")
+        return [interview for interview in cls.select().where(cls.school == school)]
+
+    @classmethod
+    def get_filter_time(cls):
+        reg_date = input("Enter a date in the following format - 2016-04-01 12:01:00: ")
+        return [i for i in cls.select().where(cls.start_date >= reg_date)]
+
+    @classmethod
+    def get_filter_mentor(cls):
+        mentor = input(
+            "Select a Mentor for sorting users by: 1. Attila Molnár 2. Pál Monoczki 3. Sándor Szodoray " +
+            "4. Dániel Salamon 5. Miklós Beöthy 6. Tamás Tompa 7. Mateusz Ostafil: ")
+        return [interview for interview in cls.select().where(cls.mentor == mentor)]
+
+    @staticmethod
+    def send_email():
+        applicants = Applicant.select().join(Interview)
+        for applicant in applicants:
+            ProjectEmail.send_interview_details(applicant)
+
 
 class Applicant(BaseModel):
     app_code = CharField(null=True, unique=True)
@@ -55,15 +81,20 @@ class Applicant(BaseModel):
     school = ForeignKeyField(School, null=True, default=None)
     status = CharField()
     email = CharField()
-    interview = ForeignKeyField(Interview, null=True, default=None, related_name='applicants')
+    interview = ForeignKeyField(
+        Interview,
+        null=True,
+        default=None,
+        related_name='applicants')
+    reg_date = DateTimeField(null=True)
 
     @staticmethod
     def detect_new_applicants():
         return Applicant.select().where(Applicant.app_code >> None)
-        # return Applicant.get(Applicant.app_code == NULL)
 
+    @staticmethod
     def generate_app_code():
-        applicants = Applicant.select().where(Applicant.app_code != None)
+        applicants = Applicant.select().where(Applicant.app_code is not None)
         exists = True
         while exists is True:
             new_app_code = random.randrange(10000, 100000)
@@ -75,25 +106,33 @@ class Applicant(BaseModel):
                 return new_app_code
 
     @staticmethod
-    def assign_app_code_to_new_applicants():
-        new_applicants = Applicant.detect_new_applicants()
-        for applicant in new_applicants:
-            # new_app_code = Applicant.generate_app_code()
-            applicant.app_code = Applicant.generate_app_code()
-            applicant.status = 'in progress'
-            applicant.save()
-            # Applicant.update(Applicant.app_code == new_app_code).where(Applicant.id == applicant.id).execute()
-
-        # return City.select(City.school_name).where(City.name == Applicant.hometown)
+    def str_time_prop(start, end, format, prop):
+        start_time = time.mktime(time.strptime(start, format))
+        end_time = time.mktime(time.strptime(end, format))
+        prop_time = start_time + prop * (end_time - start_time)
+        return time.strftime(format, time.localtime(prop_time))
 
     @staticmethod
-    def school_to_applicant():
-        applicants = Applicant.select().where(Applicant.school >> None)
-        for applicant in applicants:
-            applicant.school = City.select().where(City.name == applicant.hometown).get().school
+    def random_date(start, end, prop):
+        return Applicant.str_time_prop(start, end, '%Y-%m-%d %H:%M:%S', prop)
 
-            # element.closest_school = element.get_closest_school_name()
+    @staticmethod
+    def assign_reg_date_to_new_applicants():
+        new_applicants = Applicant.select().where(Applicant.reg_date >> None)
+        for applicant in new_applicants:
+            applicant.reg_date = Applicant.random_date("2016-04-01 12:01:00", "2016-08-22 11:59:59", random.random())
             applicant.save()
+
+    @staticmethod
+    def handle_new_applicants():
+        new_applicants = Applicant.detect_new_applicants()
+        for applicant in new_applicants:
+            applicant.app_code = Applicant.generate_app_code()
+            applicant.status = 'in progress'
+            applicant.school = City.select().where(
+                City.name == applicant.hometown).get().school
+            applicant.save()
+            ProjectEmail.send_applicant_info(applicant)
 
     @classmethod
     def check_interview_date(cls):
@@ -102,11 +141,13 @@ class Applicant(BaseModel):
             applicant.interview_date_to_applicant()
 
     def interview_date_to_applicant(self):
-        self.interview = Interview.select().where(Interview.available == True, Interview.school == self.school).get()
+        self.interview = Interview.select().where(
+            Interview.available, Interview.school == self.school).get()
         self.interview.available = False
         self.interview.save()
         self.status = "waiting for interview"
         self.save()
+
 
     @staticmethod
     def get_status():
@@ -140,6 +181,58 @@ class Applicant(BaseModel):
             print("Invalid application code, please try again")
             print(err)
             Applicant.get_interview_details()
+
+    @classmethod
+    def get_filter_hometown(cls):
+        hometown = str(input("Please choose a city: "))
+        return [applicant for applicant in cls.select().where(cls.hometown.contains(hometown))]
+
+    @classmethod
+    def get_filter_email(cls):
+        email = str(input("Please write an e-mail address: "))
+        return [applicant for applicant in cls.select().where(cls.email.contains(email))]
+
+    @classmethod
+    def get_filter_status(cls):
+        status = str(
+            input("Choose a status (new, in-progress, waiting for interview): "))
+        return [applicant for applicant in cls.select().where(cls.status.contains(status))]
+
+    @classmethod
+    def get_filter_school(cls):
+        school = input(
+            "Please choose a school: 1. Budapest, 2. Miskolc, 3.Krakow: ")
+        return [applicant for applicant in cls.select().where(cls.school == school)]
+
+    @classmethod
+    def get_filter_status(cls):
+        status = str(input("Choose a status (new, in-progress, waiting for interview): "))
+        return [applicant for applicant in cls.select().where(cls.status.contains(status))]
+
+    @classmethod
+    def get_filter_school(cls):
+        school = input("Please choose a school: 1. Budapest, 2. Miskolc, 3. Krakow: ")
+        return [applicant for applicant in cls.select().where(cls.school == school)]
+
+    @classmethod
+    def get_filter_time(cls):
+        reg_date = input("Enter a date in the following format - 2016-04-01 12:01:00: ")
+        return [applicant for applicant in cls.select().where(cls.reg_date >= reg_date)]
+
+    @classmethod
+    def get_filter_mentor(cls):
+        mentor = input(
+            "Select a Mentor for sorting users by: 1. Attila Molnár 2. Pál Monoczki 3. Sándor Szodoray " +
+            "4. Dániel Salamon 5. Miklós Beöthy 6. Tamás Tompa 7. Mateusz Ostafil: ")
+        return [applicant for applicant in cls.select()
+                .join(Interview, on=(cls.interview == Interview.id))
+                .join(Mentor, on=(Interview.mentor == Mentor.id)).where(Mentor.id == mentor)]
+
+    @classmethod
+    def get_applicant_filter(cls):
+        app_code = input("Please enter an application code: ")
+        return cls.select().where(cls.app_code == app_code)
+
 
 class City(BaseModel):
     name = CharField()
