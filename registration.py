@@ -1,13 +1,17 @@
 from flask import *
-from server import *
+from models import *
 
 
-@app.route('/registration', methods=['GET'])
+
+registration = Blueprint('registration', __name__)
+
+
+@registration.route('/registration', methods=['GET'])
 def get_applicant_reg():
     return render_template('registration_form.html')
 
 
-@app.route('/registration', methods=['POST'])
+@registration.route('/registration', methods=['POST'])
 def add_applicant():
     columns = ['first_name', 'last_name', 'hometown', 'email']
     data = [request.form[element] for element in columns]
