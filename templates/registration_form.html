@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <title>Registration</title>
+
+    </head>
+
+    <body>
+        <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+        <form method="post">
+            <fieldset style="width:400px">
+                <h2>Registration</h2><br>
+                <h4>First name</h4><input  type="text" name="first_name"
+                                               required pattern="[A-Za-z]{1,32}"
+                                               title="Please use only alphabetic characters without ékezet."
+                                               size="50"><br>
+                <h4>Last name</h4><input type="text" name="last_name"
+                                             required pattern="[A-Za-z]{1,32}"
+                                             title="Please use only alphabetic characters."
+                                             size="50"><br>
+                <h4>Hometown</h4><input type="text" name="hometown"
+                                            required pattern="[A-Za-z]{1,32}"
+                                            size="50"><br>
+                <h4>Email address</h4><input type="email" name="email" required
+                                            size="50"><br>
+                <br><button type="submit" class="btn btn-primary active" value="submit">Submit</button>
+
+        </form>
+    </body>
+
+</html>
