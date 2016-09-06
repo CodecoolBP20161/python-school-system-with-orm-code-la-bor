@@ -79,7 +79,7 @@ class Applicant(BaseModel):
     last_name = CharField()
     hometown = CharField()
     school = ForeignKeyField(School, null=True, default=None)
-    status = CharField()
+    status = CharField(null=True)
     email = CharField()
     interview = ForeignKeyField(
         Interview,
