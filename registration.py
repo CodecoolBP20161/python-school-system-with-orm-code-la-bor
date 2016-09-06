@@ -5,11 +5,6 @@ from models import *
 registration = Blueprint('registration', __name__)
 
 
-@registration.route('/')
-def welcome():
-    return render_template('welcome.html')
-
-
 @registration.route('/registration', methods=['GET'])
 def get_applicant_reg():
     return render_template('registration_form.html')
