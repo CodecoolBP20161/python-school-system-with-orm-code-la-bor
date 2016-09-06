@@ -18,5 +18,4 @@ def add_applicant():
     data = [request.form[element] for element in columns]
     new_applicant = Applicant(first_name=data[0], last_name=data[1], hometown=data[2], email=data[3], reg_date=reg_date)
     new_applicant.save()
-    flash('Huhhuuu, applicant added')
     return render_template('welcome.html')
