@@ -17,5 +17,7 @@ def add_applicant():
     columns = ['first_name', 'last_name', 'hometown', 'email']
     data = [request.form[element] for element in columns]
     new_applicant = Applicant(first_name=data[0], last_name=data[1], hometown=data[2], email=data[3], reg_date=reg_date)
+    new_applicant.app_code = Applicant.generate_app_code()
+    new_applicant.status = 'in progress'
     new_applicant.save()
-    return render_template('welcome.html')
+    return redirect('/')
