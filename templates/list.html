@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Interview list</title>
+    </head>
+    <style>
+        table, th, td {border: 1px solid gray}
+    </style>
+    <body>
+        <form method="post">
+        <div>
+            <ul>
+                <table style="width:100%">
+                    <tr>
+                        <th>School</th>
+                        <th>App code</th>
+                        <th>Mentor</th>
+                        <th>Start date</th>
+                        <th>End date</th>
+                    </tr>
+                    {% for applicant in applicants %}
+                    <tr>
+                        <td align="center">{{applicant.school.name}}</td>
+                        <td align="center">{{applicant.app_code}}</td>
+                        <td align="center">{{applicant.interview.mentor.first_name + ' ' + applicant.interview.mentor.last_name}}</td>
+                        <td align="center">{{applicant.interview.start_date}}</td>
+                        <td align="center">{{applicant.interview.end_date}}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </ul>
+        </div>
+        </form>
+    </body>
+</html>

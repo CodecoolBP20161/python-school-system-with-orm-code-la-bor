@@ -132,7 +132,7 @@ class Applicant(BaseModel):
             applicant.school = City.select().where(
                 City.name == applicant.hometown).get().school
             applicant.save()
-            ProjectEmail.send_applicant_info(applicant)
+            # ProjectEmail.send_applicant_info(applicant)
 
     @classmethod
     def check_interview_date(cls):

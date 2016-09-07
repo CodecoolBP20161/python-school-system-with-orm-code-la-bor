@@ -149,7 +149,18 @@ def generate_data():
         {'start_date': '2016-09-02 13:00:00', 'end_date': '2016-09-02 13:30:00',
          'mentor': Mentor.get(Mentor.id == 6), 'school': School.get(School.name == 'CodecoolBudapest'),
          'available': True},
+        {'start_date': '2016-09-03 13:00:00', 'end_date': '2016-09-03 13:30:00',
+         'mentor': Mentor.get(Mentor.id == 6), 'school': School.get(School.name == 'CodecoolBudapest'),
+         'available': True},
+        {'start_date': '2016-09-03 13:00:00', 'end_date': '2016-09-03 13:30:00',
+         'mentor': Mentor.get(Mentor.id == 5), 'school': School.get(School.name == 'CodecoolBudapest'),
+         'available': True},
+        {'start_date': '2016-09-03 13:00:00', 'end_date': '2016-09-03 13:30:00',
+         'mentor': Mentor.get(Mentor.id == 4), 'school': School.get(School.name == 'CodecoolBudapest'),
+         'available': True},
     ]
 
     GenerateData.add_interview_slot(interviews)
-    GenerateData.add_hometown_and_closest_school(cities)
+    # GenerateData.add_hometown_and_closest_school(cities)
+
+
