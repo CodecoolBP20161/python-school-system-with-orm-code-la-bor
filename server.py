@@ -1,12 +1,14 @@
 from flask import *
 from peewee import *
 from build import *
+from index import *
 from registration import *
 
 
 app = Flask('School system')
 
 app.register_blueprint(registration)
+app.register_blueprint(index)
 
 
 @app.before_request
