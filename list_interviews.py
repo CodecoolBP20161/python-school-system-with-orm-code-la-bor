@@ -5,13 +5,13 @@ from models import *
 list_interviews = Blueprint('list_interviews', __name__)
 
 
-@list_interviews.route('/list', methods=['GET', 'POST'])
+@list_interviews.route('/list_interviews', methods=['GET', 'POST'])
 def list_interview():
     rows = Applicant.select().join(Interview)
     return render_template('list.html', applicants=rows)
 
 
-@list_interviews.route('/list/school', methods=['GET', 'POST'])
+@list_interviews.route('/list_interviews/school', methods=['GET', 'POST'])
 def list_interview_school():
     if request.method == 'POST':
         school_name = request.form['school_name']
@@ -28,7 +28,7 @@ def get_rows_by_school_id(query):
         return Applicant.select().join(Interview).where(Applicant.school == query)
 
 
-@list_interviews.route('/list/app_code', methods=['GET', 'POST'])
+@list_interviews.route('/list_interviews/app_code', methods=['GET', 'POST'])
 def list_interview_app_code():
     if request.method == 'POST':
         app_code = request.form['app_code']
@@ -45,7 +45,7 @@ def get_applicant_by_app_code(query):
         return Applicant.select().join(Interview).where(Applicant.app_code == query)
 
 
-@list_interviews.route('/list/mentor', methods=['GET', 'POST'])
+@list_interviews.route('/list_interviews/mentor', methods=['GET', 'POST'])
 def list_interview_mentor():
     if request.method == 'POST':
         mentor = request.form['mentor']
@@ -62,7 +62,7 @@ def get_applicant_by_mentor(query):
         return Applicant.select().join(Interview).join(Mentor).where(Mentor.last_name == query)
 
 
-@list_interviews.route('/list/start_date', methods=['GET', 'POST'])
+@list_interviews.route('/list_interviews/start_date', methods=['GET', 'POST'])
 def list_interview_start_date():
     if request.method == 'POST':
         start_date = request.form['start_date']
