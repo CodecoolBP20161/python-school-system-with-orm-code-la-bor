@@ -3,6 +3,7 @@ from peewee import *
 from build import *
 from index import *
 from registration import *
+from example_data import *
 
 
 app = Flask('School system')
@@ -27,4 +28,5 @@ with app.app_context():
 
 if __name__ == "__main__":
     create_table()
+    generate_data()
     app.run(debug=True)
