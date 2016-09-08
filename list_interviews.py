@@ -22,6 +22,9 @@ def get_rows_by_school_id(school_id):
         return Applicant.select().join(Interview).where(Applicant.school == school_id)
 
 
+@list_interviews.route('/filter')
+def get_filter():
+    return render_template('filter.html')
 # @list_interviews.route('/list')
 # def filter_interviews_by_school():
 #     print(school_name)
