@@ -8,7 +8,7 @@ list_interviews = Blueprint('list_interviews', __name__)
 @list_interviews.route('/list_interviews', methods=['GET', 'POST'])
 def list_interview():
     rows = Applicant.select().join(Interview)
-    return render_template('list.html', applicants=rows)
+    return render_template('list_interview.html', applicants=rows)
 
 
 @list_interviews.route('/list_interviews/school', methods=['GET', 'POST'])
@@ -18,7 +18,7 @@ def list_interview_school():
         rows = get_rows_by_school_id(school_name)
     else:
         rows = get_rows_by_school_id(0)
-    return render_template('list.html', applicants=rows)
+    return render_template('list_interview.html', applicants=rows)
 
 
 def get_rows_by_school_id(query):
@@ -35,7 +35,7 @@ def list_interview_app_code():
         rows = get_applicant_by_app_code(app_code)
     else:
         rows = get_applicant_by_app_code(0)
-    return render_template('list.html', applicants=rows)
+    return render_template('list_interview.html', applicants=rows)
 
 
 def get_applicant_by_app_code(query):
@@ -52,7 +52,7 @@ def list_interview_mentor():
         rows = get_applicant_by_mentor(mentor)
     else:
         rows = get_applicant_by_mentor(0)
-    return render_template('list.html', applicants=rows)
+    return render_template('list_interview.html', applicants=rows)
 
 
 def get_applicant_by_mentor(query):
@@ -69,7 +69,7 @@ def list_interview_start_date():
         rows = get_applicant_by_start_date(start_date)
     else:
         rows = get_applicant_by_start_date('2017-08-15')
-    return render_template('list.html', applicants=rows)
+    return render_template('list_interview.html', applicants=rows)
 
 
 def get_applicant_by_start_date(query):
