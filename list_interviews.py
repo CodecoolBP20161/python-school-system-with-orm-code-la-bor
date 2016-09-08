@@ -5,21 +5,33 @@ from models import *
 list_interviews = Blueprint('list_interviews', __name__)
 
 
-@list_interviews.route('/list')
+@list_interviews.route('/list', methods=['GET', 'POST'])
 def list_interview():
-    applicants = Applicant.select().join(Interview)
-    return render_template('list.html', applicants=applicants)
+    if request.method == 'POST':
+        school_name = request.form['School_name']
+        rows = get_rows_by_school_id(school_name)
+    else:
+        rows = get_rows_by_school_id(0)
+    return render_template('list.html', applicants=rows)
 
 
-# @list_interviews.route('/list/school')
-# def filter_interviews_by_school(school):
-#     query = Interview.select().where(school == school)
-#     return render_template('list.html', query=query)
-#
+def get_rows_by_school_id(school_id):
+    if school_id == "0":
+        return Applicant.select().join(Interview)
+    else:
+        return Applicant.select().join(Interview).where(Applicant.school == school_id)
+
+
+# @list_interviews.route('/list')
+# def filter_interviews_by_school():
+#     print(school_name)
+#     applicants = Applicant.select().join(Interview).where(Applicant.school == 1)
+#     return render_template('list.html', applicants=applicants)
+
 #
 # @list_interviews.route('/list/app_code')
 # def filter_interviews_by_school(app_code):
-#     query = Interview.select().where(app_code == app_code)
+#     query = Interview.select().where(Applicant.app_code == app_code)
 #     return render_template('list.html', query=query)
 #
 #

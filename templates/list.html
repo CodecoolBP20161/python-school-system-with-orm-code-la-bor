@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -9,28 +11,34 @@
     </style>
     <body>
         <form method="post">
-        <div>
-            <ul>
-                <table style="width:100%">
-                    <tr>
-                        <th>School</th>
-                        <th>App code</th>
-                        <th>Mentor</th>
-                        <th>Start date</th>
-                        <th>End date</th>
-                    </tr>
-                    {% for applicant in applicants %}
-                    <tr>
-                        <td align="center">{{applicant.school.name}}</td>
-                        <td align="center">{{applicant.app_code}}</td>
-                        <td align="center">{{applicant.interview.mentor.first_name + ' ' + applicant.interview.mentor.last_name}}</td>
-                        <td align="center">{{applicant.interview.start_date}}</td>
-                        <td align="center">{{applicant.interview.end_date}}</td>
-                    </tr>
-                    {% endfor %}
-                </table>
-            </ul>
-        </div>
+            <div>
+                <ul>
+                    <table style="width:100%">
+                        <tr>
+                            <th><select name="School_name">
+                                <option value="0">All</option>
+                                <option value="1">Budapest</option>
+                                <option value="2">Miskolc</option>
+                                </select>
+                            </th>
+                            <th>App code</th>
+                            <th>Mentor</th>
+                            <th>Start date</th>
+                            <th>End date</th>
+                        </tr>
+                        {% for applicant in applicants %}
+                        <tr>
+                            <td align="center">{{applicant.school.name}}</td>
+                            <td align="center">{{applicant.app_code}}</td>
+                            <td align="center">{{applicant.interview.mentor.first_name + ' ' + applicant.interview.mentor.last_name}}</td>
+                            <td align="center">{{applicant.interview.start_date}}</td>
+                            <td align="center">{{applicant.interview.end_date}}</td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                </ul>
+            </div>
+            <button type="submit">élsdkjélkj</button>
         </form>
     </body>
 </html>
