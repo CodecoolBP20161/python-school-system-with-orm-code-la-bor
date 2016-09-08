@@ -78,7 +78,7 @@ class Applicant(BaseModel):
     first_name = CharField()
     last_name = CharField()
     hometown = CharField()
-    school = ForeignKeyField(School, null=True, default=None)
+    school = ForeignKeyField(School, null=True, default=None, related_name='applicants')
     status = CharField(null=True)
     email = CharField()
     interview = ForeignKeyField(
@@ -132,7 +132,7 @@ class Applicant(BaseModel):
             applicant.school = City.select().where(
                 City.name == applicant.hometown).get().school
             applicant.save()
-            # ProjectEmail.send_applicant_info(applicant)
+            ProjectEmail.send_applicant_info(applicant)
 
     @classmethod
     def check_interview_date(cls):
