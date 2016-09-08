@@ -62,6 +62,23 @@ def get_applicant_by_mentor(query):
         return Applicant.select().join(Interview).join(Mentor).where(Mentor.last_name == query)
 
 
+@list_interviews.route('/list/start_date', methods=['GET', 'POST'])
+def list_interview_start_date():
+    if request.method == 'POST':
+        start_date = request.form['start_date']
+        rows = get_applicant_by_start_date(start_date)
+    else:
+        rows = get_applicant_by_start_date('2017-08-15')
+    return render_template('list.html', applicants=rows)
+
+
+def get_applicant_by_start_date(query):
+    if query == "":
+        return Applicant.select().join(Interview)
+    else:
+        return Applicant.select().join(Interview).where(Interview.start_date >= query)
+
+
 @list_interviews.route('/filter')
 def get_filter():
     return render_template('filter.html')
