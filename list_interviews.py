@@ -5,7 +5,7 @@ from models import *
 list_interviews = Blueprint('list_interviews', __name__)
 
 
-@list_interviews.route('/list_interviews', methods=['GET', 'POST'])
+@list_interviews.route('/list_interviews')
 def list_interview():
     rows = Applicant.select().join(Interview)
     return render_template('list_interview.html', applicants=rows)
@@ -39,10 +39,10 @@ def list_interview_app_code():
 
 
 def get_applicant_by_app_code(query):
-    if query == "":
+    if query == "0":
         return Applicant.select().join(Interview)
     else:
-        return Applicant.select().join(Interview).where(Applicant.app_code == query)
+        return Applicant.select().join(Interview).where(Applicant.app_code.contains(query))
 
 
 @list_interviews.route('/list_interviews/mentor', methods=['GET', 'POST'])
@@ -59,7 +59,7 @@ def get_applicant_by_mentor(query):
     if query == "":
         return Applicant.select().join(Interview).join(Mentor)
     else:
-        return Applicant.select().join(Interview).join(Mentor).where(Mentor.last_name == query)
+        return Applicant.select().join(Interview).join(Mentor).where(Mentor.last_name.contains(query))
 
 
 @list_interviews.route('/list_interviews/start_date', methods=['GET', 'POST'])
