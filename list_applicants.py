@@ -5,7 +5,7 @@ from models import *
 list_applicants = Blueprint('list_applicants', __name__)
 
 
-@list_applicants.route('/list_applicants', methods=['GET', 'POST'])
+@list_applicants.route('/list_applicants')
 def list_interview():
     rows = Applicant.select().join(Interview)
     return render_template('list_applicant.html', applicants=rows)
@@ -22,7 +22,7 @@ def list_applicant_status():
 
 
 def get_rows_by_status(query):
-    if query == "":
+    if query == "0":
         return Applicant.select().join(Interview)
     else:
         return Applicant.select().join(Interview).where(Applicant.status == query)
