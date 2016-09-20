@@ -5,64 +5,65 @@
     <head>
         <meta charset="UTF-8">
         <title>Interview list</title>
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </head>
-    <style>
-        table, th, td {border: 1px solid gray}
-    </style>
     <body>
         <form method="post">
-            <div>
-                <ul>
-                    <table style="width:100%">
-                        <tr>
-                            <td><select name="status">
-                                <option value="0">All</option>
-                                <option value="new">New</option>
-                                <option value="in progress">In progress</option>
-                                <option value="waiting for interview">Waiting for interview</option>
-                                <option value="Accepted">Accepted</option>
-                                <option value="Rejected">Rejected</option>
-                            </select></td>
-                            <td><input type="text" name="reg_date"></td>
-                            <td><input type="text" name="hometown"></td>
-                            <td><input type="text" name="name"></td>
-                            <td><input type="text" name="email"></td>
-                            <td><select name="school_name">
-                                <option value="0">All</option>
-                                <option value="1">Budapest</option>
-                                <option value="2">Miskolc</option>
-                                <option value="3">Krakow</option>
-                                </select></td>
-                            <td><input type="text" name="mentor"></td>
-                        </tr>
-                        <tr>
-                            <!--<th>School</th>School-->
-                            <th><a href="http://localhost:5000/list_applicants/status">Status</a></th>
-                            <th><a href="http://localhost:5000/list_applicants/reg_date">Registration date</a></th>
-                            <th><a href="http://localhost:5000/list_applicants/hometown">Hometown</a></th>
-                            <th><a href="http://localhost:5000/list_applicants/name">Name</a></th>
-                            <th><a href="http://localhost:5000/list_applicants/email">E-mail</a></th>
-                            <th><a href="http://localhost:5000/list_applicants/school">School</a></th>
-                            <th><a href="http://localhost:5000/list_applicants/mentor">Mentor</a></th>
-                        </tr>
-                        {% for applicant in applicants %}
-                        <tr>
-                            <td align="center">{{applicant.status}}</td>
-                            <td align="center">{{applicant.reg_date}}</td>
-                            <td align="center">{{applicant.hometown}}</td>
-                            <td align="center">{{applicant.first_name + ' ' + applicant.last_name}}</td>
-                            <td align="center">{{applicant.email}}</td>
-                            <td align="center">{{applicant.school.name}}</td>
-                            <td align="center">{{applicant.interview.mentor.first_name + ' ' + applicant.interview.mentor.last_name}}</td>
-                        </tr>
-                        {% endfor %}
-                    </table>
-                </ul>
+            <div class="input-group">
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" placeholder="..." name="filter" >
+                </div>
+                <div class="btn-group input col-sm-12">
+                    <button type="button" class="btn btn-danger disabled ">Choose a filter</button>
+                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                    <span class="caret"></span></button>
+                    <button type="submit" class="btn btn-success">Search</button>
+                    <ul class="dropdown-menu">
+                        <li><a href="http://localhost:5000/list_applicants/status" class="text-center">Status</a></li>
+                        <li><a href="http://localhost:5000/list_applicants/reg_date" class="text-center">Registration date</a></li>
+                        <li><a href="http://localhost:5000/list_applicants/hometown" class="text-center">Hometown</a></li>
+                        <li><a href="http://localhost:5000/list_applicants/name" class="text-center">Name</a></li>
+                        <li><a href="http://localhost:5000/list_applicants/email" class="text-center">E-mail</a></li>
+                        <li><a href="http://localhost:5000/list_applicants/school" class="text-center">School</a></li>
+                        <li><a href="http://localhost:5000/list_applicants/mentor" class="text-center">Mentor</a></li>
+                    </ul>
+                    <br><br><br><br><br>
+                    <div class="table">
+                        <ul>
+                            <table class="table table-bordered table-hover">
+                                <tr>
+                                    <th class="text-center">Status</th>
+                                    <th class="text-center">Registration date</th>
+                                    <th class="text-center">Hometown</th>
+                                    <th class="text-center">Name</th>
+                                    <th class="text-center">E-mail</th>
+                                    <th class="text-center">School</th>
+                                    <th class="text-center">Mentor</th>
+                                </tr>
+                                {% for applicant in applicants %}
+                                    <tr>
+                                        <td align="center">{{applicant.status}}</td>
+                                        <td align="center">{{applicant.reg_date}}</td>
+                                        <td align="center">{{applicant.hometown}}</td>
+                                        <td align="center">{{applicant.first_name + ' ' + applicant.last_name}}</td>
+                                        <td align="center">{{applicant.email}}</td>
+                                        <td align="center">{{applicant.school.name}}</td>
+                                        <td align="center">{{applicant.interview.mentor.first_name + ' ' + applicant.interview.mentor.last_name}}</td>
+                                    </tr>
+                                {% endfor %}
+                            </table>
+                        </ul>
+                    </div>
+                </div>
             </div>
-            <button type="submit">Submit</button>
         </form>
-        <form action="http://localhost:5000/">
+         <br>
+        <form action="http://localhost:5000/" class="col-sm-12">
             <br><button type="submit">Back to main page</button>
         </form>
+
+
     </body>
 </html>
