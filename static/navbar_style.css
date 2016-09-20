@@ -7,7 +7,7 @@ margin: 0px 0;
 .navbar-default {
 border-color: #fff;
 background-image: url("../static/navbar.png");
-width:98.5%;
+width:99%;
 position:absolute;
 
 }
@@ -16,7 +16,6 @@ font-size: 20px;
 font-weight: bold;
 color: #FFF;
 left:120px;
-text-align: center;
 margin:0 auto;
 right:30px
 }
@@ -32,7 +31,6 @@ right:30px
 }
 
 .login{
-right: 100px;
 margin-right: 100px;
 }
 
