@@ -31,6 +31,6 @@ with app.app_context():
     print(current_app.name + ' started')
 
 if __name__ == "__main__":
-    create_table()
-    generate_data()
+    # create_table()
+    # generate_data()
     app.run(debug=True)
