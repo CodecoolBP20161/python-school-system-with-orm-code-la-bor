@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 
     <meta charset='UTF-8'>
@@ -9,37 +8,35 @@
     <link rel="stylesheet" type="text/css" href="../static/navbar_style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <title>Codelabor - School System</title>
+    <script src="../static/bootstrap/js/bootstrap.min.js"></script>
 
+    <title>Codelabor - School System</title>
 
 </head>
 
 <body>
     <nav class="navbar navbar-default navbar-fixed-top">
-          <div class="container-fluid"></div>
-            <div class="navbar-header"></div>
-              <a href="http://localhost:5000/" class="logo-img" ><img src="../static/codecool_logo_white.png" align="middle" alt="Logo"></a>
-            </div>
-            <ul class="nav navbar-nav" "pagination">
-              <li class="text-navbar"><a href="http://localhost:5000/about">About</a></li>
-              <li><a href="http://localhost:5000/registration">Register</a></li>
-              <li class="nav navbar-nav" type="button" data-toggle="dropdown"><a>List</a></li>
-                  <ul class="dropdown-menu"><a>
-                    <li><a href="#">Applicant Info</a></li>
-                    <li><a href="#">Interview Info</a></li>
-                  </ul>
-          </ul>
-              <ul class="nav navbar-nav navbar-right">
-              <li><a href="#login" class="navbar-right">Login</a></li>
+        <div class="container-fluid"></div>
+        <div class="navbar-header"></div>
+            <a href="templates/navbar.html" class="logo-img" ><img src="../static/codecool_logo_white.png" align="middle" alt="Logo"></a>
+        </div>
+        <ul class="nav navbar-nav" "pagination">
+            <li class="text-navbar"><a href="{{url_for('about.show_about_page')}}">About</a></li>
+            <li><a href="{{url_for('registration.get_applicant_reg')}}">Register</a></li>
+            <li class="nav navbar-nav" type="button" data-toggle="dropdown"><a>List</a></li>
+            <ul class="dropdown-menu"><a>
+                <li><a href="{{url_for('list_applicants.list_interview')}}">Applicant Info</a></li>
+                <li><a href="{{url_for('list_interviews.list_interview')}}">Interview Info</a></li>
             </ul>
-          </div>
-    </nav>
-    <nav>
-        <div class="background-image" style="opacity:0.5"><img src="../static/codingiscool.png">
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="" class="navbar-right">Login</a></li>
+        </ul>
         </div>
     </nav>
-    {% block body %}{% endblock %}
+        <nav>
+        <div class="background-image"><img src="../static/codingiscool.png"></div>
+        </nav>
+{#    <style background-image="opacity: 0.4"></style>#}
 
-</body>
-
-</html>
+{% block body %} {% endblock %}

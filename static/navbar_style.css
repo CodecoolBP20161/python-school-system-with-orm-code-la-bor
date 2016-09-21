@@ -7,7 +7,7 @@ margin: 0px 0;
 .navbar-default {
 border-color: #fff;
 background-image: url("../static/navbar.png");
-width:99%;
+width:98.5%;
 position:absolute;
 
 }
@@ -45,9 +45,8 @@ margin-right: 100px;
        z-index: -1;
 }
 
-.navbar-custom {
-font-size: 20px;
-background-color: #FFF;
+.input-transparent{
+    background-color: transparent;
 }
 .input-transparent {
 background-color: transparent;
