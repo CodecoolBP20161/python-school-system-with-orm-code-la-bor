@@ -6,7 +6,7 @@ list_applicants = Blueprint('list_applicants', __name__)
 
 
 @list_applicants.route('/list_applicants')
-def list_applicants():
+def list_applicant():
     rows = Applicant.select().join(Interview)
     return render_template('list_applicant.html', applicants=rows)
 
