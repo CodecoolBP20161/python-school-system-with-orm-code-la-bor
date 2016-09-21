@@ -14,7 +14,7 @@ def list_interview():
 @list_interviews.route('/list_interviews/school', methods=['GET', 'POST'])
 def list_interview_school():
     if request.method == 'POST':
-        school_name = request.form['school_name']
+        school_name = request.form['filter']
         rows = get_rows_by_school_id(school_name)
     else:
         rows = get_rows_by_school_id(0)
@@ -31,7 +31,7 @@ def get_rows_by_school_id(query):
 @list_interviews.route('/list_interviews/app_code', methods=['GET', 'POST'])
 def list_interview_app_code():
     if request.method == 'POST':
-        app_code = request.form['app_code']
+        app_code = request.form['filter']
         rows = get_applicant_by_app_code(app_code)
     else:
         rows = get_applicant_by_app_code(0)
@@ -48,7 +48,7 @@ def get_applicant_by_app_code(query):
 @list_interviews.route('/list_interviews/mentor', methods=['GET', 'POST'])
 def list_interview_mentor():
     if request.method == 'POST':
-        mentor = request.form['mentor']
+        mentor = request.form['filter']
         rows = get_applicant_by_mentor(mentor)
     else:
         rows = get_applicant_by_mentor(0)
@@ -65,7 +65,7 @@ def get_applicant_by_mentor(query):
 @list_interviews.route('/list_interviews/start_date', methods=['GET', 'POST'])
 def list_interview_start_date():
     if request.method == 'POST':
-        start_date = request.form['start_date']
+        start_date = request.form['filter']
         rows = get_applicant_by_start_date(start_date)
     else:
         rows = get_applicant_by_start_date('2017-08-15')
@@ -77,8 +77,3 @@ def get_applicant_by_start_date(query):
         return Applicant.select().join(Interview)
     else:
         return Applicant.select().join(Interview).where(Interview.start_date >= query)
-
-
-@list_interviews.route('/filter')
-def get_filter():
-    return render_template('filter.html')
