@@ -1,4 +1,9 @@
-body { padding-top: 80px; }
+body {
+    padding-top: 80px;
+    font: 'Arial';
+
+
+}
 .navbar {
 margin: 0px 0;
 
@@ -34,6 +39,12 @@ right:30px
 margin-right: 100px;
 }
 
+.registration{
+    font: 'Arial';
+    font-weight: bold;
+
+}
+
 .background-image{
     position: absolute;
        top: 50%;
@@ -43,13 +54,4 @@ margin-right: 100px;
        margin-top: -250px; /* Half the height */
        margin-left: -250px; /* Half the width */
        z-index: -1;
-}
-
-.input-transparent{
-    background-color: transparent;
-}
-.input-transparent {
-background-color: transparent;
-}
-
 }

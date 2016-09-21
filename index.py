@@ -7,4 +7,4 @@ index = Blueprint('index', __name__)
 
 @index.route('/')
 def welcome():
-    return render_template('navbar.html')
+    return render_template('home.html')
