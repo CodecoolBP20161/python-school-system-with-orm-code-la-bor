@@ -18,11 +18,11 @@
     <nav class="navbar navbar-default navbar-fixed-top">
           <div class="container-fluid"></div>
             <div class="navbar-header"></div>
-              <a href="#" class="logo-img" ><img src="../static/codecool_logo_white.png" align="middle" alt="Logo"></a>
+              <a href="http://localhost:5000/" class="logo-img" ><img src="../static/codecool_logo_white.png" align="middle" alt="Logo"></a>
             </div>
             <ul class="nav navbar-nav" "pagination">
               <li class="text-navbar"><a href="http://localhost:5000/about">About</a></li>
-              <li><a href="http://localhost:5000/register">Register</a></li>
+              <li><a href="http://localhost:5000/registration">Register</a></li>
               <li class="nav navbar-nav" type="button" data-toggle="dropdown"><a>List</a></li>
                   <ul class="dropdown-menu"><a>
                     <li><a href="#">Applicant Info</a></li>
@@ -35,9 +35,10 @@
           </div>
     </nav>
     <nav>
-        <div class="background-image"><img src="../static/codingiscool.png">
+        <div class="background-image" style="opacity:0.5"><img src="../static/codingiscool.png">
         </div>
     </nav>
+    {% block body %}{% endblock %}
 
 </body>
 

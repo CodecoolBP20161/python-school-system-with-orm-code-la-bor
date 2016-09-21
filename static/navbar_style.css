@@ -42,12 +42,15 @@ margin-right: 100px;
        height: 500px;
        margin-top: -250px; /* Half the height */
        margin-left: -250px; /* Half the width */
+       z-index: -1;
 }
 
 .navbar-custom {
 font-size: 20px;
 background-color: #FFF;
 }
-
+.input-transparent {
+background-color: transparent;
+}
 
 }

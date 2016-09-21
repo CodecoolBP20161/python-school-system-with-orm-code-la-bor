@@ -1,72 +1,65 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>ABOUT</title>
-
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    </head>
-    <body>
-        <div class="container">
-            <div class="row text-center">
-                <div class="col-md-12"><h1  style="margin-top:10;"><b>About</b></h1></div>
-            </div>
-            <hr />
-            <div class="row text-center">
-                <div class="col-md-6">
-                </div>
-                <div class="col-md-6">
-                </div>
-            </div>
-
-            <div class="col-md-6">
-                <img src="{{ url_for('static', filename='us.jpg') }}"/>
-            <!-- <img src="static/codecool_logo.png" /> -->
-        </div>
-        <div class="col-md-6 columns">
-            <p>Founded in late 2014, we have launched our first course in September 2015.
-                This means that 40+ students will be available for work in the second half of 2016.
-                The next course starts in Budapest in early 2016. Poland and Spain follow a few months later.
-                In 3 years more than 500 Codecool graduates will be working in the industry in Europe.</p>
-            <p>Codecool is a new approach to teach computer programming. Presented with real life projects, students graduate with experience required by the market.
-                Codecool is a private school founded to fill a niche in the IT sector by teaching young people to code in just 18 months. During the full-time educational process the students gain market ready experience which enables them to hit the job market immediately. </p>
-            <p>Codecool's mission is to create international IT education centers that train experienced, market ready software developers in quarter or third time compared to higher educational institutes.</p>
-
-            <br>If you like our concept
-            <br><a href="{{url_for('registration.get_applicant_reg')}}"><button class="btn btn-primary active" type="submit">REGISTER</button></a>
-
+{% extends "navbar.html" %}
+{% block body %}
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-md-12"><h1  style="margin-top:10;"><b>About</b></h1></div>
         </div>
         <hr />
+        <div class="row text-center">
+            <div class="col-md-6">
+            </div>
+            <div class="col-md-6">
+            </div>
         </div>
 
-        <div class="container">
-        <h3 class="text-center"><b>Locations</b></h3>
-    	<hr />
-    	<div class="row">
-    	  <div class="col-md-2"></div>
-          <div class="col-md-2"></div>
+        <div class="col-md-6">
+            <img src="{{ url_for('static', filename='us.jpg') }}"/>
+        <!-- <img src="static/codecool_logo.png" /> -->
+    </div>
+    <div class="col-md-6 columns">
+        <p>Founded in late 2014, we have launched our first course in September 2015.
+            This means that 40+ students will be available for work in the second half of 2016.
+            The next course starts in Budapest in early 2016. Poland and Spain follow a few months later.
+            In 3 years more than 500 Codecool graduates will be working in the industry in Europe.</p>
+        <p>Codecool is a new approach to teach computer programming. Presented with real life projects, students graduate with experience required by the market.
+            Codecool is a private school founded to fill a niche in the IT sector by teaching young people to code in just 18 months. During the full-time educational process the students gain market ready experience which enables them to hit the job market immediately. </p>
+        <p>Codecool's mission is to create international IT education centers that train experienced, market ready software developers in quarter or third time compared to higher educational institutes.</p>
 
-    	  <div class="col-md-2">
-              <h4>Budapest</h4>
-              <img src="{{ url_for('static', filename='codecool_logo.png') }}" width="100" height="100"/>
-    	  </div>
+        <br>If you like our concept
+        <br><a href="{{url_for('registration.get_applicant_reg')}}"><button class="btn btn-primary active" type="submit">REGISTER</button></a>
 
-    	  <div class="col-md-2">
-              <h4>Miskolc</h4>
-              <img src="{{ url_for('static', filename='codecool_logo.png') }}" width="100" height="100"/>
-    	  </div>
+    </div>
+    <hr />
+    </div>
 
-    	  <div class="col-md-2">
-              <h4>Krakow</h4>
-              <img src="{{ url_for('static', filename='codecool_logo.png') }}" width="100" height="100"/>
-          </div>
+    <div class="container">
+    <h3 class="text-center"><b>Locations</b></h3>
+    <hr />
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-2"></div>
 
-        <div class="container">
-            <h4 class="text-left"><b>For more info:</b></h4>
-            <h5>hello@codecool.com</h5>
-            <h5>+3620 519-9117</h5>
+      <div class="col-md-2">
+          <h4>Budapest</h4>
+          <img src="{{ url_for('static', filename='codecool_logo.png') }}" width="100" height="100"/>
+      </div>
 
-    </body>
-</html>
+      <div class="col-md-2">
+          <h4>Miskolc</h4>
+          <img src="{{ url_for('static', filename='codecool_logo.png') }}" width="100" height="100"/>
+      </div>
+
+      <div class="col-md-2">
+          <h4>Krakow</h4>
+          <img src="{{ url_for('static', filename='codecool_logo.png') }}" width="100" height="100"/>
+      </div>
+
+    <div class="container">
+        <h4 class="text-left"><b>For more info:</b></h4>
+        <h5>hello@codecool.com</h5>
+        <h5>+3620 519-9117</h5>
+    </div>
+
+</body>
+{% endblock %}
+
