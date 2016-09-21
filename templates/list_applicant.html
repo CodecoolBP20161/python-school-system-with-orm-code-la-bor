@@ -1,50 +1,48 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="UTF-8">
         <title>Interview list</title>
+        <link rel="stylesheet" href="https://bootswatch.com/flatly/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
     </head>
-    <style>
-        table, th, td {border: 1px solid gray}
-    </style>
     <body>
+
         <form method="post">
-            <div>
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="..." name="filter">
+                <div class="input-group-btn">
+                    <button class="btn btn-default" type="submit">Submit</button>
+                    <button type="button" class="btn btn-default">Choose a filter</button>
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                        <span class="caret"></span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="{{url_for('list_applicants.list_applicant_status')}}" class="text-center">Status</a></li>
+                            <li><a href="{{url_for('list_applicants.list_applicant_reg_date')}}" class="text-center">Registration date</a></li>
+                            <li><a href="{{url_for('list_applicants.list_applicant_hometown')}}" class="text-center">Hometown</a></li>
+                            <li><a href="{{url_for('list_applicants.list_applicant_name')}}" class="text-center">Name</a></li>
+                            <li><a href="{{url_for('list_applicants.list_applicant_email')}}" class="text-center">Email</a></li>
+                            <li><a href="{{url_for('list_applicants.list_applicant_school')}}" class="text-center">School</a></li>
+                            <li><a href="{{url_for('list_applicants.list_applicant_mentor')}}" class="text-center">Mentor</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+            <div class="table">
                 <ul>
-                    <table style="width:100%">
+                    <table class="table table-bordered table-hover">
                         <tr>
-                            <td><select name="status">
-                                <option value="0">All</option>
-                                <option value="new">New</option>
-                                <option value="in progress">In progress</option>
-                                <option value="waiting for interview">Waiting for interview</option>
-                                <option value="Accepted">Accepted</option>
-                                <option value="Rejected">Rejected</option>
-                            </select></td>
-                            <td><input type="text" name="reg_date"></td>
-                            <td><input type="text" name="hometown"></td>
-                            <td><input type="text" name="name"></td>
-                            <td><input type="text" name="email"></td>
-                            <td><select name="school_name">
-                                <option value="0">All</option>
-                                <option value="1">Budapest</option>
-                                <option value="2">Miskolc</option>
-                                <option value="3">Krakow</option>
-                                </select></td>
-                            <td><input type="text" name="mentor"></td>
+                            <th class="text-center">Status</th>
+                            <th class="text-center">Registration date</th>
+                            <th class="text-center">Hometown</th>
+                            <th class="text-center">Name</th>
+                            <th class="text-center">E-mail</th>
+                            <th class="text-center">School</th>
+                            <th class="text-center">Mentor</th>
                         </tr>
-                        <tr>
-                            <!--<th>School</th>School-->
-                            <th><a href="http://localhost:5000/list_applicants/status">Status</a></th>
-                            <th><a href="http://localhost:5000/list_applicants/reg_date">Registration date</a></th>
-                            <th><a href="http://localhost:5000/list_applicants/hometown">Hometown</a></th>
-                            <th><a href="http://localhost:5000/list_applicants/name">Name</a></th>
-                            <th><a href="http://localhost:5000/list_applicants/email">E-mail</a></th>
-                            <th><a href="http://localhost:5000/list_applicants/school">School</a></th>
-                            <th><a href="http://localhost:5000/list_applicants/mentor">Mentor</a></th>
-                        </tr>
+
                         {% for applicant in applicants %}
                         <tr>
                             <td align="center">{{applicant.status}}</td>
@@ -59,10 +57,11 @@
                     </table>
                 </ul>
             </div>
-            <button type="submit">Submit</button>
         </form>
-        <form action="http://localhost:5000/">
-            <br><button type="submit">Back to main page</button>
+
+        <form action="{{url_for('index.welcome')}}">
+            <br><button class="btn btn-default" type="submit">Back to main page</button>
         </form>
+
     </body>
 </html>
