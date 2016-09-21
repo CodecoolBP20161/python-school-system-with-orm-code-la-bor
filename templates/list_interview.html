@@ -5,48 +5,54 @@
     <head>
         <meta charset="UTF-8">
         <title>Interview list</title>
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
     </head>
-    <style>
-        table, th, td {border: 1px solid gray}
-    </style>
     <body>
         <form method="post">
-            <div>
-                <ul>
-                    <table style="width:100%">
-                        <tr>
-                           <td><select name="school_name">
-                                <option value="0">All</option>
-                                <option value="1">Budapest</option>
-                                <option value="2">Miskolc</option>
-                                <option value="3">Krakow</option>
-                                </select></td>
-                            <td><input type="text" name="app_code"></td>
-                            <td><input type="text" name="mentor"></td>
-                            <td><input type="text" name="start_date"></td>
+            <div class="input-group">
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" placeholder="..." name="filter" >
+                </div>
+                <div class="btn-group input col-sm-12">
+                    <button type="button" class="btn btn-danger disabled">Choose a filter</button>
+                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                    <span class="caret"></span></button>
+                    <button type="submit" class="btn btn-success">Search</button>
+                    <ul class="dropdown-menu">
+                        <li><a href="http://localhost:5000/list_interviews/school" class="text-center">School</a></li>
+                        <li><a href="http://localhost:5000/list_interviews/app_code" class="text-center">App code</a></li>
+                        <li><a href="http://localhost:5000/list_interviews/mentor" class="text-center">Mentor</a></li>
+                        <li><a href="http://localhost:5000/list_interviews/start_date" class="text-center">Start date</a></li>
+                    </ul>
+                    <br><br><br><br><br>
+                    <div class="table">
+                        <ul>
+                            <table class="table table-bordered table-hover">
 
-                        </tr>
-                        <tr>
-                            <!--<th>School</th>School-->
-                            <th><a href="http://localhost:5000/list_interviews/school">School</a></th>
-                            <th><a href="http://localhost:5000/list_interviews/app_code">App code</a></th>
-                            <th><a href="http://localhost:5000/list_interviews/mentor">Mentor</a></th>
-                            <th><a href="http://localhost:5000/list_interviews/start_date">Start date</a></th>
-                            <th>End date</th>
-                        </tr>
-                        {% for applicant in applicants %}
-                        <tr>
-                            <td align="center">{{applicant.school.name}}</td>
-                            <td align="center">{{applicant.app_code}}</td>
-                            <td align="center">{{applicant.interview.mentor.first_name + ' ' + applicant.interview.mentor.last_name}}</td>
-                            <td align="center">{{applicant.interview.start_date}}</td>
-                            <td align="center">{{applicant.interview.end_date}}</td>
-                        </tr>
-                        {% endfor %}
-                    </table>
-                </ul>
+                                <tr>
+                                    <th class="text-center">School</th>
+                                    <th class="text-center">App code</th>
+                                    <th class="text-center">Mentor</th>
+                                    <th class="text-center">Start date</th>
+                                    <th class="text-center">End date</th>
+                                </tr>
+                                {% for applicant in applicants %}
+                                <tr>
+                                    <td align="center">{{applicant.school.name}}</td>
+                                    <td align="center">{{applicant.app_code}}</td>
+                                    <td align="center">{{applicant.interview.mentor.first_name + ' ' + applicant.interview.mentor.last_name}}</td>
+                                    <td align="center">{{applicant.interview.start_date}}</td>
+                                    <td align="center">{{applicant.interview.end_date}}</td>
+                                </tr>
+                                {% endfor %}
+                            </table>
+                        </ul>
+                    </div>
+                </div>
             </div>
-            <button type="submit">Submit</button>
         </form>
         <form action="http://localhost:5000/">
             <br><button type="submit">Back to main page</button>
