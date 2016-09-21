@@ -1,61 +1,59 @@
-
-
-<!DOCTYPE html>
-<html lang="en">
+{% extends "navbar.html" %}
+{% block body %}
     <head>
-        <meta charset="UTF-8">
         <title>Interview list</title>
-        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <!-- <link rel="stylesheet" href="https://bootswatch.com/flatly/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
     </head>
+
     <body>
         <form method="post">
             <div class="input-group">
-                <div class="col-sm-4">
-                    <input type="text" class="form-control" placeholder="..." name="filter" >
-                </div>
-                <div class="btn-group input col-sm-12">
-                    <button type="button" class="btn btn-danger disabled">Choose a filter</button>
-                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
-                    <span class="caret"></span></button>
-                    <button type="submit" class="btn btn-success">Search</button>
-                    <ul class="dropdown-menu">
-                        <li><a href="http://localhost:5000/list_interviews/school" class="text-center">School</a></li>
-                        <li><a href="http://localhost:5000/list_interviews/app_code" class="text-center">App code</a></li>
-                        <li><a href="http://localhost:5000/list_interviews/mentor" class="text-center">Mentor</a></li>
-                        <li><a href="http://localhost:5000/list_interviews/start_date" class="text-center">Start date</a></li>
-                    </ul>
-                    <br><br><br><br><br>
-                    <div class="table">
-                        <ul>
-                            <table class="table table-bordered table-hover">
-
-                                <tr>
-                                    <th class="text-center">School</th>
-                                    <th class="text-center">App code</th>
-                                    <th class="text-center">Mentor</th>
-                                    <th class="text-center">Start date</th>
-                                    <th class="text-center">End date</th>
-                                </tr>
-                                {% for applicant in applicants %}
-                                <tr>
-                                    <td align="center">{{applicant.school.name}}</td>
-                                    <td align="center">{{applicant.app_code}}</td>
-                                    <td align="center">{{applicant.interview.mentor.first_name + ' ' + applicant.interview.mentor.last_name}}</td>
-                                    <td align="center">{{applicant.interview.start_date}}</td>
-                                    <td align="center">{{applicant.interview.end_date}}</td>
-                                </tr>
-                                {% endfor %}
-                            </table>
+                <input type="text" class="form-control" placeholder="..." name="filter">
+                <div class="input-group-btn">
+                    <button class="btn btn-default" type="submit">Submit</button>
+                    <button type="button" class="btn btn-default">Choose a filter</button>
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                        <span class="caret"></span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="{{url_for('list_interviews.list_interview_school')}}" class="text-center">School</a></li>
+                            <li><a href="{{url_for('list_interviews.list_interview_app_code')}}" class="text-center">Application code</a></li>
+                            <li><a href="{{url_for('list_interviews.list_interview_mentor')}}" class="text-center">Mentor</a></li>
+                            <li><a href="{{url_for('list_interviews.list_interview_start_date')}}" class="text-center">Start date</a></li>
                         </ul>
-                    </div>
                 </div>
             </div>
+
+            <div class="table">
+                <ul>
+                    <table class="table table-bordered table-hover">
+                        <tr>
+                            <th class="text-center">School</th>
+                            <th class="text-center">App code</th>
+                            <th class="text-center">Mentor</th>
+                            <th class="text-center">Start date</th>
+                            <th class="text-center">End date</th>
+                        </tr>
+
+                        {% for applicant in applicants %}
+                        <tr>
+                            <td align="center">{{applicant.school.name}}</td>
+                            <td align="center">{{applicant.app_code}}</td>
+                            <td align="center">{{applicant.interview.mentor.first_name + ' ' + applicant.interview.mentor.last_name}}</td>
+                            <td align="center">{{applicant.interview.start_date}}</td>
+                            <td align="center">{{applicant.interview.end_date}}</td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                </ul>
+            </div>
         </form>
-        <form action="http://localhost:5000/">
-            <br><button type="submit">Back to main page</button>
+
+        <form action="{{url_for('index.welcome')}}">
+            <br><button class="btn btn-default" type="submit">Back to main page</button>
         </form>
+
     </body>
-</html>
+
+{% endblock %}

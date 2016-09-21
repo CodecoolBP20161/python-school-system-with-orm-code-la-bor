@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset='UTF-8'>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://bootswatch.com/cosmo/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../static/navbar_style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="../static/bootstrap/js/bootstrap.min.js"></script>
+
+    <title>Codelabor - School System</title>
+
+</head>
+
+<body>
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid"></div>
+        <div class="navbar-header"></div>
+            <a href="{{url_for('index.welcome')}}" class="logo-img" ><img src="{{url_for('static', filename='codecool_logo_white.png')}}" align="middle" alt="Logo"></a>
+        </div>
+        <ul class="nav navbar-nav" "pagination">
+            <li class="text-navbar"><a href="{{url_for('about.show_about_page')}}">About</a></li>
+            <li><a href="{{url_for('registration.get_applicant_reg')}}">Register</a></li>
+            <li class="nav navbar-nav" type="button" data-toggle="dropdown"><a>List</a></li>
+            <ul class="dropdown-menu"><a>
+                <li><a href="{{url_for('list_applicants.list_interview')}}">Applicant Info</a></li>
+                <li><a href="{{url_for('list_interviews.list_interview')}}">Interview Info</a></li>
+            </ul>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+           <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Login</b> <span class="caret"></span></a>
+              <ul id="login-dp" class="dropdown-menu">
+                  <li>
+                      <div class="row">
+                          <div class="col-md-12">
+                              Login
+                                  <form class="form" role="form" method="post" action="login" accept-charset="UTF-8" id="login-nav">
+                                      <div class="form-group">
+                                          <label class="sr-only" for="email">Email address</label>
+                                          <input type="email" class="form-control" name="email" placeholder="Email address" required>
+                                          </div>
+                                          <div class="form-group">
+                                              <label class="sr-only" for="app_code">Application code</label>
+                                              <input type="password" class="form-control" name="app_code" placeholder="Application code" required>
+                                          </div>
+                                          <div class="form-group">
+                                              <button type="submit" class="btn btn-primary btn-block">Log in</button>
+                                          </div>
+                                  </form>
+                              </div>
+                      </div>
+                  </li>
+              </ul>
+          </li>
+          </ul>
+      </div>
+  </nav>
+  <nav>
+     <div class="background-image"><img src="{{url_for('static', filename='codingiscool.png')}}">
+
+</nav>
+
+{% block body %}
+        <style background-image="opacity: 0.4"></style>
+{% endblock %}
+
+</body>
+</html>

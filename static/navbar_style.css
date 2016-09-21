@@ -1,0 +1,53 @@
+body { padding-top: 80px; }
+.navbar {
+margin: 0px 0;
+
+}
+
+.navbar-default {
+border-color: #fff;
+background-image: url("../static/navbar.png");
+width:98.5%;
+position:absolute;
+
+}
+.navbar-nav {
+font-size: 20px;
+font-weight: bold;
+color: #FFF;
+left:120px;
+margin:0 auto;
+right:30px
+}
+
+.logo-img {
+    position:absolute;
+    left:10px;
+    top:12px;
+    margin: 0px 15px 15px 0px;
+}
+.text-navbar{
+    margin-left: 220px
+}
+
+.login{
+margin-right: 100px;
+}
+
+.background-image{
+    position: absolute;
+       top: 50%;
+       left: 50%;
+       width: 500px;
+       height: 500px;
+       margin-top: -250px; /* Half the height */
+       margin-left: -250px; /* Half the width */
+       z-index: -1;
+}
+
+.input-transparent{
+    background-color: transparent;
+}
+
+
+}
