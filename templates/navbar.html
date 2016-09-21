@@ -26,10 +26,10 @@
         <ul class="nav navbar-nav" "pagination">
             <li class="text-navbar"><a href="{{url_for('about.show_about_page')}}">About</a></li>
             <li><a href="{{url_for('registration.get_applicant_reg')}}">Register</a></li>
-            <li class="nav navbar-nav" type="button" data-toggle="dropdown"><a>List</a></li>
-            <ul class="dropdown-menu"><a>
-                <li><a href="{{url_for('list_applicants.list_applicant')}}">Applicant Info</a></li>
-                <li><a href="{{url_for('list_interviews.list_interview')}}">Interview Info</a></li>
+            <li type="button" data-toggle="dropdown"><a>List</a></li>
+            <ul class="dropdown-menu dropdown-content">
+                <li class="text-center"><a href="{{url_for('list_applicants.list_applicant')}}">Applicant Info</a></li>
+                <li class="text-center"><a href="{{url_for('list_interviews.list_interview')}}">Interview Info</a></li>
             </ul>
         </ul>
         <ul class="nav navbar-nav navbar-right">

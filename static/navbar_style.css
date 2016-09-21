@@ -9,6 +9,27 @@ margin: 0px 0;
 
 }
 
+nav {
+    position:realtive;
+    display: inline-block;
+    float: right;
+    padding: 5px;
+}
+.dropdown-menu {
+    position:relative;;
+    background-color: white;
+    right:0px;
+    size: 70px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    background-color: #f9f9f9;
+}
+.dropdown-content{
+    position: relative;
+    top: 60px;
+    left: auto;
+    right: auto;
+}
+
 .navbar-default {
 border-color: #fff;
 background-image: url("../static/navbar.png");
@@ -20,9 +41,6 @@ position:absolute;
 font-size: 20px;
 font-weight: bold;
 color: #FFF;
-left:120px;
-margin:0 auto;
-right:30px
 }
 
 .logo-img {
