@@ -18,6 +18,27 @@ def add_applicant():
     data = [request.form[element] for element in columns]
     new_applicant = Applicant(first_name=data[0], last_name=data[1], hometown=data[2], email=data[3], reg_date=reg_date)
     # Applicant.handle_new_applicants()
+    emails = []
+    for applicant in Applicant.select():
+        emails.append(applicant.email)
+    if new_applicant.email in emails:
+        return "hüje"
+        # message = "hüje"
+        # flash(message)
+    else:
+        new_applicant.app_code = Applicant.generate_app_code()
+        new_applicant.status = 'in progress'
+        if new_applicant.hometown in ['Budapest', 'Székesfehérvár', 'Esztergom', 'Komárom']:
+            new_applicant.school = 1
+        elif new_applicant.hometown in ['Miskolc', 'Eger', 'Aggtelek']:
+            new_applicant.school = 2
+        elif new_applicant.hometown in ['Krakow', 'Warsaw']:
+            new_applicant.school = 3
+        else:
+            new_applicant.school = 1
+        new_applicant.save()
+        Applicant.interview_date_to_applicant(new_applicant)
+        # ProjectEmail.send_applicant_info(new_applicant)
     new_applicant.app_code = Applicant.generate_app_code()
     new_applicant.status = 'in progress'
     if new_applicant.hometown in ['Budapest', 'Székesfehérvár', 'Esztergom', 'Komárom']:
