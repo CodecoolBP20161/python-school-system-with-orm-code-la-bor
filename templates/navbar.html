@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
     <meta charset='UTF-8'>
@@ -18,7 +19,7 @@
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container-fluid"></div>
         <div class="navbar-header"></div>
-            <a href="templates/navbar.html" class="logo-img" ><img src="../static/codecool_logo_white.png" align="middle" alt="Logo"></a>
+            <a href="{{url_for('index.welcome')}}" class="logo-img" ><img src="{{url_for('static', filename='codecool_logo_white.png')}}" align="middle" alt="Logo"></a>
         </div>
         <ul class="nav navbar-nav" "pagination">
             <li class="text-navbar"><a href="{{url_for('about.show_about_page')}}">About</a></li>
@@ -30,13 +31,42 @@
             </ul>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-            <li><a href="" class="navbar-right">Login</a></li>
-        </ul>
-        </div>
-    </nav>
-        <nav>
-        <div class="background-image"><img src="../static/codingiscool.png"></div>
-        </nav>
-{#    <style background-image="opacity: 0.4"></style>#}
+           <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Login</b> <span class="caret"></span></a>
+              <ul id="login-dp" class="dropdown-menu">
+                  <li>
+                      <div class="row">
+                          <div class="col-md-12">
+                              Login
+                                  <form class="form" role="form" method="post" action="login" accept-charset="UTF-8" id="login-nav">
+                                      <div class="form-group">
+                                          <label class="sr-only" for="email">Email address</label>
+                                          <input type="email" class="form-control" name="email" placeholder="Email address" required>
+                                          </div>
+                                          <div class="form-group">
+                                              <label class="sr-only" for="app_code">Application code</label>
+                                              <input type="password" class="form-control" name="app_code" placeholder="Application code" required>
+                                          </div>
+                                          <div class="form-group">
+                                              <button type="submit" class="btn btn-primary btn-block">Log in</button>
+                                          </div>
+                                  </form>
+                              </div>
+                      </div>
+                  </li>
+              </ul>
+          </li>
+          </ul>
+      </div>
+  </nav>
+  <nav>
+     <div class="background-image"><img src="{{url_for('static', filename='codingiscool.png')}}">
 
-{% block body %} {% endblock %}
+</nav>
+
+{% block body %}
+        <style background-image="opacity: 0.4"></style>
+{% endblock %}
+
+</body>
+</html>
