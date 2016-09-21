@@ -5,15 +5,39 @@
     <head>
         <meta charset="UTF-8">
         <title>Interview list</title>
+        <link rel="stylesheet" href="https://bootswatch.com/flatly/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
     </head>
-    <style>
-        table, th, td {border: 1px solid gray}
-    </style>
+
     <body>
+
         <form method="post">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="..." name="filter">
+
+                <div class="input-group-btn">
+                    <button type="button" class="btn btn-default">Choose a filter</button>
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                        <span class="caret"></span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="{{url_for('list_applicants.list_applicant_status')}}">Status</a></li>
+                            <li><a href="{{url_for('list_applicants.list_applicant_reg_date')}}">Registration date</a></li>
+                            <li><a href="{{url_for('list_applicants.list_applicant_hometown')}}">Hometown</a></li>
+                            <li><a href="{{url_for('list_applicants.list_applicant_name')}}">Name</a></li>
+                            <li><a href="{{url_for('list_applicants.list_applicant_email')}}">Email</a></li>
+                            <li><a href="{{url_for('list_applicants.list_applicant_school')}}">School</a></li>
+                            <li><a href="{{url_for('list_applicants.list_applicant_mentor')}}">Mentor</a></li>
+
+
+                        </ul>
+                    </div>
+                </div>
+
             <div>
                 <ul>
-                    <table style="width:100%">
+                    <table class="table table-bordered table-hover">
                         <tr>
                             <td><select name="status">
                                 <option value="0">All</option>
@@ -37,7 +61,7 @@
                         </tr>
                         <tr>
                             <!--<th>School</th>School-->
-                            <th><a href="http://localhost:5000/list_applicants/status">Status</a></th>
+                            <th>< >Status</a></th>
                             <th><a href="http://localhost:5000/list_applicants/reg_date">Registration date</a></th>
                             <th><a href="http://localhost:5000/list_applicants/hometown">Hometown</a></th>
                             <th><a href="http://localhost:5000/list_applicants/name">Name</a></th>
@@ -59,10 +83,14 @@
                     </table>
                 </ul>
             </div>
-            <button type="submit">Submit</button>
+            <button class="btn btn-default" type="submit">Submit</button>
         </form>
+
         <form action="http://localhost:5000/">
-            <br><button type="submit">Back to main page</button>
+            <br><button class="btn btn-default" type="submit">Back to main page</button>
         </form>
+
+
+
     </body>
 </html>
