@@ -77,8 +77,3 @@ def get_applicant_by_start_date(query):
         return Applicant.select().join(Interview)
     else:
         return Applicant.select().join(Interview).where(Interview.start_date >= query)
-
-
-@list_interviews.route('/filter')
-def get_filter():
-    return render_template('filter.html')

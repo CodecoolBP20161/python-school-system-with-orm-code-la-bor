@@ -39,18 +39,5 @@ def add_applicant():
         new_applicant.save()
         Applicant.interview_date_to_applicant(new_applicant)
         # ProjectEmail.send_applicant_info(new_applicant)
-    new_applicant.app_code = Applicant.generate_app_code()
-    new_applicant.status = 'in progress'
-    if new_applicant.hometown in ['Budapest', 'Székesfehérvár', 'Esztergom', 'Komárom']:
-        new_applicant.school = 1
-    elif new_applicant.hometown in ['Miskolc', 'Eger', 'Aggtelek']:
-        new_applicant.school = 2
-    elif new_applicant.hometown in ['Krakow', 'Warsaw']:
-        new_applicant.school = 3
-    else:
-        new_applicant.school = 1
-    new_applicant.save()
-    Applicant.interview_date_to_applicant(new_applicant)
-    # ProjectEmail.send_applicant_info(new_applicant)
     return redirect('/')
 

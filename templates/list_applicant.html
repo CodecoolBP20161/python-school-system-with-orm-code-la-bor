@@ -1,67 +1,59 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>Interview list</title>
-        <link rel="stylesheet" href="https://bootswatch.com/flatly/bootstrap.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+{% extends "navbar.html" %}
+{% block body %}
+<body>
 
-    </head>
-    <body>
-
-        <form method="post">
-            <div class="input-group">
-                <input type="text" class="form-control" placeholder="..." name="filter">
-                <div class="input-group-btn">
-                    <button class="btn btn-default" type="submit">Submit</button>
-                    <button type="button" class="btn btn-default">Choose a filter</button>
-                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                        <span class="caret"></span></button>
-                        <ul class="dropdown-menu">
-                            <li><a href="{{url_for('list_applicants.list_applicant_status')}}" class="text-center">Status</a></li>
-                            <li><a href="{{url_for('list_applicants.list_applicant_reg_date')}}" class="text-center">Registration date</a></li>
-                            <li><a href="{{url_for('list_applicants.list_applicant_hometown')}}" class="text-center">Hometown</a></li>
-                            <li><a href="{{url_for('list_applicants.list_applicant_name')}}" class="text-center">Name</a></li>
-                            <li><a href="{{url_for('list_applicants.list_applicant_email')}}" class="text-center">Email</a></li>
-                            <li><a href="{{url_for('list_applicants.list_applicant_school')}}" class="text-center">School</a></li>
-                            <li><a href="{{url_for('list_applicants.list_applicant_mentor')}}" class="text-center">Mentor</a></li>
-                        </ul>
-                    </div>
+    <form method="post">
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="..." name="filter">
+            <div class="input-group-btn">
+                <button class="btn btn-default" type="submit">Submit</button>
+                <button type="button" class="btn btn-default">Choose a filter</button>
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                    <span class="caret"></span></button>
+                    <ul class="dropdown-menu">
+                        <li><a href="{{url_for('list_applicants.list_applicant_status')}}" class="text-center">Status</a></li>
+                        <li><a href="{{url_for('list_applicants.list_applicant_reg_date')}}" class="text-center">Registration date</a></li>
+                        <li><a href="{{url_for('list_applicants.list_applicant_hometown')}}" class="text-center">Hometown</a></li>
+                        <li><a href="{{url_for('list_applicants.list_applicant_name')}}" class="text-center">Name</a></li>
+                        <li><a href="{{url_for('list_applicants.list_applicant_email')}}" class="text-center">Email</a></li>
+                        <li><a href="{{url_for('list_applicants.list_applicant_school')}}" class="text-center">School</a></li>
+                        <li><a href="{{url_for('list_applicants.list_applicant_mentor')}}" class="text-center">Mentor</a></li>
+                    </ul>
                 </div>
-
-            <div class="table">
-                <ul>
-                    <table class="table table-bordered table-hover">
-                        <tr>
-                            <th class="text-center">Status</th>
-                            <th class="text-center">Registration date</th>
-                            <th class="text-center">Hometown</th>
-                            <th class="text-center">Name</th>
-                            <th class="text-center">E-mail</th>
-                            <th class="text-center">School</th>
-                            <th class="text-center">Mentor</th>
-                        </tr>
-
-                        {% for applicant in applicants %}
-                        <tr>
-                            <td align="center">{{applicant.status}}</td>
-                            <td align="center">{{applicant.reg_date}}</td>
-                            <td align="center">{{applicant.hometown}}</td>
-                            <td align="center">{{applicant.first_name + ' ' + applicant.last_name}}</td>
-                            <td align="center">{{applicant.email}}</td>
-                            <td align="center">{{applicant.school.name}}</td>
-                            <td align="center">{{applicant.interview.mentor.first_name + ' ' + applicant.interview.mentor.last_name}}</td>
-                        </tr>
-                        {% endfor %}
-                    </table>
-                </ul>
             </div>
-        </form>
 
-        <form action="{{url_for('index.welcome')}}">
-            <br><button class="btn btn-default" type="submit">Back to main page</button>
-        </form>
+        <div class="table">
+            <ul>
+                <table class="table table-bordered table-hover">
+                    <tr>
+                        <th class="text-center">Status</th>
+                        <th class="text-center">Registration date</th>
+                        <th class="text-center">Hometown</th>
+                        <th class="text-center">Name</th>
+                        <th class="text-center">E-mail</th>
+                        <th class="text-center">School</th>
+                        <th class="text-center">Mentor</th>
+                    </tr>
 
-    </body>
-</html>
+                    {% for applicant in applicants %}
+                    <tr>
+                        <td align="center">{{applicant.status}}</td>
+                        <td align="center">{{applicant.reg_date}}</td>
+                        <td align="center">{{applicant.hometown}}</td>
+                        <td align="center">{{applicant.first_name + ' ' + applicant.last_name}}</td>
+                        <td align="center">{{applicant.email}}</td>
+                        <td align="center">{{applicant.school.name}}</td>
+                        <td align="center">{{applicant.interview.mentor.first_name + ' ' + applicant.interview.mentor.last_name}}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </ul>
+        </div>
+    </form>
+
+    <form action="{{url_for('index.welcome')}}">
+        <br><button class="btn btn-default" type="submit">Back to main page</button>
+    </form>
+
+</body>
+{% endblock %}
