@@ -25,7 +25,7 @@ def get_rows_by_school_id(query):
     if query == "0":
         return Applicant.select().join(Interview)
     else:
-        return Applicant.select().join(Interview).where(Applicant.school == query)
+        return Applicant.select().join(Interview).join(School).where(School.name.contains(query))
 
 
 @list_interviews.route('/list_interviews/app_code', methods=['GET', 'POST'])
@@ -42,7 +42,7 @@ def get_applicant_by_app_code(query):
     if query == "0":
         return Applicant.select().join(Interview)
     else:
-        return Applicant.select().join(Interview).where(Applicant.app_code.contains(query))
+        return Applicant.select().join(Interview).where(Applicant.app_code == query)
 
 
 @list_interviews.route('/list_interviews/mentor', methods=['GET', 'POST'])
@@ -68,7 +68,7 @@ def list_interview_start_date():
         start_date = request.form['filter']
         rows = get_applicant_by_start_date(start_date)
     else:
-        rows = get_applicant_by_start_date('2017-08-15')
+        rows = get_applicant_by_start_date('2117-08-15')
     return render_template('list_interview.html', applicants=rows)
 
 

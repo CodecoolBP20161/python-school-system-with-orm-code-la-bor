@@ -110,7 +110,7 @@ def get_rows_by_school(query):
     if query == "0":
         return Applicant.select().join(Interview)
     else:
-        return Applicant.select().join(Interview).where(Applicant.school == query)
+        return Applicant.select().join(Interview).join(School).where(School.name.contains(query))
 
 
 @list_applicants.route('/list_applicants/mentor', methods=['GET', 'POST'])
@@ -128,4 +128,3 @@ def get_rows_by_mentor(query):
         return Applicant.select().join(Interview).join(Mentor)
     else:
         return Applicant.select().join(Interview).join(Mentor).where(Mentor.last_name.contains(query))
-
